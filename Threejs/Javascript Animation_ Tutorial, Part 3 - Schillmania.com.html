@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script async="" src="http://www.google-analytics.com/analytics.js" /><script type="text/javascript">
+/*
+   [                                                       ]
+   [ SCHILLMANIA! | 2009 edition                           ]
+   [ ----------------------------------------------------- ]
+   [                                             200902xx  ]
+   [ APPROACH
+   [                                                       ]
+   [ Khoi Vinh + TheRoot42 + others as design inspiration. ]
+   [ Less is more. The grid is good. That is all.          ]
+   [                                                       ]
+   [ ABOOT                                                 ]
+   [                                                       ]
+   [ Name:        Scott Schiller                           ]
+   [ Background:  Canadian                                 ]
+   [ Live/Work:   San Francisco | Flickr/Yahoo!            ]
+   [ Email:       i'd like to work at yahoo.com            ]
+*/
+var APP_XHTML = true; // Apparently your agent supports application/xhtml+xml
+var urlRoot = '/';
+</script>
+<title>Javascript Animation: Tutorial, Part 3 - Schillmania.com</title>
+<meta name="description" content="The final, and overdue, part in a series on Javascript animation techniques: Creating tweens, simultaneous animations and event handling are discussed. A simple animation API, demo and source code is included." />
+<meta name="keywords" content="animation, javascript, dhtml, tutorial" />
+<meta name="robots" content="all" />
+<meta name="author" content="Scott Schiller" />
+<meta name="copyright" content="Copyright (C) 1997 onwards Scott Schiller" />
+<meta name="language" content="en-us" />
+<base href="http://www.schillmania.com/" />
+<link rel="alternate" type="application/rss+xml" href="http://www.schillmania.com/content/schillmania_rss.xml" title="RSS feed for Schillmania.com" />
+<link rel="shortcut icon" href="http://schillmania.com/favicon.ico" />
+<script type="text/javascript" src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/yui.js" /><style>@media print {#ghostery-purple-box {display:none !important}}</style>
+<script type="text/javascript" src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/2009.js" />
+<script type="text/javascript" src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/stats.js" />
+<script src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/photos_public.gne" /></head>
+
+<body id="body" style="" cz-shortcut-listen="true">
+
+<div id="site">
+
+<div id="content">
+
+ <div id="container">
+
+  <div id="header">
+
+   <div id="header-content">
+
+    <div id="logo">
+     <a href="http://www.schillmania.com/" title="The creative and technical vents of Scott Schiller" style="background: url(&quot;/2009/image/header-jaggies.png&quot;) -24px -23px repeat-x rgb(255, 255, 255); color: rgb(0, 0, 0);">Schillmania!</a>
+    </div>
+
+    <div id="theme-archive">
+	 <div id="site-archives">
+	  <a href="http://www.schillmania.com/?theme=2004" title="View the 2004 &apos;now with more funk&apos; theme">04</a>
+	  <a href="http://www.schillmania.com/?theme=2005" title="View the 2005 &apos;bouncing icons&apos; theme">05</a>
+	  <a href="http://www.schillmania.com/?theme=2006" title="View the 2006 &apos;work/life balance&apos; theme">06</a>
+	  <a href="http://www.schillmania.com/?theme=2007" title="View the 2007/08 &apos;night/day&apos; theme">07/08</a>
+	  <a href="http://www.schillmania.com/?theme=2008" title="View the 08 &apos;back to basics&apos; theme">08</a>
+	  <a href="http://www.schillmania.com/#theme=2009" title="2009 (current) theme" class="current">09</a>
+	 </div>
+    </div>
+
+   </div>
+
+   <hr />
+  
+  </div>
+
+  <div id="lights" style="top: 2em; display: none;"> </div>
+
+  <!-- dynamic content -->
+
+  <div id="main-content">
+	
+   <div id="entry-content">
+
+
+  <div class="top header"><h1>Javascript Animation: Tutorial, Part 3</h1><div class="divider"> </div></div>
+
+  <div class="copy">
+
+   <h2>Creating Motion Tweens in Javascript</h2>
+
+   <p class="header-comment">This is the long-overdue final piece of a series on creating animations in Javascript; see <a href="http://www.schillmania.com/content/projects/javascript-animation-1/" title="Javascript Animation: Tutorial, part 1">part 1</a> and <a href="http://www.schillmania.com/content/projects/javascript-animation-2/" title="Javascript Animation: Tutorial, part 2">part 2</a> for reference.</p>
+
+<p>In the Flash world, objects can be animated or morphed between one state and the next over a period of time. This is where the term <i>tween</i> comes in. The developer does not have to write code to make the animation sequence, they simply specify the start and end points and Flash dynamically generates the frames in-be<i>tween</i> to make a smooth transition between states. With a tiny bit of math, you can easily make a reasonably-smooth tween generator in Javascript. This example will be very basic, but you could get much fancier with bezier and quadratic curves etc.</p>
+
+<p>Full-featured animation APIs provided by the Yahoo! User Interface library, jQuery, Mootools and others allow you to specify start and end points, animation duration, tween effects and so on. In this article, I'll show a simple animation manager script which uses a few basic tween styles and a fixed frame count.</p>
+
+<p>Less talk, and more demo:</p>
+
+<ul>
+ <li><a href="http://www.schillmania.com/content/projects/javascript-animation-3/demo/index-audio.html">JS animation demo: Full-screen window + SFX</a> (SoundManager 2)</li>
+ <li><a href="http://www.schillmania.com/content/projects/javascript-animation-3/demo/animation-sequence.html">JS animation demo: Sequential + Simultaneous animation sequence</a></li>
+</ul>
+
+<h3>A Simple Motion Tween</h3>
+
+<p>Let's say we want to move an element from point A to point B. The tween in this case can be done in a linear fashion, or according to a curve or other function. A linear motion is easy, but doesn't look as nice as a fluid motion which mimics real-life physics. A simple way to do this is a "slow-fast-slow" curve; for example, where an object starts from 0 (not moving), accelerates to a peak and then slows down to 0 again.</p>
+
+<p>Using a fixed number of frames (and thus, a non-fixed duration due to the asynchronous nature of Javascript), writing a linear tween is very simple:</p>
+
+<pre class="block">
+<code>var points = {
+  <span><span>// moving a box "from" and "to", eg. on the X coordinate</span></span>
+  'from': 200,
+  'to': 300
+}
+var frameCount = 20; <span><span>// move from X to Y over 20 frames</span></span>
+var frames = []; <span><span>// array of coordinates we'll compute</span></span>
+<span><span>
+// "dumb" tween: "move X pixels every frame"</span></span>
+var tweenAmount = (points.to - points.from)/frameCount;
+for (var i=0; i&lt;frameCount; i++) {
+  <span><span>// calculate the points to animate</span></span>
+  frames[i] = points.from+(tweenAmount*i); 
+}
+<span><span>// frames[] now looks like [205,210,215,220, ... ,300]; etc.</span></span>
+</code>
+</pre>
+
+<p>A more realistic tweening effect (including acceleration and deceleration) is achieved by changing the amount of motion made with each frame.</p>
+
+<pre class="block"><code>var points = {
+  <span><span>// moving a box "from" and "to", eg. on the X coordinate</span></span>
+  'from': 200,
+  'to': 300
+}
+var animDelta = (points.to - points.from); <span><span>// how far to move</span></span>
+<span><span>
+// animation curve: "sum of numbers" (=100%), slow-fast-slow</span></span>
+var tweenAmount = [1,2,3,4,5,6,7,8,9,10,9,8,7,6,5,4,3,2,1];
+<span><span>// move from X to Y over frames as defined by tween curve</span></span>
+var frameCount = tweenAmount.length;
+var frames = []; <span><span>// array of coordinates we'll compute</span></span>
+var newFrame = points.from; <span><span>// starting coordinate</span></span>
+for (var i=0; i&lt;frameCount; i++) {
+  <span><span>// calculate the points to animate</span></span>
+  newFrame += (animDelta*tweenAmount[i]/100);
+  frames[i] = newFrame;
+}
+<span><span>// frames[] now looks like [201,203,206, ... ,228,236,245, ... ,297,299,300]; etc.</span></span>
+</code>
+</pre>
+
+<p>A linear acceleration and deceleration motion as above produces a visual improvement over a straight, linear motion. Each loop iteration adds a percentage of the total distance to move according to the tween amount, which adds up to 100%. Full-featured Javascript animation libraries go far beyond this in using bezier curves and fancier math functions, which provide much smoother motion tweens.</p>
+
+<h3>An Example Animation</h3>
+
+<p>Here, we'll create an animation object with some parameters and event handlers, and then start it.</p>
+
+<pre class="block">
+<code>var oAnim = new Animation({
+  from: 0,
+  to: 50,
+  ontween: function(value) {
+    writeDebug('oAnim.ontween(): value='+value);
+  },
+  oncomplete: function(value) {
+    writeDebug('oAnim.oncomplete()');
+  }
+});
+oAnim.start();
+</code>
+</pre>
+
+<p>Nothing is actually animated on-screen in this case, but the relevant events fire and the tween value is updated as the animation runs. This could be used to move a box from 0 to 50 pixels across the screen, or from 0% to 50% of the screen or some other value.</p>
+
+<h3>Writing an Animation API in Javascript</h3>
+
+<p>Typically I like to have a single animator object which is responsible for managing all animations, following the idea that a single <code>setInterval</code> is regarded as the best way to do timing for Javascript animation loops. When an animation is started, a timer is created (if not already) and the collection of objects you have registered can then be animated. Despite the single timer and loop, each animation will effectively run on its own "timeline", and if you use different tweening functions, at its own pace.</p>
+
+<p>For an individual animation effect from X to Y, an animation object is created with <code>from</code>: and <code>to</code>: properties, along with <code>ontween()</code> (called "per-frame") and <code>oncomplete()</code> event handlers/callbacks for the animation. The actual animation work is done within <code>ontween</code> in this example; most actual Javascript animation libraries allow you specify multiple HTML attributes to animate without any <code>ontween()</code> work needed, eg. <code>{marginLeft:{from:100,to:300},marginTop:{from:0,to:50}}</code> and so on. The syntax just shown is used by the <a href="http://developer.yahoo.com/yui/animation/" title="YUI animation component">animation component</a> of the <a href="http://developer.yahoo.com/yui/" title="Yahoo! User Interface library">Yahoo! User Interface</a> library.</p>
+
+<pre class="block">
+<code>function Animator() {
+  <span><span>// controller for animation objects.</span></span>
+  var self = this;
+  var intervalRate = 20;
+  this.tweenTypes = {
+    <span><span>// % of total distance to move per-frame, total always = 100</span></span>
+    'default': [1,2,3,4,5,6,7,8,9,10,9,8,7,6,5,4,3,2,1],
+    'blast': [12,12,11,10,10,9,8,7,6,5,4,3,2,1],
+    'linear': [10,10,10,10,10,10,10,10,10,10]
+  }
+  this.queue = [];
+  this.queueHash = [];
+  this.active = false;
+  this.timer = null;
+  this.createTween = function(start,end,type) {
+    <span><span>// return array of tween coordinate data (start-&gt;end)</span></span>
+    type = type||'default';
+    var tween = [start];
+    var tmp = start;
+    var diff = end-start;
+    var x = self.tweenTypes[type].length;
+    for (var i=0; i&lt;x; i++) {
+      tmp += diff*self.tweenTypes[type][i]*0.01;
+      tween[i] = {};
+      tween[i].data = tmp;
+      tween[i].event = null;
+    }
+    return tween;
+  };
+
+  this.enqueue = function(o,fMethod,fOnComplete) {
+    <span><span>// add object and associated methods to animation queue</span></span>
+    <span><span>
+    // writeDebug('animator.enqueue()');</span></span>
+    if (!fMethod) {
+      <span><span>// writeDebug('animator.enqueue(): missing fMethod');</span></span>
+    }
+    self.queue.push(o);
+    o.active = true;
+  };
+
+  this.animate = function() {
+    <span><span>// interval-driven loop: process queue, stop if done</span></span>
+    var active = 0;
+    for (var i=0,j=self.queue.length; i&lt;j; i++) {
+      if (self.queue[i].active) {
+        self.queue[i].animate();
+        active++;
+      }
+    }
+    if (active == 0 &amp;&amp; self.timer) {
+      <span><span>// all animations finished</span></span>
+      <span><span>
+      // writeDebug('Animations complete');</span></span>
+      self.stop();
+    } else {
+      <span><span>// writeDebug(active+' active');</span></span>
+    }
+  };
+
+  this.start = function() {
+    if (self.timer || self.active) {
+      <span><span>// writeDebug('animator.start(): already active');</span></span>
+      return false;
+    }
+    <span><span>// writeDebug('animator.start()');</span></span>
+<span><span>
+    // report only if started</span></span>
+    self.active = true;
+    self.timer = setInterval(self.animate,intervalRate);
+  };
+
+  this.stop = function() {
+    <span><span>// writeDebug('animator.stop()',true);</span></span>
+<span><span>
+    // reset some things, clear for next batch of animations</span></span>
+    clearInterval(self.timer);
+    self.timer = null;
+    self.active = false;
+    self.queue = [];
+  };
+
+};
+
+var animator = new Animator();
+</code>
+</pre>
+
+<h3>Efficiency: Single Timer, Many Animations</h3>
+
+<p>The <code>Animation</code> object is a simple manager for multiple animations. It has a method for creating tweens, queueing for individual <code>Animation()</code> instances, and start and stop methods. When an animation is created and played for the first time, it adds itself via <code>animator.enqueue()</code> and then calls <code>animator.start()</code> if needed to kick things off. This way, the animator only ever has one single <code>setInterval</code> timer active - a good thing - and it only runs when animations are actively running. Once the last animation has finished, the animator shuts down until the next time it's needed.</p>
+
+<pre class="block">
+<code>function Animation(oParams) {
+  <span><span>// Individual animation sequence</span></span>
+  <span><span>
+  /*
+    oParams = {
+      from: 200,
+      to: 300,
+      tweenType: 'default', <span><span>// see animator.tweenTypes (optional)</span></span>
+      ontween: function(value) { ... }, <span><span>// method called each time (required)</span></span>
+      oncomplete: function() { ... } <span><span>// when finished (optional)</span></span>
+    }
+  */</span></span>
+  var self = this;
+  if (typeof oParams.tweenType == 'undefined') {
+    oParams.tweenType = 'default';
+  }
+  this.ontween = (oParams.ontween||null);
+  this.oncomplete = (oParams.oncomplete||null);
+  this.tween = animator.createTween(oParams.from,oParams.to,oParams.tweenType);
+  this.frameCount = animator.tweenTypes[oParams.tweenType].length;
+  this.frame = 0;
+  this.active = false;
+
+  this.animate = function() {
+    <span><span>// generic animation method</span></span>
+    if (self.active) {
+      if (self.ontween &amp;&amp; self.tween[self.frame]) {
+        self.ontween(self.tween[self.frame].data);
+      }
+      if (self.frame++ &gt;= self.frameCount-1) {
+        <span><span>// writeDebug('animation(): end');</span></span>
+        self.active = false;
+        self.frame = 0;
+        if (self.oncomplete) {
+          self.oncomplete();
+        }
+        return false;
+      }
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  this.start = function() {
+    <span><span>// add this to the main animation queue</span></span>
+    animator.enqueue(self,self.animate,self.oncomplete);
+    if (!animator.active) {
+      animator.start();
+    }
+  };
+
+  this.stop = function() {
+    self.active = false;
+  };
+  
+};
+</code>
+</pre>
+
+<h3>Fun Stuff: Animation Sequences</h3>
+
+<p>Let's say you wanted a multi-part animation sequence, where a box resizes and moves in separate motions. A chain can easily be made using the <code>oncomplete()</code> method of separate animation objects.</p>
+
+<p>In this case, a sequence of <code>animations[]</code> objects is made and a function simply iterates through them, increasing a counter each time an animation's <code>oncomplete()</code> fires. Animations can be fired and run simultaneously, as shown in the case of the last two.</p>
+
+<pre class="block">
+<code>var animations = [];
+var animationCount = 0;
+
+function nextAnimation() {
+  if (animations[animationCount]) {
+    <span><span>// writeDebug('starting animation '+animationCount);</span></span>
+    animations[animationCount].start();
+    animationCount++;
+  }
+}
+
+<span><span>// generic tween handlers</span></span>
+function animateBoxX(value) {
+  document.getElementById('box2').style.left = value+'px';
+}
+
+function animateBoxH(value) {
+  document.getElementById('box2').style.height = value+'px';
+}
+
+<span><span>// motion #1</span></span>
+animations.push(new Animation({
+  from: 0,
+  to: 200,
+  ontween: animateBoxX,
+  oncomplete: nextAnimation
+}));
+
+<span><span>// motion #2</span></span>
+animations.push(new Animation({
+  from: parseInt(document.getElementById('box2').offsetHeight),
+  to: 300,
+  ontween: animateBoxH,
+  oncomplete: nextAnimation
+}));
+
+<span><span>// motion #3</span></span>
+animations.push(new Animation({
+  from: 200,
+  to: 400,
+  ontween: animateBoxX,
+  oncomplete: function() {
+    <span><span>// run last two animations simultaneously</span></span>
+    nextAnimation();
+    nextAnimation();
+  }
+}));
+
+<span><span>// simultaneous #1</span></span>
+animations.push(new Animation({
+  from: 400,
+  to: 800,
+  ontween: animateBoxX
+}));
+
+<span><span>// simultaneous #2</span></span>
+animations.push(new Animation({
+  from: 300,
+  to: 600,
+  ontween: animateBoxH
+}));
+
+nextAnimation(); <span><span>// start the sequence</span></span>
+</code>
+</pre>
+
+<p><a href="http://www.schillmania.com/content/projects/javascript-animation-3/demo/animation-sequence.html">Javascript Animation API demo: Sequential + Simultaneous animation sequence</a></p>
+
+
+<h3>Demo Limitations, Annoyances etc.</h3>
+
+<p>While intended as examples, some shortcuts were taken in writing the demo animation code.</p>
+
+<ul>
+ <li>Fixed frame count means animation duration is variable, and varies between browsers/platforms and CPU etc. (Ideally, duration is configurable and animation runs at best-possible speed, skipping frames if need be - eg., try to render 100 fps, calculate tween array of (frames * duration) up-front and skip to nearest frame based on Date() vs. time animation started while running.)</li>
+ <li>One tween per animation, code doesn't conveniently handle animation of arbitrary (or multiple) HTML properties.</li>
+ <li><code>ontween()</code> is somewhat limited, doesn't provide access to all properties of the animation object etc.</li>
+</ul>
+
+<p>If for some reason you needed to write your own animation script, these would be items to consider. I also recommend the YUI animation library, which is quite solid. <a href="http://www.berniecode.com/writing/animator.html">Bernie's Better Animation Class</a> is a similar standalone script worth checking out.</p>
+
+  </div>
+
+ <div class="top header"><h4>Related links</h4><div class="divider"> </div></div><div class="copy"><ul><li><a href="http://www.schillmania.com/content/projects/javascript-animation-3/demo/">Javascript Animation API demo: Full-screen window</a></li><li><a href="http://www.schillmania.com/content/projects/javascript-animation-3/demo/index-audio.html">Javascript Animation API demo: Full-screen window + Sound</a></li><li><a href="http://www.schillmania.com/content/projects/javascript-animation-3/demo/animation-sequence.html">Javascript Animation API demo: Sequential + Simultaneous animation sequence</a></li><li><a href="http://www.berniecode.com/writing/animator.html">Bernie's Better Animation Class</a></li><li><a href="http://www.schillmania.com/content/projects/javascript-animation-1/">Javascript Animation: Tutorial, Part 1</a></li><li><a href="http://www.schillmania.com/content/projects/javascript-animation-2/">Javascript Animation: Tutorial, Part 2</a></li> </ul></div>
+
+  <!-- /entry content -->
+
+  </div>
+
+  <!-- right column -->
+
+  <div id="right">
+
+<!-- end unique content -->
+
+   <div id="nav">
+
+    <div id="options-stub" />
+
+    <div id="stub" class="stub" />
+
+<ul id="nav-list" class="top">
+	
+<li id="external">
+
+	<h2 title="Recent Activity"><span class="l" />Recent<span>ly.</span></h2>
+	
+	<ul>
+	 <li>
+
+	    <div class="arkanoid item">
+	     <h3><a href="http://www.schillmania.com/arkanoid/" title="The classic Breakout-style arcade game, playable in-browser">Arkanoid</a><span class="opt">:</span> <span>Recent Submissions</span></h3>
+	     <div id="arkanoid-stub"><ul class="thumbs"><li id=""><a href="http://www.schillmania.com/arkanoid/#level23707"><img src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/preview.php" alt="" /></a></li><li id=""><a href="http://www.schillmania.com/arkanoid/#level23708"><img src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/preview(1).php" alt="" /></a></li><li id=""><a href="http://www.schillmania.com/arkanoid/#level23709"><img src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/preview(2).php" alt="" /></a></li><li id=""><a href="http://www.schillmania.com/arkanoid/#level23710"><img src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/preview(3).php" alt="" /></a></li><li id=""><a href="http://www.schillmania.com/arkanoid/#level23711"><img src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/preview(4).php" alt="" /></a></li><li id=""><a href="http://www.schillmania.com/arkanoid/#level23712"><img src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/preview(5).php" alt="" /></a></li><div class="clear" /></ul></div>
+
+	     <p class="cta"><a href="http://www.schillmania.com/arkanoid/#editor" title="Edit and submit your own DHTML Arkanoid level">Create a level</a> <span class="divider">|</span> <a href="http://www.schillmania.com/arkanoid/#browser" title="Browse and play user-submitted levels in DHTML Arkanoid">More..</a></p>
+	    </div>
+
+	    <div class="flickr item">
+	     <h3>Amateur Photography <span class="opt">-</span> <span>Photos from Schill</span></h3>
+
+	     <div id="flickr-stub"><ul class="thumbs"><li id=""><a href="http://www.flickr.com/photos/schill/36401954900/" title="From The High Line"><img src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/white-15.png" alt="" style="background: url(&quot;http://farm5.staticflickr.com/4363/36401954900_78be7c015d_s.jpg&quot;) 50% 50% no-repeat transparent;" /></a></li><li id=""><a href="http://www.flickr.com/photos/schill/36758314595/" title="&quot;MASON&quot; (He-Man)"><img src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/white-15.png" alt="" style="background: url(&quot;http://farm5.staticflickr.com/4406/36758314595_6bc258c9be_s.jpg&quot;) 50% 50% no-repeat transparent;" /></a></li><li id=""><a href="http://www.flickr.com/photos/schill/36619015331/" title="New York Public Library"><img src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/white-15.png" alt="" style="background: url(&quot;http://farm5.staticflickr.com/4385/36619015331_b6c43c2581_s.jpg&quot;) 50% 50% no-repeat transparent;" /></a></li><li id=""><a href="http://www.flickr.com/photos/schill/36704653305/" title="Schiller Cousins"><img src="./Javascript Animation_ Tutorial, Part 3 - Schillmania.com_files/white-15.png" alt="" style="background: url(&quot;http://farm5.staticflickr.com/4420/36704653305_f87f7b0ba3_s.jpg&quot;) 50% 50% no-repeat transparent;" /></a></li><div class="clear" /></ul></div>
+	    </div>
+
+	    <div class="lastfm item">
+	     <h3>Heavy Rotation <span class="opt">-</span> <span>Recent top plays @<a href="http://www.last.fm/user/chillwithschill/" title="chillwithschill @ last.fm">last.fm</a></span><span class="record" /></h3>
+	     <div id="lastfm-stub"><ul class="list"><li class="top-track"><span class="track">Trust Me</span><span class="opt"> - </span><span class="artist">Guru</span></li><li class="top-track"><span class="track">Down the Backstreets</span><span class="opt"> - </span><span class="artist">Guru</span></li><li class="top-track"><span class="track">Sights In The City</span><span class="opt"> - </span><span class="artist">Guru</span></li><li class="top-track"><span class="track">Slicker Than Most</span><span class="opt"> - </span><span class="artist">Guru</span></li><li class="top-track"><span class="track">Looking Through Darkness</span><span class="opt"> - </span><span class="artist">Guru</span></li></ul></div>
+	     <div class="clear" />
+	    </div>
+	
+	 </li>
+	</ul>
+
+</li>
+
+<li>
+  <h2 title="The latest and greatest."><span class="l" />Read<span>ing.</span><span /></h2>
+  <ul>
+
+   <li>
+	<!--
+    <p>The latest and/or most relevant stuff.</p>
+	-->
+    <h3>Most Recently</h3>
+    <dl>
+	 <dt><a href="http://www.schillmania.com/content/entries/2013/armor-alley-web-prototype/">Armor Alley (1990): Web Prototype</a><div class="r-wedge" /></dt>
+	 <dd>A browser-based interpretation of the MS-DOS release of Armor Alley, a combat strategy game originally released in 1990 for MS-DOS PCs and the Macintosh. Written in HTML, JavaScript and CSS.</dd>
+	 <dt><a href="http://www.schillmania.com/content/entries/2012/survivor-c64-html-remake/">SURVIVOR: Remaking A C64 Game In HTML</a><div class="r-wedge" /></dt>
+	 <dd>Remaking an Atari / Commodore 64-era space-based "shoot-'em-up" arcade game in HTML + CSS + JavaScript, including a level editor and design tool, thirty years after its release.</dd>
+	 <dt><a href="http://www.schillmania.com/content/entries/2011/wheels-of-steel/">The Wheels Of Steel: An Ode To Turntables (in HTML)</a><div class="r-wedge" /></dt>
+	 <dd>Building a browser-based turntable prototype using HTML, CSS, JavaScript and Flash: A bit of history, screenshots, explanation of the approach taken, limitations found and sample code.</dd>
+	 <dt><a href="http://www.schillmania.com/content/entries/2010/how-soundmanager2-works/">How SoundManager 2 Works</a><div class="r-wedge" /></dt>
+	 <dd>Background details to the JavaScript and Flash that makes SoundManager 2 work, plus technical notes and other findings about Flash's wacky ExternalInterface functionality.</dd>
+	 <dt><a href="http://www.schillmania.com/content/entries/2009/css3-and-the-future/">CSS 3 and The Future: Image-free Rounded Corners, Drop Shadows and Gradients</a><div class="r-wedge" /></dt>
+	 <dd>A brief history of rounded corner CSS 2 hacks and some examples of effects using border-radius, box-shadow and other fancy CSS 3 attributes (and vendor-specific extensions) allowing modern browsers to render shiny UI designs entirely from code.</dd>
+	 <dt><a href="http://www.schillmania.com/content/entries/2009/browser-performance-cost-of-social-media/">The Cost of "Social Media" Javascript Overload</a><div class="r-wedge" /></dt>
+	 <dd>Security, load time and user experience are all affected by the amount of inline Javascript blocks and third-party script "includes" being crammed into some modern sites, particularly commercial and tech blogs. This entry is a rant, and some suggestions to improve performance.</dd>
+	 <dt><a href="http://www.schillmania.com/content/entries/2009/time-lapse-photography-chdk/">HD Time-Lapse Photography: A How-To</a><div class="r-wedge" /></dt>
+	 <dd>A hacker type can't simply plant basil and cilantro outside, and leave them alone to grow; of course there has to be something else, preferably nerdy, in the process. This is how I ended up getting into time-lapse photography and making videos from sequences of photos using a Canon camera, the free CHDK software, and QuickTime.</dd>
+	 <dt><a href="http://www.schillmania.com/content/entries/2009/javascript-malware-obfuscation-analysis/">Javascript Malware Analysis: A Case Study</a><div class="r-wedge" /></dt>
+	 <dd>When JS goes bad: Remote iFrame tricks on legitimate (or phishing) sites can load Javascript exploits or "shellcode", which can mean drive-by downloads and other risks. This is an example of some heavily-obfuscated code seen on a recent Facebook phishing site.</dd>
+	 <dt><a href="http://www.schillmania.com/content/projects/javascript-animation-3/">Javascript Animation: Tutorial, Part 3</a><div class="r-wedge" /></dt>
+	 <dd>The final, and overdue, part in a series on Javascript animation techniques: Creating tweens, simultaneous animations and event handling are discussed. A simple animation API, demo and source code is included.</dd>
+	 <dt><a href="http://www.schillmania.com/content/entries/2009/adblock-vs-noscript/">Extension Wars: Adblock Plus vs. NoScript</a><div class="r-wedge" /></dt>
+	 <dd>Is it okay for one popular Firefox extension to alter the behaviour of another without asking for your permission? (PS: Internet drama/tempest in a teapot amusement goes here.)</dd>
+	 <dt><a href="http://www.schillmania.com/content/entries/2009/defer-script-loading/">Optimizing Your External Javascript References</a><div class="r-wedge" /></dt>
+	 <dd>Traditionally, the script tag blocks parse, load and render of a web page. A few ideas around this include loading JS with JS, the defer attribute and caching locally.</dd>
+	 <dt><a href="http://www.yuiblog.com/blog/2009/06/30/yui-soundmanager/">Enhancing YUI-based Applications With Audio</a><div class="r-wedge" /></dt>
+	 <dd>(yuiblog.com article) Thoughts about audio and how it can be applied online to user interface/experience design.</dd>
+	 <dt><a href="http://www.yuiblog.com/blog/2009/02/26/flickr-uploadr/">Flickr Web Uploadr: File uploads via YUI</a><div class="r-wedge" /></dt>
+	 <dd>(code.flickr.com article) A brief history of how browser-based file uploads suck, and how we made them a lot better on Flickr.</dd>
+	 <dt><a href="http://www.schillmania.com/content/entries/2009/yahoo-photos-frontend-thoughts/" class="xhr-exclude">A Snapshot of The Yahoo! Photos Beta (from 2006)</a><div class="r-wedge" /></dt>
+	 <dd>Javascript performance learnings: Memory leaks and management, event delegation, performance tweaks, debugging, UI observations and side thoughts from a web development perspective from my time working on the Ajax-heavy redesign of Yahoo! Photos, between 2005 and 2006.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2009/what-i-did-in-2008/" class="xhr-exclude">What I Did In 2008</a><div class="r-wedge" /></dt>
+     <dd>A productive year seeing the redesign of SoundManager 2, the Javascript Sound library, a refresh of Snowstorm (a free Javascript Snow effect), continued downtempo and trip-hop mixes, binaural audio recordings, time-lapse photography and video experiments.</dd>
+	 <dt><a href="http://code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/">On UI Quality (The Little Things)</a><div class="r-wedge" /></dt>
+	 <dd>(code.flickr.com article) Observations of how browsers do linear and bicubic image resampling when resizing, and how to make them look better in IE 6 and 7.</dd>
+    </dl>
+   </li>
+
+  </ul>
+ </li>
+ 
+<li>
+  <h2 title="Fun and entertainment"><span class="l" />Play<span>ing</span><span>.</span></h2>
+  <ul>
+   <li>
+    <h3>Entertainment: Games</h3>
+    <dl>
+     <dt><a href="http://www.schillmania.com/content/projects/dhtml_arkanoid/">DHTML Arkanoid</a><div class="r-wedge" /></dt>
+     <dd>An attempt at recreating the classic Arkanoid arcade game entirely in DHTML. Includes a level editor and a highscores list.</dd>
+     <dt><a href="http://www.schillmania.com/?theme=2007&amp;christmas=1">"Smash Christmas Lights"</a><div class="r-wedge" /></dt>
+     <dd>A seasonal twist on the 2007/08 web site theme, with animations and sound effects. There is a bonus sequence for those who are "thorough"..</dd>
+     <dt><a href="http://www.schillmania.com/projects/fireworks/">Fireworks.js</a><div class="r-wedge" /></dt>
+     <dd>A goofy interactive Javascript Fireworks experiment, with animation and sound.</dd>
+     <dt><a href="http://www.schillmania.com/random/humour/web20awareness/">"Web 2.0 Awareness Test"</a><div class="r-wedge" /></dt>
+     <dd>A Javascript/CSS experiment which gives you a score based on what Web 2.0-related sites you may have recently visited. (Written in 2006.)</dd>
+
+    </dl>
+   </li>
+
+   <li>
+    <h3>Code: F/OSS/Things You Can Use</h3>
+    <dl>
+     <dt><a href="http://www.schillmania.com/projects/soundmanager2/">SoundManager 2: Javascript Sound For The Web</a><div class="r-wedge" /></dt>
+     <dd>A new, fancier version of a Javascript sound project allowing people to add sound, or make sound apps using Javascript.</dd>
+     <dt class="external"><a href="http://www.schillmania.com/projects/soundmanager2/demo/play-mp3-links/">Javascript MP3 Player Demo</a><div class="r-wedge" /></dt>
+     <dd>An example of SoundManager 2, showing how you can make MP3 links play inline.</dd>
+     <dt><a href="http://www.schillmania.com/content/projects/even-more-rounded-corners/">Even More Rounded Corners With CSS</a><div class="r-wedge" /></dt>
+     <dd>Another take at creating single-image, alpha-transparent, fluid, rounded corner dialogs with CSS.</dd>
+     <dt><a href="http://www.schillmania.com/content/projects/javascript-animation-1/">Javascript Animation: Tutorial, Part 1</a><div class="r-wedge" /></dt>
+     <dd>Part one of a planned series: Theory behind Javascript/DHTML-based animation via setTimeout and setInterval.</dd>
+     <dt><a href="http://www.schillmania.com/content/projects/javascript-animation-2/">Javascript Animation: Tutorial, Part 2</a><div class="r-wedge" /></dt>
+     <dd>Discussing efficiency regarding interval-based animation</dd>
+	 <dt><a href="http://www.schillmania.com/content/projects/javascript-animation-3/">Javascript Animation: Tutorial, Part 3</a><div class="r-wedge" /></dt>
+	 <dd>The final, and overdue, part in a series on Javascript animation techniques: Creating tweens, simultaneous animations and event handling are discussed. A simple animation API, demo and source code is included.</dd>
+     <dt><a href="http://www.schillmania.com/content/projects/snowstorm/">SnowStorm: A Javascript Snow Effect</a><div class="r-wedge" /></dt>
+     <dd>A downloadable DHTML component that creates an animated snowfall effect. Uses PNG-based images where supported.</dd>
+    </dl>
+   </li>
+
+  </ul>
+ </li>
+ 
+<li>
+  <h2 title="Thoughts and so on"><span class="l" />Think<span>ing</span><span>.</span></h2>
+  <ul>
+   <li>
+
+    <p>Observations, Thoughts and Rants</p>
+    <h3>Writing: Highlights</h3>
+
+	<h4>Non-technical</h4>
+    <dl>
+     <dt><a href="http://www.schillmania.com/content/entries/2008/beck-mellow-gold/">Top 5 favourite albums: Beck: Mellow Gold</a><div class="r-wedge" /></dt>
+     <dd>Comments on Beck's classic break-out album from 1994, with a few insights from this Beck fan.</dd>
+     <dt><a href="http://www.schillmania.com/content/opinion/2005/04/12/what-turntables-to-buy/">What Turntables To Buy?</a><div class="r-wedge" /></dt>
+     <dd>My response to a forum post on choosing DJ equipment.</dd>
+     <dt><a href="http://www.schillmania.com/content/opinion/2004/01/03/on_djing_and_turntablism/">On DJing and Turntablism</a><div class="r-wedge" /></dt>
+     <dd>Why you should buy a pair of 1200s, a mixer and some records.</dd>
+    </dl>
+
+	<h4>Nerd glasses required</h4>
+    <dl>
+     <dt><a href="http://www.schillmania.com/content/projects/soundmanager2/">Sound For The Web: SoundManager 2 (Article)</a><div class="r-wedge" /></dt>
+     <dd>A new, fancier version of a Javascript sound project allowing people to add sound, or make sound apps using Javascript.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2006/08/how-web20-aware-are-you/">How Web 2.0-aware Are You?</a><div class="r-wedge" /></dt>
+     <dd>A humorous look at Web 2.0-related sites, using a trick that tests your browser's visited URL history.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2005/02/19/writing-html-like-1993/">Writing HTML like it's 1993</a><div class="r-wedge" /></dt>
+     <dd>A new job update, California, Eric and Molly teach CSS.</dd>
+     <dt><a href="http://www.schillmania.com/content/opinion/2005/10/dont-believe-the-web-20-hype/">Don't Believe The (Web 2.0) Hype!</a><div class="r-wedge" /></dt>
+     <dd>An attempt at popping the latest Internet 2.0 bubble and related technologies, along with a wishlist of ideals.</dd>
+     <dt><a href="http://www.schillmania.com/content/opinion/2005/10/on-seo-and-spamming/">On SEO and Search Engine Spamming</a><div class="r-wedge" /></dt>
+     <dd>From a post on theroot42.org originally entitled, 'SEO/How To Do Well On The Search Engines'</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/10/24/application-xhtml+xml/">Application/XHTML+XML</a><div class="r-wedge" /></dt>
+     <dd>What I learned about XHTML when switching schillmania.com to application/xhtml+xml (forcing true XML validation.)</dd>
+     <dt><a href="http://www.schillmania.com/content/opinion/2004/06/27/the_obligatory_standards_rant/">The Obligatory Standards Rant</a><div class="r-wedge" /></dt>
+     <dd>A rant advocating standards on a respected design-oriented forum.</dd>
+     <dt><a href="http://www.schillmania.com/content/opinion/2004/01/01/spam_spam_spam/">Spam, spam, spam</a><div class="r-wedge" /></dt>
+     <dd>Spam: The scourge of the Internet. A quick overview-cum-rant, and some recommended tools to fight the spam war.</dd>
+    </dl>
+
+   </li>
+
+  </ul>
+ </li>
+
+<li>
+  <h2 title="Audio: Recordings"><span class="l" />Listen<span>ing</span><span>.</span></h2>
+  <ul>
+   <li>
+    <p>Random soundbites + video clips</p>
+
+    <h3>Binaural Audio Recordings</h3>
+    <dl>
+     <dt><a href="http://www.schillmania.com/content/media/beat-juggling/">Hand/Eye Coordination</a><div class="r-wedge" /></dt>
+     <dd>An attempt at 'Beat juggling' a seamless loop from a sample using turntables and two copies of the same record.</dd>
+     <dt><a href="http://www.schillmania.com/content/media/drumming-with-vinyl/">Drumming with Vinyl</a><div class="r-wedge" /></dt>
+     <dd>Correctly scratch a record with a drum sample on it, and you can make your own variation on a theme.</dd>
+
+     <dt><a href="http://www.schillmania.com/content/media/technics_mouse_scratching/">Scratching .. with a mouse?</a><div class="r-wedge" /></dt>
+     <dd>Combine a turntable with a computer mouse and a copy of the SoundCraft vinyl scratching emulation engine, and you have at least 30 seconds of entertainment.</dd>
+     <dt><a href="http://www.schillmania.com/content/media/2-hour_mix/">Chill with Schill</a><div class="r-wedge" /></dt>
+     <dd>A two-hour Downtempo/Trip-Hop mix, recorded on a lazy afternoon while drinking a $4 mocha from Starbucks. How's that for detail?</dd>
+    </dl>
+   </li>
+
+  </ul>
+ </li>
+
+<li>
+  <h2 title="Contact information and related links"><span class="l" />React<span>ing</span><span>.</span></h2>
+  <ul>
+   <li>
+    <p>Get In Touch.</p>
+
+    <h3>Interact</h3>
+    <dl>
+     <dt><a href="http://www.schillmania.com/content/react/contact/" title="Scott Schiller, contact information">Contact</a><div class="r-wedge" /></dt>
+     <dd>How to get in touch with Scott Schiller.</dd>
+    </dl>
+
+    <h3>Elsewhere Online</h3>
+    <dl>
+     <dt><a href="http://flickr.com/people/schill/">schill on Flickr</a><div class="r-wedge" /></dt>
+     <dd>Scott's Flickr profile and photos</dd>
+     <dt><a href="http://www.last.fm/user/chillwithschill/">chillwithschill on Last.fm</a><div class="r-wedge" /></dt>
+     <dd>Scott's last.fm profile and music interests</dd>
+     <dt><a href="http://www.scottschiller.com/" title="Scott Schiller, professional portfolio site">scottschiller.com: Portfolio</a><div class="r-wedge" /></dt>
+     <dd>Scott Schiller's professional and personal portfolio site. (Last updated: 2004)</dd>
+     <dt><a href="http://www.freshly-ground.com/" title="Experimental design/music/DJ site">freshly ground: Experimental sound/music</a><div class="r-wedge" /></dt>
+     <dd>A side-project of experiments in music and binaural audio recordings</dd>
+    </dl>
+
+   </li>
+  </ul>
+</li>
+
+<li>
+  <h2 title="Old sites, articles and work"><span class="l" />Dig<span>ging</span><span>.</span></h2>
+  <ul>
+   <li>
+    <p>The Archives: Design and content</p>
+
+    <h3>Alternate Themes</h3>
+    <dl>
+     <dt><a href="http://schillmania.com/?theme=2008" title="2008 &apos;Back to Basics&apos; edition">2008 "Back To Basics" edition</a><div class="r-wedge" /></dt>
+     <dd>Schillmania! 2008 Edition: Back To Basics (CSS grid layout, minimal JS/images)</dd>
+     <dt><a href="http://www.schillmania.com/?theme=2007" title="2007/2008 &apos;night and day&apos; theme">2007/08 "Night and Day" edition</a><div class="r-wedge" /></dt>
+     <dd>Schillmania! 2007/08 Edition: "Night and day" theme with time-sensitive UI/design, environmental sound effects and ambience</dd>
+     <dt><a href="http://www.schillmania.com/?theme=2007&amp;christmas=1" title="2007 Smash Christmas Lights seasonal feature">"Smash Christmas Lights" 2007</a><div class="r-wedge" /></dt>
+     <dd>Schillmania! 2007 Edition: "Smash Christmas Lights" seasonal feature</dd>
+     <dt><a href="http://www.schillmania.com/?theme=2006" title="Schillmania! 2006 Edition">2006 "Work/life balance" edition</a><div class="r-wedge" /></dt>
+     <dd>Schillmania! 2006 Edition: Archived design (Sliding feature photo, two-column layout)</dd>
+     <dt><a href="http://www.schillmania.com/?theme=2005" title="Schillmania! 2005 Edition">2005 "Bouncing Icon" edition</a><div class="r-wedge" /></dt>
+     <dd>Schillmania! 2005 Edition: Archived design (Horizon, bouncing icon layout)</dd>
+     <dt><a href="http://www.schillmania.com/?theme=2004" title="Schillmania! 2004 Edition">2004 Edition: Now With More Funk</a><div class="r-wedge" /></dt>
+     <dd>Schillmania! 2004 Edition: Archived design (Multi-themed sliding photos+sound layout, may be buggy)</dd>
+    </dl>
+
+    <h3>Design Archives</h3>
+    <dl>
+     <dt><a href="http://www.schillmania.com/content/entries/2005/05/25/5-years/">A Five-Year Retrospective</a><div class="r-wedge" /></dt>
+     <dd>A look back on the origins of schillmania.com and its previous incarnations.</dd>
+     <dt><a href="http://www.schillmania.com/spring_03" title="Schillmania! Spring.03 Edition">2003 (Spring.03): Strictly XHTML edition</a><div class="r-wedge" /></dt>
+     <dd>Schillmania! 2003 Edition: Archived design ("Newspaper style", first major XHTML + heavy JavaScript rewrite)</dd>
+    </dl>
+
+	<h3>News + Article Archives</h3>
+	
+	<p>Everything else not previously mentioned.</p>
+
+	<h4>2005 - 2007</h4>
+    <dl>
+     <dt><a href="http://www.schillmania.com/content/entries/2007/12/redesign/">A Fresh Redesign: 2007/08 edition</a><div class="r-wedge" /></dt>
+     <dd>An aggressive new time-sensitive redesign renders the site with different visual and audible cues over the course of the day.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2006/12/happy-holidays/">A Holiday Update (2006)</a><div class="r-wedge" /></dt>
+	 <dd>The usual holiday festivities: Snow, good tunes, smashing christmas lights and other debauchery.</dd>
+     <dt><a href="http://www.schillmania.com/content/projects/soundmanager2/">Sound For The Web: SoundManager 2 (Article)</a><div class="r-wedge" /></dt>
+     <dd>A new, fancier version of a Javascript sound project allowing people to add sound, or make sound apps using Javascript.</dd>
+     <dd>The usual holiday festivities: Snow, good tunes, smashing christmas lights and other debauchery.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2006/10/beck-hacks-yahoo/">Beck Hacks Yahoo!</a><div class="r-wedge" /></dt>
+     <dd>Beck Hansen and his band play an unannounced gig at Yahoo! Hack Day.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2006/08/how-web20-aware-are-you/">How Web 2.0-aware Are You?</a><div class="r-wedge" /></dt>
+     <dd>A humorous look at Web 2.0-related sites, using a trick that tests your browser's visited URL history.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2006/01/tj-schiller-us-open/">TJ Schiller Stomps US Open, X-Games</a><div class="r-wedge" /></dt>
+     <dd>My brother takes first place in two massive comps, throwing a never-done-before trick at one.</dd>
+     <dt><a href="http://www.schillmania.com/content/media/world-of-trip-hop-mix/">World Of Trip-Hop Mix</a><div class="r-wedge" /></dt>
+     <dd>A 160-minute mix of downtempo and trip-hop.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2005/04/14/tj-schiller-2005-wsi/">TJ Schiller wins 2005 WSI Slopestyle</a><div class="r-wedge" /></dt>
+     <dd>My brother wins at a popular freestyle skiing event.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2005/04/03/okanagan-golf-paradise/">A Piece of Okanagan Golf Paradise</a><div class="r-wedge" /></dt>
+     <dd>A site built for a tourist vacation company at Predator Ridge.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2005/03/24/most-expensive-cab-ride-ever/">The Most Expensive Cab Ride. Ever.</a><div class="r-wedge" /></dt>
+     <dd>Regarding the purchase of a 2005 Toyota Celica.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2005/03/02/yahoo-10-sugar-ray/">Sugar Ray Rocks Yahoo! 10th Anniversary</a><div class="r-wedge" /></dt>
+     <dd>Yahoo celebrates 10 years with the musical talents of Sugar Ray.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2005/08/07/beck-in-santa-cruz/">Beck Live in Santa Cruz</a><div class="r-wedge" /></dt>
+     <dd>Meeting Beck Hansen, my favourite musician of all-time, after a concert in Santa Cruz</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2005/02/19/writing-html-like-1993/">Writing HTML like it's 1993</a><div class="r-wedge" /></dt>
+     <dd>A new job update, California, Eric and Molly teach CSS.</dd>
+     <dt><a href="http://www.schillmania.com/content/opinion/2005/10/dont-believe-the-web-20-hype/">Don't Believe The (Web 2.0) Hype!</a><div class="r-wedge" /></dt>
+     <dd>An attempt at popping the latest Internet 2.0 bubble and related technologies, along with a wishlist of ideals.</dd>
+     <dt><a href="http://www.schillmania.com/content/opinion/2005/10/on-seo-and-spamming/">On SEO and Search Engine Spamming</a><div class="r-wedge" /></dt>
+     <dd>From a post on theroot42.org originally entitled, 'SEO/How To Do Well On The Search Engines'</dd>
+     <dt><a href="http://www.schillmania.com/content/opinion/2005/04/12/what-turntables-to-buy/">What Turntables To Buy?</a><div class="r-wedge" /></dt>
+     <dd>My response to a forum post on choosing DJ equipment.</dd>
+     <dt><a href="http://www.schillmania.com/content/opinion/2005/01/25/way-to-doh/">Way To D'oh!</a><div class="r-wedge" /></dt>
+     <dd>Some tech/geek thoughts on 'Way To Dough', a neat web-based promotion for the Subway chain of stores.</dd>
+    </dl>
+
+	<h4>2004</h4>
+	<dl>
+	 <dt><a href="http://www.schillmania.com/content/opinion/2004/11/27/the-$5-coffee/">The (almost) Five-Dollar Coffee</a><div class="r-wedge" /></dt>
+	 <dd>Starbucks ups the cost of already-overpriced coffee; I've had enough.</dd>
+	 <dt><a href="http://www.schillmania.com/content/entries/2004/10/24/application-xhtml+xml/">Application/XHTML+XML</a><div class="r-wedge" /></dt>
+	 <dd>What I learned about XHTML when switching schillmania.com to application/xhtml+xml (forcing true XML validation.)</dd>
+	 <dt><a href="http://www.schillmania.com/content/opinion/2004/06/27/the_obligatory_standards_rant/">The Obligatory Standards Rant</a><div class="r-wedge" /></dt>
+	 <dd>A rant advocating standards on a respected design-oriented forum.</dd>
+	 <dt><a href="http://www.schillmania.com/content/opinion/2004/01/03/on_djing_and_turntablism/">On DJing and Turntablism</a><div class="r-wedge" /></dt>
+	 <dd>Why you should buy a pair of 1200s, a mixer and some records.</dd>
+	 <dt><a href="http://www.schillmania.com/content/opinion/2004/01/01/spam_spam_spam/">Spam, spam, spam</a><div class="r-wedge" /></dt>
+	 <dd>Spam: The scourge of the Internet. A quick overview-cum-rant, and some recommended tools to fight the spam war.</dd>
+     <dt><a href="http://www.schillmania.com/content/media/beat-juggling/">Hand/Eye Coordination</a><div class="r-wedge" /></dt>
+     <dd>An attempt at 'Beat juggling' a seamless loop from a sample using turntables and two copies of the same record.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/12/19/15-minutes-of-fame/">15 Minutes Of Fame</a><div class="r-wedge" /></dt>
+     <dd>The UK-based Magazine 'Web Designer,' writes some kind words about my work.</dd>
+     <dt><a href="http://www.schillmania.com/content/projects/35mm-photo-viewer/">35mm Photo Viewer V5.0B</a><div class="r-wedge" /></dt>
+     <dd>A free, downloadable web-based photo viewer with optional XML templates.</dd>
+     <dt><a href="http://www.schillmania.com/content/media/drumming-with-vinyl/">Drumming with Vinyl</a><div class="r-wedge" /></dt>
+     <dd>Correctly scratch a record with a drum sample on it, and you can make your own variation on a theme.</dd>
+     <dt><a href="http://www.schillmania.com/content/opinion/2004/11/27/the-$5-coffee/">The (almost) Five-Dollar Coffee</a><div class="r-wedge" /></dt>
+     <dd>Starbucks ups the cost of already-overpriced coffee; I've had enough.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/10/24/application-xhtml+xml/">Application/xhtml+xml</a><div class="r-wedge" /></dt>
+     <dd>What I learned about XHTML when switching schillmania.com to application/xhtml+xml (forcing true XML validation.)</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/10/17/tj-schiller_freshtival/">TJ Schiller at Freshtival 04</a><div class="r-wedge" /></dt>
+     <dd>My younger brother TJ does the skiing thing at Calgary's Freshtival, a freestyle skiing movie release event and rail session, with Tanner Hall and others.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/10/04/javascript-sound/">Javascript Sound API</a><div class="r-wedge" /></dt>
+     <dd>An API and flexible Flash template for adding sound to websites, controlled entirely by Javascript.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/09/19/a-real-world-website-counter/">A Real-World Website Counter</a><div class="r-wedge" /></dt>
+     <dd>A parallel-port-driven mileage-style counter is connected to schillmania.com. Meanwhile, rumors of geek-like antics abound.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/08/15/photo-viewer-update/">Photo Viewer Update: v4.0a</a><div class="r-wedge" /></dt>
+     <dd>A DHTML-driven photo viewer application is revamped with a basic search engine and other nifty features.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/08/15/when-lightning-strikes-next-door/">When Lightning Strikes - Next Door</a><div class="r-wedge" /></dt>
+     <dd>A nasty storm in Calgary hits the neighbours', damaging all sorts of electronic equipment.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/07/18/">Montreal, Quebec, Toronto, Windsor</a><div class="r-wedge" /></dt>
+     <dd>Photos and commentary on my vacation to Ontario and Quebec, which have some great summer weather - both sunny and stormy.</dd>
+     <dt><a href="http://www.schillmania.com/content/opinion/2004/06/27/the_obligatory_standards_rant/">The Obligatory Standards Rant</a><div class="r-wedge" /></dt>
+     <dd>A rant advocating standards on a respected design-oriented forum.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/06/20/cm_town_hall/">Critical Mass: Town Hall 2004</a><div class="r-wedge" /></dt>
+     <dd>The annual Town Hall event at Critical Mass happens on-time, but with a presentational twist.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/06/13/">Scottschiller.com v4: Portfolio Site Update</a><div class="r-wedge" /></dt>
+     <dd>Scott Schiller finally gets around to updating his technical/work experience portfolio site - now at version 4.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/05/31/calgary_flames_17th_red_mile_photos/">Flames win Game 3, city loses its mind</a><div class="r-wedge" /></dt>
+     <dd>The Calgary Flames win Game 3 of the Stanley Cup finals, prompting a massive and energetic crowd along the ever-popular 17th Avenue area downtown.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/05/15/">DJing, beer, fire and .. rollerskating?</a><div class="r-wedge" /></dt>
+     <dd>Urban nightlife activities keep one Scott Schiller away from the computer.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/04/27/whistler_2004_wsi/">Josh Bibby, TJ Schiller stomp the WSI</a><div class="r-wedge" /></dt>
+     <dd>Two crazy freestyle skiiers from Vernon, BC turn heads at the 2004 Whistler Ski Invitational.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/04/12/">Okanagan Road Trip Photos</a><div class="r-wedge" /></dt>
+     <dd>Some new panoramic photos and other images from a trip to the Okanagan region of BC, Canada.</dd>
+     <dt><a href="http://www.schillmania.com/content/media/technics_mouse_scratching/">Scratching .. with a mouse?</a><div class="r-wedge" /></dt>
+     <dd>Combine a turntable with a computer mouse and a copy of the SoundCraft vinyl scratching emulation engine, and you have at least 30 seconds of entertainment.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/03/28/">Special Blend</a><div class="r-wedge" /></dt>
+     <dd>Vietnamese iced coffee, 'ca phe sua da' - an enjoyable caffeinated beverage.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/03/14/colophon/">Site Colophon</a><div class="r-wedge" /></dt>
+     <dd>A description of how the content for this site is generated and served.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/03/14/aquarium_time_lapse/">Aquarium Time Lapse Video</a><div class="r-wedge" /></dt>
+     <dd>A time-lapse video (~12 days) of a fish tank.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/03/01/">Back in Black</a><div class="r-wedge" /></dt>
+     <dd>An overview of the site redesign.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2004/02/29/tj_schiller-us_open/">TJ Schiller at the US Freeskiing Open</a><div class="r-wedge" /></dt>
+     <dd>TJ Schiller (my younger brother) wins the Slopestyle comp at the US Freeskiing open.</dd>
+    </dl>
+   </li>
+   <li>
+    <h4>2003</h4>
+    <dl>
+     <dt><a href="http://www.schillmania.com/content/entries/2003/12/18/">SnowStorm Update</a><div class="r-wedge" /></dt>
+     <dd>Changes and bug fixes relating to the DHTML SnowStorm component (Version 1.2a.)</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2003/12/06/">SnowStorm Component</a><div class="r-wedge" /></dt>
+     <dd>Continued description of SnowStorm, now a downloadable component-based javascript snow library.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2003/11/17/">Bring the SnowStorm (DHTML, that is..)</a><div class="r-wedge" /></dt>
+     <dd>An introduction to SnowStorm, a DHTML component that provides a neat animated snow effect; uses PNG-based images where supported.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2003/10/26/">More Fish Stuff</a><div class="r-wedge" /></dt>
+     <dd>Some small additions (and consequent losses) involving a 90-gallon fish tank.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2003/10/24/">Ugly Hallowe'en Theme</a><div class="r-wedge" /></dt>
+     <dd>The one time of the year where the Spring.03 'Bold' theme actually suits the season.</dd>
+     <dt><a href="http://www.schillmania.com/content/entries/2003/10/09/">I Love Spam</a><div class="r-wedge" /></dt>
+     <dd>An experiment in spambots: 'How long until a new address is spammed?'</dd>
+    </dl>
+   </li>
+ </ul>
+</li>
+
+</ul>
+   
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script type="text/javascript">preInit();</script>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+    "name": "LightTaxesApp",
+    "version": "1.0.0",
+    "description": "Electron ppplication controlling the animations",
+    "main": "js/main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "repository": "https://github.com/ImanolGo/LIghtTaxes",
+    "keywords": [
+        "Electron",
+        "Tablet",
+        "Lights",
+        "Animations"
+    ],
+    "author": "Imanol Gómez",
+    "license": "MIT License",
+    "devDependencies": {
+        "electron": "~1.6.2"
+    }
+}

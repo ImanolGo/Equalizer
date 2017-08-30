@@ -3,7 +3,7 @@
 Receive UDP
 
  Hardware:
- * Adafruit Feather HUZZAH
+ * Adafruit Feather HUZZAH ESP8266
  * WS2812 LED Strip
 
  Description:

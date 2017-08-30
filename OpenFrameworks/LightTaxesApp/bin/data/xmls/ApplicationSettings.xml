@@ -6,7 +6,7 @@
       <window title="Light Taxes" x="0" y="0" width="960" height="600" fullscreen="0" showCursor="1"/>
 
       <debug showCursor="1" setVerbose="1"/> 
-	    <network ipAddress="192.168.1.21" portUdpReceive="44409" portUdpSend="2390"/>
+	    <network ipAddress="127.0.0.1" portUdpReceive="44409" portUdpSend="64395"/>
 
   </of_settings>
 
