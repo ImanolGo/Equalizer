@@ -1,7 +1,7 @@
 {
-    "name": "LightTaxesApp",
+    "name": "EqualizerApp",
     "version": "1.0.0",
-    "description": "Electron ppplication controlling the animations",
+    "description": "Electron application controlling the equalizer installation",
     "main": "js/main.js",
     "scripts": {
         "start": "electron ."
@@ -16,6 +16,8 @@
     "author": "Imanol Gómez",
     "license": "MIT License",
     "devDependencies": {
-        "electron": "~1.6.2"
+        "electron": "1.7.5",
+        "electron-packager": "^9.0.0",
+        "electron-prebuilt-compile": "1.7.5"
     }
 }
