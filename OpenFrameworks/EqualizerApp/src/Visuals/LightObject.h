@@ -37,6 +37,8 @@ public:
     
     void showId(bool _showId) {m_showId = _showId;}
     
+    void setSize(int size);
+    
 private:
     
     void setup();

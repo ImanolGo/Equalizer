@@ -71,6 +71,7 @@ void AppManager::setupManagers()
     m_udpManager.setup();
     m_keyboardManager.setup();
     m_noiseManager.setup();
+    m_lightSculptureManager.setup();
     m_guiManager.setup();
 }
 
@@ -80,6 +81,7 @@ void AppManager::update()
     m_viewManager.update();
     m_udpManager.update();
     m_noiseManager.update();
+    m_lightSculptureManager.update();
     m_layoutManager.update();
 }
 

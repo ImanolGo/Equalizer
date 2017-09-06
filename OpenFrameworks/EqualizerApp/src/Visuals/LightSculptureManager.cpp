@@ -16,7 +16,7 @@
 const string LightSculptureManager::LEDS_LIST_PATH = "leds/";
 
 
-LightSculptureManager::LightSculptureManager(): Manager(), m_lightObjectSize(8.0)
+LightSculptureManager::LightSculptureManager(): Manager(), m_lightObjectSize(20.0)
 {
 	//Intentionally left empty
 }
@@ -68,13 +68,13 @@ void LightSculptureManager::setupLeds()
 
 void LightSculptureManager::createLedsPosition()
 {
-    float x_offset = 0.05;
-    float y_offset = 0.05;
+    float x_offset = 0.1;
+    float y_offset = 0.1;
     int num_rows = 9;
     int num_cols = 8;
     
-    float w = (1.0 - 2.0*x_offset)/num_cols;
-    float h = (1.0 - 2.0*y_offset)/num_rows;
+    float w = (1.0 - 2.0*x_offset)/(num_cols-1);
+    float h = (1.0 - 2.0*y_offset)/(num_rows-1);
     
     for(int i = 0; i< num_rows; i++){
         for(int j = 0; j< num_cols; j++){
@@ -168,7 +168,7 @@ void LightSculptureManager::createLed(const ofPoint& position)
 {
     auto lightObject = ofPtr<LightObject> (new LightObject ( position, m_lightObjects.size() + 1) );
     lightObject->setColor(ofColor::black);
-    lightObject->setWidth(m_lightObjectSize);
+    lightObject->setSize(m_lightObjectSize);
     m_lightObjects.push_back(lightObject);
 
     

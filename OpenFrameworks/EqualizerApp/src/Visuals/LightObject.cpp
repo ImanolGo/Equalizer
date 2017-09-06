@@ -63,11 +63,11 @@ void LightObject::draw()
     ofRotateY(m_rotation.y);
     
     
-    ofSetCircleResolution(20);
+    ofSetCircleResolution(100);
     ofFill();
     
     //ofRect(0, 0, m_width, m_height);
-    ofSetColor(0);
+    ofSetColor(255);
     ofDrawCircle(0, 0, m_width);
     ofSetColor(m_color);
     ofDrawCircle(0, 0, m_width*0.9);
@@ -104,5 +104,10 @@ void LightObject::setPixelColor(ofPixelsRef pixels)
     m_color = ofColor::white;
     m_color.setBrightness(brightness);
     //m_color = ofColor(brightness);
+}
+
+void LightObject::setSize(int size){
+    setWidth(size);
+    this->setupText();
 }
 
