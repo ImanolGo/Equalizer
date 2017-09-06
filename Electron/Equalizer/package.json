@@ -1,12 +1,12 @@
 {
-    "name": "EqualizerApp",
+    "name": "equalizer_app",
     "version": "1.0.0",
     "description": "Electron application controlling the equalizer installation",
     "main": "js/main.js",
     "scripts": {
         "start": "electron ."
     },
-    "repository": "https://github.com/ImanolGo/LIghtTaxes",
+    "repository": "https://github.com/ImanolGo/Equalizer",
     "keywords": [
         "Electron",
         "Tablet",

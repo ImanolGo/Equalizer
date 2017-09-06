@@ -1,79 +1,80 @@
 /*
- *  LightTaxesApp.cpp
- *  Light Taxes App
+ *  EqualizerApp.cpp
+ *  Equalizer App
  *
  *  Created by Imanol Gomez on 22/08/17.
  *
  */
 
+
 #include "AppManager.h"
 
-#include "LightTaxesApp.h"
+#include "EqualizerApp.h"
 
 //--------------------------------------------------------------
-void LightTaxesApp::setup(){
+void EqualizerApp::setup(){
     AppManager::getInstance().setup();
 }
 
 //--------------------------------------------------------------
-void LightTaxesApp::update(){
+void EqualizerApp::update(){
     AppManager::getInstance().update();
 }
 
 //--------------------------------------------------------------
-void LightTaxesApp::draw(){
+void EqualizerApp::draw(){
     AppManager::getInstance().draw();
 }
 
-void LightTaxesApp::exit()
+void EqualizerApp::exit()
 {
-    ofLogNotice() <<"LightTaxesApp::exit";
+    ofLogNotice() <<"EqualizerApp::exit";
 
 }
 
 //--------------------------------------------------------------
-void LightTaxesApp::keyPressed(int key){
+void EqualizerApp::keyPressed(int key){
 
 }
 
 //--------------------------------------------------------------
-void LightTaxesApp::keyReleased(int key){
+void EqualizerApp::keyReleased(int key){
 
 }
 
 //--------------------------------------------------------------
-void LightTaxesApp::mouseMoved(int x, int y ){
+void EqualizerApp::mouseMoved(int x, int y ){
 
 }
 
 //--------------------------------------------------------------
-void LightTaxesApp::mouseDragged(int x, int y, int button){
+void EqualizerApp::mouseDragged(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void LightTaxesApp::mousePressed(int x, int y, int button){
+void EqualizerApp::mousePressed(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void LightTaxesApp::mouseReleased(int x, int y, int button){
+void EqualizerApp::mouseReleased(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void LightTaxesApp::windowResized(int w, int h){
+void EqualizerApp::windowResized(int w, int h){
     AppManager::getInstance().getLayoutManager().windowResized(w,h);
 
 
 }
 
 //--------------------------------------------------------------
-void LightTaxesApp::gotMessage(ofMessage msg){
+void EqualizerApp::gotMessage(ofMessage msg){
 
 }
 
 //--------------------------------------------------------------
-void LightTaxesApp::dragEvent(ofDragInfo dragInfo){
+void EqualizerApp::dragEvent(ofDragInfo dragInfo){
 
 }

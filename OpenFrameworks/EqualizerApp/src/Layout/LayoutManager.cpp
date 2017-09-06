@@ -1,10 +1,11 @@
 /*
  *  LayoutManager.cpp
- *  Light Taxes App
+ *  Equalizer App
  *
  *  Created by Imanol Gomez on 22/08/17.
  *
  */
+
 
 
 #include "ofMain.h"
