@@ -1,6 +1,11 @@
-# Light Sculpture Taxe
+# Equalizer
 
-Software controlling light installation representing taxes inequality
+
+The equalizer is a light installation commissioned to Moritz Waldemeyer for the EDIT Festival, which stands for Expo for Design, Innovation and Technology, will take place from September 28 to October 8 inside the Unilever Soap Factory near the Don Roadway and Lake Shore Boulevard East. It is a an eight foot tall infographic interactive art installation.
+
+The piece will interactively show the inequality of taxation all over the world. It will give the possibility to change the rules of the game to figure out how to balance it. The interaction will be though a tablet that will provide the user with a graphical user interface and a revisualisation of what is happening in the light sculpture.
+
+The the tablet communicates with the sculpture and smoothly visualises the changes made by the user.
 
 ## Installation
 
