@@ -60,8 +60,6 @@ class NoiseManager: public Manager
     
         void onSaturationChange(float& value) {m_color.setSaturation(value);}
     
-        void  onPlayNoiseChange(bool value) {m_playNoise = value;}
-    
         void resetPosition();
 
     
@@ -87,7 +85,6 @@ class NoiseManager: public Manager
         int         m_noiseResolution;
     
         ofColor     m_color;
-        bool        m_playNoise;
         ofImage     m_noiseImage;
 };
 

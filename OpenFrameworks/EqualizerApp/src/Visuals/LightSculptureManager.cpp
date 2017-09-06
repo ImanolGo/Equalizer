@@ -1,5 +1,5 @@
 /*
- *  LedsManager.cpp
+ *  LightSculptureManager.cpp
  *  Equalizer App
  *
  *  Created by Imanol Gomez on 06/09/17.
@@ -9,27 +9,27 @@
 
 #include "ofMain.h"
 
-#include "LedsManager.h"
+#include "LightSculptureManager.h"
 #include "AppManager.h"
 
 
-const string LedsManager::LEDS_LIST_PATH = "leds/";
+const string LightSculptureManager::LEDS_LIST_PATH = "leds/";
 
 
-LedsManager::LedsManager(): Manager(), m_ledsSize(8.0)
+LightSculptureManager::LightSculptureManager(): Manager(), m_lightObjectSize(8.0)
 {
 	//Intentionally left empty
 }
 
 
-LedsManager::~LedsManager()
+LightSculptureManager::~LightSculptureManager()
 {
     this->saveLedsPositions();
-    ofLogNotice() <<"LedsManager::Destructor" ;
+    ofLogNotice() <<"LightSculptureManager::Destructor" ;
 }
 
 
-void LedsManager::setup()
+void LightSculptureManager::setup()
 {
 	if(m_initialized)
 		return;
@@ -40,11 +40,11 @@ void LedsManager::setup()
     this->setupBoundingBox();
     this->setupLeds();
     
-    ofLogNotice() <<"LedsManager::initialized" ;
+    ofLogNotice() <<"LightSculptureManager::initialized" ;
     
 }
 
-void LedsManager::setupBoundingBox()
+void LightSculptureManager::setupBoundingBox()
 {
 //    m_boundingBox.setX(166.081);
 //    m_boundingBox.setY(362.7);
@@ -59,84 +59,58 @@ void LedsManager::setupBoundingBox()
 
 
 
-void LedsManager::setupLeds()
+void LightSculptureManager::setupLeds()
 {
     this->createLedsPosition();
     //this->readLedsPositions();
     //this->normalizeLeds();
 }
 
-void LedsManager::createLedsPosition()
+void LightSculptureManager::createLedsPosition()
 {
-//    float x_offset = 0.05;
-//    float y_offset = 0.05;
-//    int num_rows = 20;
-//    int num_cols = 19;
-//    
-//    float w = (1.0 - 2.0*x_offset)/num_cols;
-//    float h = (1.0 - 2.0*y_offset)/num_rows;
-//    
-//    for(int i = 0; i< num_rows; i++){
-//        for(int j = 0; j< num_cols; j++){
-//            
-//            float x = x_offset + j*w;
-//            float y = y_offset + i*h;
-//            
-//            ofPoint ledPosition(x,y,0.0);
-//            createLed(ledPosition);
-//        }
-//    }
-    
-    float x_offset_even = 0.127;
-    float x_offset_odd = 0.070;
-    float y_offset = 0.042;
-    int num_rows = 37;
+    float x_offset = 0.05;
+    float y_offset = 0.05;
+    int num_rows = 9;
     int num_cols = 8;
     
-    float w = 0.114;
-    float h = 0.0258;
+    float w = (1.0 - 2.0*x_offset)/num_cols;
+    float h = (1.0 - 2.0*y_offset)/num_rows;
     
     for(int i = 0; i< num_rows; i++){
         for(int j = 0; j< num_cols; j++){
             
-            float x = x_offset_odd + j*w;
-            
-            if(i%2==0){
-                x = x_offset_even + j*w;
-            }
-            
+            float x = x_offset + j*w;
             float y = y_offset + i*h;
             
             ofPoint ledPosition(x,y,0.0);
             createLed(ledPosition);
         }
     }
-    
 }
 
-void LedsManager::addLed(const ofPoint& position)
+void LightSculptureManager::addLed(const ofPoint& position)
 {
-    ofRectangle windowRect = AppManager::getInstance().getDressManager().getWindowRect();
+    ofRectangle windowRect = AppManager::getInstance().getLayoutManager().getWindowRect();
     createLed(position);
     
-    if (!m_leds.empty()) {
-        m_leds.back()->normalize(windowRect);
+    if (!m_lightObjects.empty()) {
+        m_lightObjects.back()->normalize(windowRect);
     }
     
-    ofLogNotice() <<"LedsManager::addLed-> id = " <<  m_leds.back()->getId();
+    ofLogNotice() <<"LightSculptureManager::addLed-> id = " <<  m_lightObjects.back()->getId();
 }
 
-void LedsManager::deleteLastLed()
+void LightSculptureManager::deleteLastLed()
 {
-    if(!m_leds.empty()){
-        int id = m_leds.back()->getId();
-        m_leds.pop_back();
+    if(!m_lightObjects.empty()){
+        int id = m_lightObjects.back()->getId();
+        m_lightObjects.pop_back();
 
-        ofLogNotice() <<"LedsManager::deleteLastLed-> id = " << id;
+        ofLogNotice() <<"LightSculptureManager::deleteLastLed-> id = " << id;
     }
 }
 
-void LedsManager::readLedsPositions()
+void LightSculptureManager::readLedsPositions()
 {
     
     string led_position_path = LEDS_LIST_PATH + "LedPositions.txt";
@@ -161,54 +135,47 @@ void LedsManager::readLedsPositions()
 }
 
 
-void LedsManager::saveLedsPositions()
+void LightSculptureManager::saveLedsPositions()
 {
      string led_position_path = LEDS_LIST_PATH + "LedPositions.txt";
      ofFile ledPosFile(led_position_path, ofFile::WriteOnly, true);
     
-    for(auto led: m_leds)
+    for(auto lightObject: m_lightObjects)
     {
-        ofPoint pos =led->getPosition();
+        ofPoint pos = lightObject->getPosition();
         ledPosFile << "{" << pos.x << ", " << pos.y << ", 0.0}" <<std::endl;
     }
     
     ledPosFile.close();
     
-    ofLogNotice() <<"LedsManager::saveLedsPositions -> saved led positions to file " <<  led_position_path;
+    ofLogNotice() <<"LightSculptureManager::saveLedsPositions -> saved led positions to file " <<  led_position_path;
     
 }
 
 
-void LedsManager::normalizeLeds()
+void LightSculptureManager::normalizeLeds()
 {
-    
-    float width = AppManager::getInstance().getDressManager().getWidth();
-    float height = AppManager::getInstance().getDressManager().getHeight();
-    
-    
-    ofLogNotice() <<"LedsManager::normalizeLeds -> width " << width<< ", height = "  << height;
-    
-    for (auto led: m_leds)
+    for (auto led: m_lightObjects)
     {
         led->normalize(m_boundingBox);
-        ofLogNotice() <<"LedsManager::normalized LED -> id " << led->getId() << ", x = "  << led->getPosition().x << ", y = "  << led->getPosition().y;
+        ofLogNotice() <<"LightSculptureManager::normalized LED -> id " << led->getId() << ", x = "  << led->getPosition().x << ", y = "  << led->getPosition().y;
     }
     
 }
 
 
-void LedsManager::createLed(const ofPoint& position)
+void LightSculptureManager::createLed(const ofPoint& position)
 {
-    ofPtr<Led> led = ofPtr<Led> (new Led ( position, m_leds.size() + 1) );
-    led->setColor(ofColor::black);
-    led->setWidth(m_ledsSize);
-    m_leds.push_back(led);
+    auto lightObject = ofPtr<LightObject> (new LightObject ( position, m_lightObjects.size() + 1) );
+    lightObject->setColor(ofColor::black);
+    lightObject->setWidth(m_lightObjectSize);
+    m_lightObjects.push_back(lightObject);
 
     
-    ofLogNotice() <<"LedsManager::createLed -> id " << led->getId() << ", x = "  << led->getPosition().x << ", y = "  << led->getPosition().y;
+    ofLogNotice() <<"LightSculptureManager::createLed -> id " << lightObject->getId() << ", x = "  << lightObject->getPosition().x << ", y = "  << lightObject->getPosition().y;
 }
 
-bool LedsManager::parseLedLine(string& line, ofPoint& position)
+bool LightSculptureManager::parseLedLine(string& line, ofPoint& position)
 {
     if(line.size() == 0){
         return false;
@@ -225,65 +192,62 @@ bool LedsManager::parseLedLine(string& line, ofPoint& position)
     return true;
 }
 
-void LedsManager::removeCharsFromString( string &str, char* charsToRemove ) {
+void LightSculptureManager::removeCharsFromString( string &str, char* charsToRemove ) {
     for ( unsigned int i = 0; i < strlen(charsToRemove); ++i ) {
         str.erase( remove(str.begin(), str.end(), charsToRemove[i]), str.end() );
     }
 }
 
-void LedsManager::update()
+void LightSculptureManager::update()
 {
     //
 }
 
-void LedsManager::setPixels(ofPixelsRef pixels)
+void LightSculptureManager::setPixels(ofPixelsRef pixels)
 {
     this->setLedColors(pixels);
-    
-    AppManager::getInstance().getImageManager().update();
-    AppManager::getInstance().getOutputDataManager().update();
 }
 
-void LedsManager::setLedColors(ofPixelsRef pixels)
+void LightSculptureManager::setLedColors(ofPixelsRef pixels)
 {
-    for(auto led: m_leds){
+    for(auto led: m_lightObjects){
         led->setPixelColor(pixels);
     }
 }
 
 
-void LedsManager::draw()
+void LightSculptureManager::draw()
 {
     this->drawLeds();
 }
 
-void LedsManager::draw(int width, int height)
+void LightSculptureManager::draw(int width, int height)
 {
     this->drawLeds(width, height);
 }
 
-void LedsManager::drawLeds(int width, int height)
+void LightSculptureManager::drawLeds(int width, int height)
 {
-    for(auto led: m_leds)
+    for(auto led: m_lightObjects)
     {
         led->draw(width,height);
     }
 }
 
-void LedsManager::onSetLedsSize(float &value)
+void LightSculptureManager::onSetLedsSize(float &value)
 {
-    m_ledsSize = value;
+    m_lightObjectSize = value;
     
-    for(auto led: m_leds){
-        led->setWidth(m_ledsSize);
+    for(auto lightObject: m_lightObjects){
+        lightObject->setWidth(m_lightObjectSize);
     }
 }
 
-void LedsManager::showChannels(bool _showChannels)
+void LightSculptureManager::showChannels(bool _showChannels)
 {
-    for(auto led: m_leds)
+    for(auto lightObject: m_lightObjects)
     {
-        led->showId(_showChannels);
+        lightObject->showId(_showChannels);
     }
 }
 

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0466B9E6A55078A9F39B1B4B /* svgtiny_gradient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4F639B12AA5C1013177E49 /* svgtiny_gradient.cpp */; };
+		08C320D01F60552D00D21443 /* LightObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08C320CA1F60552D00D21443 /* LightObject.cpp */; };
+		08C320D11F60552D00D21443 /* LightSculptureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08C320CC1F60552D00D21443 /* LightSculptureManager.cpp */; };
+		08C320D21F60552D00D21443 /* NoiseManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08C320CE1F60552D00D21443 /* NoiseManager.cpp */; };
 		10071661D0AA59C4EC246B6C /* ofxGuiGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A1CE60B1AC164DA8880771 /* ofxGuiGroup.cpp */; };
 		18FA42C471CF66795EF9EB97 /* ofxTCPClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3766129862C931409F5C3D4 /* ofxTCPClient.cpp */; };
 		1AF15FCF93D2DDD6D4285C8E /* AppManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5056FC61E30B9810903B814D /* AppManager.cpp */; };
@@ -89,6 +92,12 @@
 		0227F9BE14631C9FE7CA55B1 /* TextVisual.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = TextVisual.cpp; path = src/Engine/Visuals/TextVisual.cpp; sourceTree = SOURCE_ROOT; };
 		067A0CB3F8E32F33532D73DE /* ofxGui.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxGui.h; path = src/Addons/ofxGui/src/ofxGui.h; sourceTree = SOURCE_ROOT; };
 		074978820820325AB8737225 /* README.md */ = {isa = PBXFileReference; explicitFileType = file; fileEncoding = 30; name = README.md; path = src/Addons/ofxUnicode/README.md; sourceTree = SOURCE_ROOT; };
+		08C320CA1F60552D00D21443 /* LightObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LightObject.cpp; path = Visuals/LightObject.cpp; sourceTree = "<group>"; };
+		08C320CB1F60552D00D21443 /* LightObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LightObject.h; path = Visuals/LightObject.h; sourceTree = "<group>"; };
+		08C320CC1F60552D00D21443 /* LightSculptureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LightSculptureManager.cpp; path = Visuals/LightSculptureManager.cpp; sourceTree = "<group>"; };
+		08C320CD1F60552D00D21443 /* LightSculptureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LightSculptureManager.h; path = Visuals/LightSculptureManager.h; sourceTree = "<group>"; };
+		08C320CE1F60552D00D21443 /* NoiseManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NoiseManager.cpp; path = Visuals/NoiseManager.cpp; sourceTree = "<group>"; };
+		08C320CF1F60552D00D21443 /* NoiseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoiseManager.h; path = Visuals/NoiseManager.h; sourceTree = "<group>"; };
 		08C5194B0C92DDA2A7539395 /* core.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = core.h; path = src/Addons/ofxUnicode/libs/utf8cpp/src/utf8_v2_3_1/source/utf8/core.h; sourceTree = SOURCE_ROOT; };
 		09BB1D7613A1F9D8E8B11D7A /* KeyboardManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = KeyboardManager.h; path = src/I0/KeyboardManager.h; sourceTree = SOURCE_ROOT; };
 		09F8F2DF1D53E65319F30B96 /* LightManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = LightManager.cpp; path = src/Engine/3D/LightManager.cpp; sourceTree = SOURCE_ROOT; };
@@ -213,6 +222,20 @@
 				B7F86ACC7BC26AAC8E9BB8D8 /* UdpManager.h */,
 			);
 			name = I0;
+			sourceTree = "<group>";
+		};
+		08C320C91F60551600D21443 /* Visuals */ = {
+			isa = PBXGroup;
+			children = (
+				08C320CA1F60552D00D21443 /* LightObject.cpp */,
+				08C320CB1F60552D00D21443 /* LightObject.h */,
+				08C320CC1F60552D00D21443 /* LightSculptureManager.cpp */,
+				08C320CD1F60552D00D21443 /* LightSculptureManager.h */,
+				08C320CE1F60552D00D21443 /* NoiseManager.cpp */,
+				08C320CF1F60552D00D21443 /* NoiseManager.h */,
+			);
+			name = Visuals;
+			path = src;
 			sourceTree = "<group>";
 		};
 		1646F71220FE0F0638559519 /* 3D */ = {
@@ -558,6 +581,7 @@
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
+				08C320C91F60551600D21443 /* Visuals */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				6948EE371B920CB800B5AC1A /* local_addons */,
@@ -673,9 +697,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08C320D01F60552D00D21443 /* LightObject.cpp in Sources */,
 				9A15495FA2EE8F23378413B2 /* ofxBaseGui.cpp in Sources */,
 				1E777E277DAB367779E7E89A /* ofxButton.cpp in Sources */,
 				10071661D0AA59C4EC246B6C /* ofxGuiGroup.cpp in Sources */,
+				08C320D11F60552D00D21443 /* LightSculptureManager.cpp in Sources */,
 				4D8AD4DF379BCF35DCB7A000 /* ofxLabel.cpp in Sources */,
 				ACE00783B5CCD633D94EDDEF /* ofxPanel.cpp in Sources */,
 				5367CE7A2C5BCF846D28D246 /* ofxSlider.cpp in Sources */,
@@ -686,6 +712,7 @@
 				F60A8CA415750AA5DDCC6169 /* ofxTCPServer.cpp in Sources */,
 				8CB0A46B3A54F961BA55A6A6 /* ofxUDPManager.cpp in Sources */,
 				9D3E5A7C189607A50D28E499 /* src_colors.cpp in Sources */,
+				08C320D21F60552D00D21443 /* NoiseManager.cpp in Sources */,
 				A417B50DA594FBD304CFF2CA /* svgtiny.cpp in Sources */,
 				0466B9E6A55078A9F39B1B4B /* svgtiny_gradient.cpp in Sources */,
 				FCA1CD00EA2BBEEEBA5C4AC9 /* svgtiny_list.cpp in Sources */,

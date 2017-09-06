@@ -165,7 +165,8 @@ void LayoutManager::drawFbo()
     
     ofEnableAlphaBlending();
     m_fbo.begin();
-    ofClear(m_color);
+    ofClear(0);
+    AppManager::getInstance().getLightSculptureManager().draw();
     
     m_fbo.end();
     ofDisableAlphaBlending();

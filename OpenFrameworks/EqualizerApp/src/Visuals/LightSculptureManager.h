@@ -1,5 +1,5 @@
 /*
- *  LedsManager.h
+ *  LightSculptureManager.h
  *  Equalizer App
  *
  *  Created by Imanol Gomez on 06/09/17.
@@ -9,18 +9,18 @@
 #pragma once
 
 #include "Manager.h"
-#include "Led.h"
+#include "LightObject.h"
 
 
-//========================== class LedsManager ==============================
+//========================== class LightSculptureManager ==============================
 //============================================================================
-/** \class LedsManager LedsManager.h
+/** \class LightSculptureManager LightSculptureManager.h
  *	\brief Class managing the LEDs
  *	\details It controls the postion and color of the LEDs
  */
 
 
-class LedsManager: public Manager
+class LightSculptureManager: public Manager
 {
 
     static const string LEDS_LIST_PATH;
@@ -28,15 +28,15 @@ class LedsManager: public Manager
     public:
     
         typedef vector<int> IntVector;
-        typedef vector< ofPtr<Led> > LedVector;
+        typedef vector< ofPtr<LightObject> > LightObjectVector;
     
     public:
 
         //! Constructor
-        LedsManager();
+        LightSculptureManager();
 
         //! Destructor
-        ~LedsManager();
+        ~LightSculptureManager();
 
         //! Setup the Halo Manager
         void setup();
@@ -50,13 +50,13 @@ class LedsManager: public Manager
         //! Draw the Led Manager according to a certain width or height
         void draw(int width, int height);
     
-        const LedVector& getLeds() const {return m_leds;}
+        const LightObjectVector& getLeds() const {return m_lightObjects;}
     
         void setPixels(ofPixelsRef pixels);
     
         void setLedColors(ofPixelsRef pixels);
     
-        int getNumberLeds() const {return m_leds.size();}
+        int getNumberLeds() const {return m_lightObjects.size();}
     
         void addLed(const ofPoint&  position);
     
@@ -94,10 +94,10 @@ class LedsManager: public Manager
     
     
     
-        LedVector       m_leds;
-        ofRectangle     m_boundingBox;
+        LightObjectVector       m_lightObjects;
+        ofRectangle             m_boundingBox;
     
-        float           m_ledsSize;
+        float           m_lightObjectSize;
     
 };
 

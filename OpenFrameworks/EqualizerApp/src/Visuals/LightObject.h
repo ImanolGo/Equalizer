@@ -1,5 +1,5 @@
 /*
- *  Led.h
+ *  LightObject.h
  *  Equalizer App
  *
  *  Created by Imanol Gomez on 06/09/17.
@@ -15,15 +15,15 @@
 #include "ImageVisual.h"
 
 
-class Led: public BasicVisual {
+class LightObject: public BasicVisual {
     
     static const int SIZE;
     
 public:
     
-    Led(const ofPoint& position, int id);
+    LightObject(const ofPoint& position, int id);
     
-    virtual ~Led();
+    virtual ~LightObject();
     
     void draw();
     

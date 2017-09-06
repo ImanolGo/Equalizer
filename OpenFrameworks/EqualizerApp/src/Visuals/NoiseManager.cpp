@@ -13,7 +13,7 @@
 #include "AppManager.h"
 
 
-NoiseManager::NoiseManager(): Manager(), m_noiseResolution(255), m_playNoise(false)
+NoiseManager::NoiseManager(): Manager(), m_noiseResolution(64), m_noiseFrequency(0.4), m_noiseSpeed(1.0)
 {
 	//Intentionally left empty
 }
@@ -78,20 +78,18 @@ void NoiseManager::resetPosition()
 
 void NoiseManager::update()
 {
-    if(!m_playNoise){
-        return;
-    }
-    
+  
     this->updateNoise();
+    setupBoundingBox();
     
-    AppManager::getInstance().getLedsManager().setPixels(m_noiseImage.getPixelsRef());
+    AppManager::getInstance().getLightSculptureManager().setPixels(m_noiseImage.getPixels());
 }
 
 
 void NoiseManager::updateNoise()
 {
     float time = ofGetElapsedTimef() * m_noiseSpeed;
-    ofPixelsRef pixels = m_noiseImage.getPixelsRef();
+    ofPixelsRef pixels = m_noiseImage.getPixels();
     
     int tmpIndex = 0;
     for( int y = 0; y < m_noiseImage.getHeight(); y++ )
@@ -130,10 +128,6 @@ void NoiseManager::onNoiseResolutionChange( int& value )
 
 void NoiseManager::draw()
 {
-    if(!m_playNoise){
-        return;
-    }
-    
      m_noiseImage.draw(m_boundingBox);
 }
 

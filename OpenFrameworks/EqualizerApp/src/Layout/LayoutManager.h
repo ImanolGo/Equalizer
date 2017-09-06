@@ -46,6 +46,8 @@ public:
     void draw();
     
     void windowResized(int w, int h);
+    
+    const ofRectangle& getWindowRect() {return m_windowRect;}
 
 private:
 

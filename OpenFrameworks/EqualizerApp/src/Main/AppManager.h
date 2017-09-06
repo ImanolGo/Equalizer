@@ -23,7 +23,8 @@
 #include "KeyboardManager.h"
 #include "GuiManager.h"
 #include "UdpManager.h"
-
+#include "LightSculptureManager.h"
+#include "NoiseManager.h"
 
 
 //========================== class AppManager ==============================
@@ -75,6 +76,12 @@ public:
     //! Returns the UDP manager
     UdpManager&   getUdpManager() { return m_udpManager; }
     
+    //! Returns the noise manager
+    NoiseManager&   getNoiseManager() { return m_noiseManager; }
+    
+    //! Returns the Light Sculpture manager
+    LightSculptureManager&   getLightSculptureManager() { return m_lightSculptureManager; }
+    
     
     //==========================================================================
     
@@ -116,7 +123,9 @@ private:
     KeyboardManager          m_keyboardManager;          ///< Manages the keyboard
     GuiManager               m_guiManager;               ///< Manages the graphical user interface
     UdpManager               m_udpManager;               ///< Manages the udp messages
-
+    NoiseManager             m_noiseManager;             ///< Manages the noise visuals
+    LightSculptureManager    m_lightSculptureManager;    ///< Manages the light sculpture
+    
     bool                     m_debugMode;
 };
 

@@ -53,7 +53,7 @@ public:
     
     void onSetAudioMode(bool& value);
     
-    int getWidth() {return GUI_WIDTH + 40;}
+    int getWidth() {return GUI_WIDTH;}
     
     int getHeight() {return m_gui.getHeight();}
     
@@ -67,6 +67,8 @@ private:
     
     void setupLayoutGui();
     
+    void setupNoiseGui();
+    
     void drawRectangle();
 
 private:
@@ -78,8 +80,13 @@ private:
     
 
     ofParameterGroup    m_parametersLayout;
+    ofParameterGroup    m_parametersNoise;
     
     ofParameter<int>      m_id;
+    
+    ofParameter<int>      m_noiseResolution;
+    ofParameter<float>    m_noiseFrequency;
+    ofParameter<float>    m_noiseSpeed;
     
     ofxColorSlider          m_color;
     

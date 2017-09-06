@@ -70,6 +70,7 @@ void AppManager::setupManagers()
     m_layoutManager.setup();
     m_udpManager.setup();
     m_keyboardManager.setup();
+    m_noiseManager.setup();
     m_guiManager.setup();
 }
 
@@ -78,6 +79,7 @@ void AppManager::update()
     m_visualEffectsManager.update();
     m_viewManager.update();
     m_udpManager.update();
+    m_noiseManager.update();
     m_layoutManager.update();
 }
 
@@ -90,6 +92,7 @@ void AppManager::draw()
     m_viewManager.draw();
     m_layoutManager.draw();
     m_guiManager.draw();
+    m_noiseManager.draw();
     
 }
 

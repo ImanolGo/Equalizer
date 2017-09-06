@@ -42,6 +42,7 @@ void GuiManager::setup()
 
     this->setupGuiParameters();
     this->setupLayoutGui();
+    this->setupNoiseGui();
 
     this->loadGuiValues();
     
@@ -79,6 +80,29 @@ void GuiManager::setupLayoutGui()
     m_gui.add(m_parametersLayout);
 
 }
+
+void GuiManager::setupNoiseGui()
+{
+    auto noiseManager = &AppManager::getInstance().getNoiseManager();
+    
+    m_parametersNoise.setName("Noise");
+    
+    m_noiseResolution.set("Noise Resolution",  64, 2, 256 );
+    m_noiseResolution.addListener(noiseManager, &NoiseManager::onNoiseResolutionChange);
+    m_parametersNoise.add(m_noiseResolution);
+    
+    m_noiseFrequency.set("Noise Frequency",  0.4, 0.0, 4.0);
+    m_noiseFrequency.addListener(noiseManager, &NoiseManager::onNoiseFrequencyChange);
+    m_parametersNoise.add(m_noiseFrequency);
+    
+    m_noiseSpeed.set("Noise Speed",  1.0, 0.001, 3);
+    m_noiseSpeed.addListener(noiseManager, &NoiseManager::onNoiseSpeedChange);
+    m_parametersNoise.add(m_noiseSpeed);
+    
+    
+    m_gui.add(m_parametersNoise);
+}
+
 
 
 

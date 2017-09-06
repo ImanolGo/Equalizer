@@ -1,41 +1,41 @@
 /*
- *  Led.cpp
+ *  LightObject.cpp
  *  Equalizer App
  *
  *  Created by Imanol Gomez on 06/09/17.
  *
  */
 
-#include "Led.h"
+#include "LightObject.h"
 
 
-const int Led::SIZE = 20;
+const int LightObject::SIZE = 20;
 
-Led::Led(const ofPoint& position, int id): BasicVisual(position, SIZE, SIZE), m_id(id), m_showId(false)
+LightObject::LightObject(const ofPoint& position, int id): BasicVisual(position, SIZE, SIZE), m_id(id), m_showId(true)
 {
     this->setup();
 }
 
-Led::~Led()
+LightObject::~LightObject()
 {
     //Intentionaly left empty
 }
 
-void Led::setup()
+void LightObject::setup()
 {
    // this->setupImages();
     this->setupText();
 }
 
 
-void Led::setupImages()
+void LightObject::setupImages()
 {
     ofVec3f position(0,0);
     string resourceName = "brush";
     m_image = ofPtr<ImageVisual> (new ImageVisual(m_position,resourceName, true));
 }
 
-void Led::setupText()
+void LightObject::setupText()
 {
     
     ofVec3f position(0,0);
@@ -50,7 +50,7 @@ void Led::setupText()
 }
 
 
-void Led::draw()
+void LightObject::draw()
 {
     ofPushMatrix();
     ofPushStyle();
@@ -80,7 +80,7 @@ void Led::draw()
     ofPopMatrix();
 }
 
-void Led::draw(int width, int height)
+void LightObject::draw(int width, int height)
 {
     
     ofPushMatrix();
@@ -89,14 +89,14 @@ void Led::draw(int width, int height)
     ofPopMatrix();
 }
 
-void Led::normalize(const ofRectangle& boundingBox)
+void LightObject::normalize(const ofRectangle& boundingBox)
 {
     m_position.x = (m_position.x - boundingBox.getX()) / boundingBox.getWidth();
     m_position.y = (m_position.y - boundingBox.getY()) / boundingBox.getHeight();
 }
 
 
-void Led::setPixelColor(ofPixelsRef pixels)
+void LightObject::setPixelColor(ofPixelsRef pixels)
 {
     m_color = pixels.getColor(m_position.x * pixels.getWidth(), m_position.y * pixels.getHeight());
     int brightness = m_color.getBrightness();
