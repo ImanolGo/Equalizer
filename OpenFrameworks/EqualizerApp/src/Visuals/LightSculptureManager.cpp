@@ -16,7 +16,7 @@
 const string LightSculptureManager::LEDS_LIST_PATH = "leds/";
 
 
-LightSculptureManager::LightSculptureManager(): Manager(), m_lightObjectSize(20.0)
+LightSculptureManager::LightSculptureManager(): Manager(), m_lightObjectSize(20.0), m_bitmapNumber(0), m_stripNumber(0)
 {
 	//Intentionally left empty
 }
@@ -251,8 +251,9 @@ void LightSculptureManager::showChannels(bool _showChannels)
     }
 }
 
-
-
+void LightSculptureManager::onClearLights(bool& value)
+{
+}
 
 
 

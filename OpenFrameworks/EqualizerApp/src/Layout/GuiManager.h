@@ -67,6 +67,8 @@ private:
     
     void setupLayoutGui();
     
+    void setupCommunicationsGui();
+    
     void setupNoiseGui();
     
     void drawRectangle();
@@ -81,12 +83,18 @@ private:
 
     ofParameterGroup    m_parametersLayout;
     ofParameterGroup    m_parametersNoise;
+    ofParameterGroup    m_parametersCommunications;
     
     ofParameter<int>      m_id;
     
     ofParameter<int>      m_noiseResolution;
     ofParameter<float>    m_noiseFrequency;
     ofParameter<float>    m_noiseSpeed;
+    
+    ofParameter<int>      m_comBitmapNum;
+    ofParameter<int>      m_comStripNum;
+    ofParameter<bool>     m_comClearLights;
+    ofParameter<int>      m_comSpeed;
     
     ofxColorSlider          m_color;
     

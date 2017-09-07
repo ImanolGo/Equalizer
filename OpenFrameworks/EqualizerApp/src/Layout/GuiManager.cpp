@@ -41,7 +41,8 @@ void GuiManager::setup()
 
 
     this->setupGuiParameters();
-    this->setupLayoutGui();
+    //this->setupLayoutGui();
+    this->setupCommunicationsGui();
     this->setupNoiseGui();
 
     this->loadGuiValues();
@@ -63,6 +64,30 @@ void GuiManager::setupGuiParameters()
 
 
 
+void GuiManager::setupCommunicationsGui()
+{
+    auto lightSculptureManager = &AppManager::getInstance().getLightSculptureManager();
+    
+    m_parametersLayout.setName("Communications");
+    
+    m_comBitmapNum.set("BitMapNr", 0, 0, 10);
+    m_comBitmapNum.addListener(lightSculptureManager, &LightSculptureManager::onSetBitmapNumber);
+    m_parametersCommunications.add(m_comBitmapNum);
+    
+    m_comStripNum.set("StripNr", 0, 0, 3);
+    m_comStripNum.addListener(lightSculptureManager, &LightSculptureManager::onSetStripNumber);
+    m_parametersCommunications.add(m_comStripNum);
+   
+    m_comClearLights.set("Clear", false);
+    m_comClearLights.addListener(lightSculptureManager, &LightSculptureManager::onSetStripNumber);
+    m_parametersCommunications.add(m_comClearLights);
+    
+    
+    ofParameter<bool>     m_comClearLights;
+    ofParameter<int>      m_comSpeed;
+    
+    m_gui.add(m_parametersCommunications);
+}
 void GuiManager::setupLayoutGui()
 {
     auto udpManager = &AppManager::getInstance().getUdpManager();
@@ -74,7 +99,7 @@ void GuiManager::setupLayoutGui()
     
     
     m_id.set("ID", 0, 0, 512);
-    m_id.addListener(udpManager, &UdpManager::onSetId);
+    //m_id.addListener(udpManager, &UdpManager::onSetId);
     m_parametersLayout.add(m_id);
     
     m_gui.add(m_parametersLayout);

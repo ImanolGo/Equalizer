@@ -64,6 +64,12 @@ class LightSculptureManager: public Manager
     
         void onSetLedsSize(float &value);
     
+        void onSetBitmapNumber(int &value) {m_bitmapNumber = ofClamp(value,0,254);}
+    
+        void onSetStripNumber(int &value) {m_stripNumber = ofClamp(value,0,254);}
+    
+        void onClearLights(bool &value);
+    
         void showChannels(bool _showChannels);
     
     private:
@@ -97,7 +103,9 @@ class LightSculptureManager: public Manager
         LightObjectVector       m_lightObjects;
         ofRectangle             m_boundingBox;
     
-        float           m_lightObjectSize;
+        float                   m_lightObjectSize;
+        int                     m_bitmapNumber;
+        int                     m_stripNumber;
     
 };
 
