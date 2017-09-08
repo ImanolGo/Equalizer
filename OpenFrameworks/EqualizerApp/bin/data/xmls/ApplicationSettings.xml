@@ -3,10 +3,10 @@
 
   <of_settings>
 
-      <window title="EqualizerApp" x="0" y="0" width="960" height="600" fullscreen="0" showCursor="1"/>
+      <window title="EqualizerApp" x="70" y="70" width="960" height="600" fullscreen="0" showCursor="1"/>
 
       <debug showCursor="1" setVerbose="1"/> 
-	    <network ipAddress="192.168.0.255" portUdpReceive="44409" portUdpSend="55766"/>
+	    <network ipAddress="192.168.0.255" portUdpReceive="44409" portUdpSend="63094"/>
 
   </of_settings>
 

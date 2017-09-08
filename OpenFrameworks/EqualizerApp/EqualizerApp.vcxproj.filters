@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\Addons\ofxGui\src\ofxBaseGui.cpp">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxGui\src\ofxButton.cpp">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxGui\src\ofxGuiGroup.cpp">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxGui\src\ofxLabel.cpp">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxGui\src\ofxPanel.cpp">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxGui\src\ofxSlider.cpp">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxGui\src\ofxSliderGroup.cpp">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxGui\src\ofxToggle.cpp">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxNetwork\src\ofxTCPClient.cpp">
+      <Filter>src\Addons\ofxNetwork\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxNetwork\src\ofxTCPManager.cpp">
+      <Filter>src\Addons\ofxNetwork\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxNetwork\src\ofxTCPServer.cpp">
+      <Filter>src\Addons\ofxNetwork\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxNetwork\src\ofxUDPManager.cpp">
+      <Filter>src\Addons\ofxNetwork\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxSvg\libs\svgTiny\src\src_colors.cpp">
+      <Filter>src\Addons\ofxSvg\libs\svgTiny\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxSvg\libs\svgTiny\src\svgtiny.cpp">
+      <Filter>src\Addons\ofxSvg\libs\svgTiny\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxSvg\libs\svgTiny\src\svgtiny_gradient.cpp">
+      <Filter>src\Addons\ofxSvg\libs\svgTiny\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxSvg\libs\svgTiny\src\svgtiny_list.cpp">
+      <Filter>src\Addons\ofxSvg\libs\svgTiny\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxSvg\src\ofxSvg.cpp">
+      <Filter>src\Addons\ofxSvg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxUnicode\src\ofTextConverter.cpp">
+      <Filter>src\Addons\ofxUnicode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxUnicode\src\ofUnicode.cpp">
+      <Filter>src\Addons\ofxUnicode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofxUnicode\src\ofUTF8.cpp">
+      <Filter>src\Addons\ofxUnicode\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\3D\CameraAnimations.cpp">
+      <Filter>src\Engine\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\3D\CameraAnimationsManager.cpp">
+      <Filter>src\Engine\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\3D\CameraManager.cpp">
+      <Filter>src\Engine\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\3D\LightManager.cpp">
+      <Filter>src\Engine\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Resources\ResourceManager.cpp">
+      <Filter>src\Engine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Tools\EngineFont.cpp">
+      <Filter>src\Engine\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Visuals\ImageVisual.cpp">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Visuals\ImageVisual3D.cpp">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Visuals\RectangleVisual.cpp">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Visuals\SvgVisual.cpp">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Visuals\TextVisual.cpp">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Visuals\VideoVisual.cpp">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Visuals\ViewManager.cpp">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Visuals\VisualEffects.cpp">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Visuals\VisualEffectsManager.cpp">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\I0\KeyboardManager.cpp">
+      <Filter>src\I0</Filter>
+    </ClCompile>
+    <ClCompile Include="src\I0\UdpManager.cpp">
+      <Filter>src\I0</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Layout\GuiManager.cpp">
+      <Filter>src\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Layout\LayoutManager.cpp">
+      <Filter>src\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main\AppManager.cpp">
+      <Filter>src\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main\EqualizerApp.cpp">
+      <Filter>src\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main\main.cpp">
+      <Filter>src\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main\SettingsManager.cpp">
+      <Filter>src\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Visuals\LightObject.cpp">
+      <Filter>src\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Visuals\LightSculptureManager.cpp">
+      <Filter>src\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Visuals\NoiseManager.cpp">
+      <Filter>src\Visuals</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons">
+      <UniqueIdentifier>{44C2E31E-3A94-67F8-2669-D1C5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxGui">
+      <UniqueIdentifier>{407BE4E2-78CC-D24E-0CB6-5BCE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxGui\src">
+      <UniqueIdentifier>{A7E0B2A9-6C0A-9388-6769-DD5A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxMyIP">
+      <UniqueIdentifier>{5D982135-E8F0-3A25-7B33-FB06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxMyIP\src">
+      <UniqueIdentifier>{49B16E9C-7586-CD8C-4B79-DC21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxNetwork">
+      <UniqueIdentifier>{09B73C01-94F2-278B-3AA5-F85C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxNetwork\src">
+      <UniqueIdentifier>{ABFA30F4-5F26-C867-F952-17A7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxSvg">
+      <UniqueIdentifier>{79EB84A9-D004-C2E7-357C-2530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxSvg\libs">
+      <UniqueIdentifier>{7BD6BBDE-8C6D-9150-27AC-E26F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxSvg\libs\svgTiny">
+      <UniqueIdentifier>{C78E5414-D72F-CCA2-8EAF-13C7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxSvg\libs\svgTiny\src">
+      <UniqueIdentifier>{49D54A19-5305-6CA1-BC00-8D89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxSvg\src">
+      <UniqueIdentifier>{09D10F06-E1D8-2B77-16C5-E777}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxUnicode">
+      <UniqueIdentifier>{E82891DC-E954-015E-EE88-6378}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxUnicode\libs">
+      <UniqueIdentifier>{1A376A3D-FCFE-EFC1-BFBB-A35D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxUnicode\libs\utf8cpp">
+      <UniqueIdentifier>{0F7F3B35-5258-07FE-ADB1-4F2B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxUnicode\libs\utf8cpp\include">
+      <UniqueIdentifier>{F579F39D-8979-EA8C-272A-C179}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxUnicode\libs\utf8cpp\include\utf8">
+      <UniqueIdentifier>{EEF4518C-E9C0-8A7C-C3DF-1F1C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxUnicode\libs\utf8cpp\src">
+      <UniqueIdentifier>{85F387EB-59FD-F73F-CD3E-DD2D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1">
+      <UniqueIdentifier>{91D10340-89E0-54CF-7F4E-CD69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source">
+      <UniqueIdentifier>{E91A67D0-632E-8243-8C5C-6952}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8">
+      <UniqueIdentifier>{E72A142D-91C3-F326-32F1-8422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxUnicode\src">
+      <UniqueIdentifier>{3CFC747B-2AEC-E04F-A377-698C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Engine">
+      <UniqueIdentifier>{33FA9329-3569-5A99-A4AF-D67C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Engine\3D">
+      <UniqueIdentifier>{EFB4B634-3010-294F-63BC-3A8C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Engine\Resources">
+      <UniqueIdentifier>{2975D63A-2923-8592-710A-D9A3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Engine\Tools">
+      <UniqueIdentifier>{35A02FAA-7975-79C0-ECB0-0B79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Engine\Visuals">
+      <UniqueIdentifier>{F737640D-9F42-AC92-7F50-BCBC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\I0">
+      <UniqueIdentifier>{2328543A-8C7A-E3DD-7D4D-BD0B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Layout">
+      <UniqueIdentifier>{48DE4E4C-4D44-6A7D-6721-F29B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Main">
+      <UniqueIdentifier>{B604249B-4527-FF17-F2E4-84CF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Visuals">
+      <UniqueIdentifier>{A6B5F35D-A8B6-920A-78B7-EB46}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Addons\ofxGui\src\ofxBaseGui.h">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxGui\src\ofxButton.h">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxGui\src\ofxGui.h">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxGui\src\ofxGuiGroup.h">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxGui\src\ofxLabel.h">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxGui\src\ofxPanel.h">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxGui\src\ofxSlider.h">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxGui\src\ofxSliderGroup.h">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxGui\src\ofxToggle.h">
+      <Filter>src\Addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxMyIP\src\ofxMyIP.h">
+      <Filter>src\Addons\ofxMyIP\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxNetwork\src\ofxNetwork.h">
+      <Filter>src\Addons\ofxNetwork\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxNetwork\src\ofxNetworkUtils.h">
+      <Filter>src\Addons\ofxNetwork\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxNetwork\src\ofxTCPClient.h">
+      <Filter>src\Addons\ofxNetwork\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxNetwork\src\ofxTCPManager.h">
+      <Filter>src\Addons\ofxNetwork\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxNetwork\src\ofxTCPServer.h">
+      <Filter>src\Addons\ofxNetwork\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxNetwork\src\ofxUDPManager.h">
+      <Filter>src\Addons\ofxNetwork\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxSvg\libs\svgTiny\src\svgtiny.h">
+      <Filter>src\Addons\ofxSvg\libs\svgTiny\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxSvg\libs\svgTiny\src\svgtiny_internal.h">
+      <Filter>src\Addons\ofxSvg\libs\svgTiny\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxSvg\src\ofxSvg.h">
+      <Filter>src\Addons\ofxSvg\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\include\utf8\checked.h">
+      <Filter>src\Addons\ofxUnicode\libs\utf8cpp\include\utf8</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\include\utf8\core.h">
+      <Filter>src\Addons\ofxUnicode\libs\utf8cpp\include\utf8</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\include\utf8\unchecked.h">
+      <Filter>src\Addons\ofxUnicode\libs\utf8cpp\include\utf8</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\include\utf8.h">
+      <Filter>src\Addons\ofxUnicode\libs\utf8cpp\include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8\checked.h">
+      <Filter>src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8\core.h">
+      <Filter>src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8\unchecked.h">
+      <Filter>src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8.h">
+      <Filter>src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxUnicode\src\ofTextConverter.h">
+      <Filter>src\Addons\ofxUnicode\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxUnicode\src\ofUnicode.h">
+      <Filter>src\Addons\ofxUnicode\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxUnicode\src\ofUTF8.h">
+      <Filter>src\Addons\ofxUnicode\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\3D\CameraAnimations.h">
+      <Filter>src\Engine\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\3D\CameraAnimationsManager.h">
+      <Filter>src\Engine\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\3D\CameraManager.h">
+      <Filter>src\Engine\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\3D\LightManager.h">
+      <Filter>src\Engine\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Resources\ResourceManager.h">
+      <Filter>src\Engine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Tools\EngineFont.h">
+      <Filter>src\Engine\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Visuals\BasicVisual.h">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Visuals\ImageVisual.h">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Visuals\ImageVisual3D.h">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Visuals\RectangleVisual.h">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Visuals\SvgVisual.h">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Visuals\TextVisual.h">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Visuals\VideoVisual.h">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Visuals\ViewManager.h">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Visuals\VisualEffects.h">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Visuals\VisualEffectsManager.h">
+      <Filter>src\Engine\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\I0\KeyboardManager.h">
+      <Filter>src\I0</Filter>
+    </ClInclude>
+    <ClInclude Include="src\I0\UdpManager.h">
+      <Filter>src\I0</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Layout\GuiManager.h">
+      <Filter>src\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Layout\LayoutManager.h">
+      <Filter>src\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Main\AppManager.h">
+      <Filter>src\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Main\EqualizerApp.h">
+      <Filter>src\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Main\Manager.h">
+      <Filter>src\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Main\SettingsManager.h">
+      <Filter>src\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Visuals\LightObject.h">
+      <Filter>src\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Visuals\LightSculptureManager.h">
+      <Filter>src\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Visuals\NoiseManager.h">
+      <Filter>src\Visuals</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>

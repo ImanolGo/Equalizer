@@ -10,7 +10,10 @@
 
 #include "UdpManager.h"
 #include "AppManager.h"
+
+#ifndef TARGET_WIN32
 #include "ofxMyIP.h"
+#endif
 
 
 const int UdpManager::UDP_MESSAGE_LENGHT = 1000;
@@ -70,7 +73,7 @@ void UdpManager::setupUdpConnection()
 void UdpManager::setupIP()
 {
     #ifdef TARGET_WIN32
-        system("data/commands/ipfirst.cmd");
+        system("/data/commands/ipfirst.cmd");
         ofFile file("my.ip");
         file >> m_ip;
     #else
