@@ -94,6 +94,7 @@ private:
     ofParameter<int>      m_comBitmapNum;
     ofParameter<int>      m_comStripNum;
     ofParameter<bool>     m_comClearLights;
+    ofParameter<bool>     m_comSendHeights;
     ofParameter<int>      m_comSpeed;
     
     ofxColorSlider          m_color;

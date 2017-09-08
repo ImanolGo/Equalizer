@@ -16,7 +16,7 @@
 const string LightSculptureManager::LEDS_LIST_PATH = "leds/";
 
 
-LightSculptureManager::LightSculptureManager(): Manager(), m_lightObjectSize(20.0), m_bitmapNumber(0), m_stripNumber(0)
+LightSculptureManager::LightSculptureManager(): Manager(), m_lightObjectSize(20.0), m_bitmapNumber(0), m_stripNumber(0), m_sendHeights(true)
 {
 	//Intentionally left empty
 }
@@ -206,6 +206,10 @@ void LightSculptureManager::update()
 void LightSculptureManager::setPixels(ofPixelsRef pixels)
 {
     this->setLedColors(pixels);
+    
+    if(m_sendHeights){
+         this->sendHeights();
+    }
 }
 
 void LightSculptureManager::setLedColors(ofPixelsRef pixels)
@@ -215,6 +219,17 @@ void LightSculptureManager::setLedColors(ofPixelsRef pixels)
     }
 }
 
+void LightSculptureManager::sendHeights()
+{
+    UdpData data;
+    data.m_bitmapNr = m_bitmapNumber; data.m_stripNr = m_stripNumber;
+    
+    for(auto lightObject: m_lightObjects){
+        data.m_id = lightObject->getId();
+        data.m_value = ofMap(lightObject->getColor().getBrightness(), 0, 255, 0, 254);
+        AppManager::getInstance().getUdpManager().sendLoadBitmap(data);
+    }
+}
 
 void LightSculptureManager::draw()
 {
@@ -253,9 +268,26 @@ void LightSculptureManager::showChannels(bool _showChannels)
 
 void LightSculptureManager::onClearLights(bool& value)
 {
+    UdpData data; data.m_value = value; data.m_bitmapNr = m_bitmapNumber; data.m_stripNr = m_stripNumber;
+    
+    for(auto lightObject: m_lightObjects)
+    {
+        data.m_id = lightObject->getId();
+        AppManager::getInstance().getUdpManager().sendLoadBitmap(data);
+    }
 }
 
-
+void LightSculptureManager::onSetSpeed(int &value)
+{
+     UdpData data; data.m_value = ofClamp(value,0,254);
+        data.m_bitmapNr = m_bitmapNumber; data.m_stripNr = m_stripNumber;
+    
+    for(auto lightObject: m_lightObjects)
+    {
+        data.m_id = lightObject->getId();
+        AppManager::getInstance().getUdpManager().sendSpeed(data);
+    }
+}
 
 
 

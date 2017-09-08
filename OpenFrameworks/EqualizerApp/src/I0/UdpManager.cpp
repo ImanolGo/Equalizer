@@ -18,7 +18,7 @@ const int UdpManager::UDP_MESSAGE_LENGHT = 1000;
 const char UdpManager::START_COMMAND = 'd';
 const char UdpManager::END_COMMAND = 255;
 
-UdpManager::UdpManager(): Manager(), m_id(0)
+UdpManager::UdpManager(): Manager(), m_id(0), m_broadcast("")
 {
     //Intentionally left empty
 }
@@ -38,18 +38,19 @@ void UdpManager::setup()
     
     Manager::setup();
     
-    this->setupUdpReceiver();
     this->setupIP();
+    this->setupUdpConnection();
     //this->setupText();
     
     ofLogNotice() <<"UdpManager::initialized" ;
 }
 
-void UdpManager::setupUdpReceiver()
+void UdpManager::setupUdpConnection()
 {
     int portReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
     ofLogNotice() <<"UdpManager::setupUdpReceiver -> listening for udp messages on port  " << portReceive;
     
+    //m_udpConnection.SetEnableBroadcast(true);
     m_udpConnection.Create(); //create the socket
     m_udpConnection.Bind(portReceive); //and bind to port
     
@@ -57,7 +58,8 @@ void UdpManager::setupUdpReceiver()
     string ip = AppManager::getInstance().getSettingsManager().getIpAddress();
     int portSend = AppManager::getInstance().getSettingsManager().getUdpPortSend();
    
-    m_udpConnection.Connect(ip.c_str(),portSend);
+    m_udpConnection.Connect(m_broadcast.c_str(),portSend);
+    m_udpConnection.SetEnableBroadcast(true);
     
     ofLogNotice() <<"UdpManager::setupUdpReceiver -> sending to IP " << ip <<" to port " << portSend;
     
@@ -80,14 +82,30 @@ void UdpManager::setupIP()
     
     ofLogNotice() <<"UdpManager::setupIP -> IP address: " << m_ip;
     
+    m_broadcast = "";
     auto stringSplit = ofSplitString(m_ip, ".");
     
-    for(auto str: stringSplit){
-        char s = (char) ofToInt(str);
-        m_ipVector.push_back(s);
-        //ofLogNotice() <<"UdpManager::setupIP -> IP address: " << s;
+    for(int i=0; i<stringSplit.size(); i++){
+       
+        if(i<stringSplit.size()-1){
+            m_broadcast += stringSplit[i];
+            m_broadcast += ".";
+        }
         
+        char s = (char) ofToInt(stringSplit[i]);
+        m_ipVector.push_back(s);
     }
+    
+    m_broadcast+="255";
+    ofLogNotice() <<"UdpManager::setupIP -> Broadcast IP address: " << m_broadcast;
+    
+//    for(auto str: stringSplit){
+//        char s = (char) ofToInt(str);
+//        m_ipVector.push_back(s);
+//        m_broadcast = str;
+//        //ofLogNotice() <<"UdpManager::setupIP -> IP address: " << s;
+//        
+//    }
     
 }
 void UdpManager::setupText()
@@ -162,89 +180,89 @@ void UdpManager::updateReceiveText(const string& message)
 }
 
 
-void UdpManager::sendData(int id, int value, int bitmapNr)
+void UdpManager::sendData(const UdpData& data)
 {
     string message="";
     
     message+= START_COMMAND;
     
-    char id_ = (char) ofClamp(id, 0, 254);
+    char id_ = (char) ofClamp(data.m_id, 0, 254);
     message+= id_;
     
     char data_command = 1;
     message+= data_command;
     
-    char strip_nr = 0;
+    char strip_nr = (char) ofClamp(data.m_stripNr, 0, 254);
     message+= strip_nr;
     
-    char bitmap_nr = (char) ofClamp(bitmapNr, 0, 254);
+    char bitmap_nr = (char) ofClamp(data.m_bitmapNr, 0, 254);
     message+= strip_nr;
 
-    char height = (char) ofClamp(value, 0, 254);
+    char height = (char) ofClamp(data.m_value, 0, 254);
     message+= height;
     
     message+= END_COMMAND;
   
     m_udpConnection.Send(message.c_str(),message.length());
     
-    ofLogNotice() <<"UdpManager::sendData << " << message;
+    //ofLogNotice() <<"UdpManager::sendData << " << message;
 }
 
-void UdpManager::sendLoadBitmap(int id, int bitmapNr)
+void UdpManager::sendLoadBitmap(const UdpData& data)
 {
     string message="";
     
     message+= START_COMMAND;
     
-    char id_ = (char) ofClamp(id, 0, 254);
+    char id_ = (char) ofClamp(data.m_id, 0, 254);
     message+= id_;
     
-    char bitmap_command = 0;
-    message+= bitmap_command;
+    char data_command = 0;
+    message+= data_command;
     
-    char strip_nr = 0;
+    char strip_nr = (char) ofClamp(data.m_stripNr, 0, 254);
     message+= strip_nr;
     
-    char bitmap_nr = (char) ofClamp(bitmapNr, 0, 254);
+    char bitmap_nr = (char) ofClamp(data.m_bitmapNr, 0, 254);
     message+= strip_nr;
 
-    char clear = 0;
+    char clear = (char) ofClamp(data.m_value, 0, 1);
     message+= clear;
     
     message+= END_COMMAND;
     
     m_udpConnection.Send(message.c_str(),message.length());
     
-    ofLogNotice() <<"UdpManager::sendData << " << message;
+    //ofLogNotice() <<"UdpManager::sendData << " << message;
 }
 
 
-void UdpManager::sendSpeed(int id, int value, int bitmapNr)
+void UdpManager::sendSpeed(const UdpData& data)
 {
     string message="";
     
     message+= START_COMMAND;
     
-    char id_ = (char) ofClamp(id, 0, 254);
+    char id_ = (char) ofClamp(data.m_id, 0, 254);
     message+= id_;
     
-    char speed_command = 2;
-    message+= speed_command;
+    char data_command = 2;
+    message+= data_command;
     
-    char strip_nr = 0;
+    char strip_nr = (char) ofClamp(data.m_stripNr, 0, 254);
     message+= strip_nr;
     
-    char bitmap_nr = (char) ofClamp(bitmapNr, 0, 254);
+    char bitmap_nr = (char) ofClamp(data.m_bitmapNr, 0, 254);
     message+= strip_nr;
     
-    char speed = (char) ofClamp(value, 0, 254);
+    char speed = (char) ofClamp(data.m_value, 0, 254);
     message+= speed;
     
     message+= END_COMMAND;
     
     m_udpConnection.Send(message.c_str(),message.length());
     
-    ofLogNotice() <<"UdpManager::sendData << " << message;
+    //ofLogNotice() <<"UdpManager::sendData << " << message;
 }
 
 void UdpManager::sendAutodiscovery()
@@ -268,7 +286,7 @@ void UdpManager::sendAutodiscovery()
     
     m_udpConnection.Send(message.c_str(),message.length());
     
-    ofLogNotice() <<"UdpManager::sendAutodiscovery";
+    //ofLogNotice() <<"UdpManager::sendAutodiscovery";
 }
 
 

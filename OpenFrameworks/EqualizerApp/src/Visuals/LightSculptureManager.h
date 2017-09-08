@@ -68,7 +68,11 @@ class LightSculptureManager: public Manager
     
         void onSetStripNumber(int &value) {m_stripNumber = ofClamp(value,0,254);}
     
+        void onSetSpeed(int &value);
+    
         void onClearLights(bool &value);
+    
+        void onToggleSendHeights(bool &value) {m_sendHeights = value;}
     
         void showChannels(bool _showChannels);
     
@@ -94,6 +98,8 @@ class LightSculptureManager: public Manager
     
         void drawLeds(int width = 1, int height = 1);
     
+        void sendHeights();
+    
     
     
     private:
@@ -106,6 +112,7 @@ class LightSculptureManager: public Manager
         float                   m_lightObjectSize;
         int                     m_bitmapNumber;
         int                     m_stripNumber;
+        bool                    m_sendHeights;
     
 };
 

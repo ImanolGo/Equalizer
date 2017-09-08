@@ -73,19 +73,24 @@ void GuiManager::setupCommunicationsGui()
     m_comBitmapNum.set("BitMapNr", 0, 0, 10);
     m_comBitmapNum.addListener(lightSculptureManager, &LightSculptureManager::onSetBitmapNumber);
     m_parametersCommunications.add(m_comBitmapNum);
-    
+
     m_comStripNum.set("StripNr", 0, 0, 3);
     m_comStripNum.addListener(lightSculptureManager, &LightSculptureManager::onSetStripNumber);
     m_parametersCommunications.add(m_comStripNum);
    
+    
+    m_comSpeed.set("Speed", 127, 0, 254);
+    m_comSpeed.addListener(lightSculptureManager, &LightSculptureManager::onSetSpeed);
+    m_parametersCommunications.add(m_comSpeed);
+    
     m_comClearLights.set("Clear", false);
-    m_comClearLights.addListener(lightSculptureManager, &LightSculptureManager::onSetStripNumber);
+    m_comClearLights.addListener(lightSculptureManager, &LightSculptureManager::onClearLights);
     m_parametersCommunications.add(m_comClearLights);
-    
-    
-    ofParameter<bool>     m_comClearLights;
-    ofParameter<int>      m_comSpeed;
-    
+
+    m_comSendHeights.set("SendHeights", true);
+    m_comSendHeights.addListener(lightSculptureManager, &LightSculptureManager::onToggleSendHeights);
+    m_parametersCommunications.add(m_comSendHeights);
+//
     m_gui.add(m_parametersCommunications);
 }
 void GuiManager::setupLayoutGui()

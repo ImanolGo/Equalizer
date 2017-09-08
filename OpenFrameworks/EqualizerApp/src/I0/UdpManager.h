@@ -15,6 +15,27 @@
 #include "TextVisual.h"
 
 
+
+
+//=========================== UdpData =======================================
+//===========================================================================
+
+
+typedef struct UdpData
+{
+    UdpData()
+    : m_id(0), m_value(0), m_bitmapNr(0),m_stripNr(0)
+    {
+        // Do nothing
+    }
+    int m_id;
+    int m_value;
+    int m_bitmapNr;
+    int m_stripNr;
+} UdpData;
+
+
+
 //========================== class UdpManager =======================================
 //==============================================================================
 /** \class UdpManager UdpManager.h
@@ -45,11 +66,17 @@ public:
     void update();
     
     void sendAutodiscovery();
+    
+    void sendData(const UdpData& data);
+    
+    void sendSpeed(const UdpData& data);
+    
+    void sendLoadBitmap(const UdpData& data);
 
 private:
     
-    //! sets up the udp receiver
-    void setupUdpReceiver();
+    //! sets up the udp
+    void setupUdpConnection();
     
     void setupIP();
     
@@ -58,12 +85,7 @@ private:
     
     //! updates receiving information text visuals
     void updateReceiveText(const string& message);
-    
-    void sendData(int id, int value, int bitmapNr);
-    
-    void sendSpeed(int id, int value, int bitmapNr);
-    
-    void sendLoadBitmap(int id, int bitmapNr);
+
     
  private:
     
@@ -74,6 +96,7 @@ private:
     unsigned int            m_id;
     ofColor                 m_color;
     string                  m_ip;
+    string                  m_broadcast;
     vector<char>            m_ipVector;
     
     
