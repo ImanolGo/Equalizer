@@ -67,8 +67,14 @@ void GuiManager::setupGuiParameters()
 void GuiManager::setupCommunicationsGui()
 {
     auto lightSculptureManager = &AppManager::getInstance().getLightSculptureManager();
+    auto udpManager = &AppManager::getInstance().getUdpManager();
     
     m_parametersLayout.setName("Communications");
+    
+    ofxButton * autodiscovery = new ofxButton();
+    autodiscovery->setup("Autodiscovery");
+    autodiscovery->addListener(udpManager, &UdpManager::sendAutodiscovery);
+    m_gui.add(autodiscovery);
     
     m_comBitmapNum.set("BitMapNr", 0, 0, 10);
     m_comBitmapNum.addListener(lightSculptureManager, &LightSculptureManager::onSetBitmapNumber);

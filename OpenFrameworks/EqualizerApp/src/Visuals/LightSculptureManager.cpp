@@ -227,7 +227,7 @@ void LightSculptureManager::sendHeights()
     for(auto lightObject: m_lightObjects){
         data.m_id = lightObject->getId();
         data.m_value = ofMap(lightObject->getColor().getBrightness(), 0, 255, 0, 254);
-        AppManager::getInstance().getUdpManager().sendLoadBitmap(data);
+        AppManager::getInstance().getUdpManager().sendData(data);
     }
 }
 
