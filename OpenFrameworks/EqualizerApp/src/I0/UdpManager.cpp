@@ -131,7 +131,7 @@ void UdpManager::setupText()
 
     
     int porReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
-    string text = "UDP Send -> Local IP: x" +  m_ip + ", Boradcast IP: " + m_broadcast + ", Port: " + ofToString(portSend);
+    string text = "UDP Send -> Local IP: " +  m_ip + ", Boradcast IP: " + m_broadcast + ", Port: " + ofToString(portSend);
     
     m_udpText =  ofPtr<TextVisual> (new TextVisual(position, width, height));
     m_udpText->setText(text, "fonts/open-sans/OpenSans-Semibold.ttf", fontSize);
