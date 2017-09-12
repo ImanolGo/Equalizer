@@ -1,5 +1,5 @@
 <group>
-	<FPS>59.0848</FPS>
+	<FPS>199.715</FPS>
 	<Color>87, 255, 117, 131<Hue>87.1684</Hue>
 		<Saturation>118.393</Saturation>
 		<Brightness>122.296</Brightness>
@@ -13,9 +13,9 @@
 		<Noise_Frequency>4</Noise_Frequency>
 		<Noise_Speed>0.475332</Noise_Speed>
 	</Noise>
-<BitMapNr>3</BitMapNr>
+<BitMapNr>4</BitMapNr>
 <StripNr>2</StripNr>
 <Clear>0</Clear>
-<Speed>149</Speed>
+<Speed>117</Speed>
 	<SendHeights>0</SendHeights>
 </group>

@@ -44,6 +44,7 @@ void UdpManager::setup()
     this->setupIP();
     this->setupUdpConnection();
     this->setupText();
+    this->sendAutodiscovery();
     
     ofLogNotice() <<"UdpManager::initialized" ;
 }
@@ -130,7 +131,7 @@ void UdpManager::setupText()
 
     
     int porReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
-    string text = "UDP Send -> Local IP: " +  m_ip + ", Boradcast IP: " + m_broadcast + ", Port: " + ofToString(portSend);
+    string text = "UDP Send -> Local IP: x" +  m_ip + ", Boradcast IP: " + m_broadcast + ", Port: " + ofToString(portSend);
     
     m_udpText =  ofPtr<TextVisual> (new TextVisual(position, width, height));
     m_udpText->setText(text, "fonts/open-sans/OpenSans-Semibold.ttf", fontSize);
@@ -182,7 +183,7 @@ void UdpManager::sendData(const UdpData& data)
     message+= strip_nr;
     
     char bitmap_nr = (char) ofClamp(data.m_bitmapNr, 0, 254);
-    message+= strip_nr;
+    message+= bitmap_nr;
 
     char height = (char) ofClamp(data.m_value, 0, 254);
     message+= height;
@@ -210,7 +211,7 @@ void UdpManager::sendLoadBitmap(const UdpData& data)
     message+= strip_nr;
     
     char bitmap_nr = (char) ofClamp(data.m_bitmapNr, 0, 254);
-    message+= strip_nr;
+    message+= bitmap_nr;
 
     char clear = (char) ofClamp(data.m_value, 0, 1);
     message+= clear;
@@ -219,7 +220,7 @@ void UdpManager::sendLoadBitmap(const UdpData& data)
     
     m_udpConnection.Send(message.c_str(),message.length());
     
-    //ofLogNotice() <<"UdpManager::sendData << " << message;
+    //ofLogNotice() <<"UdpManager::sendLoadBitmap << " << message;
 }
 
 
@@ -239,7 +240,7 @@ void UdpManager::sendSpeed(const UdpData& data)
     message+= strip_nr;
     
     char bitmap_nr = (char) ofClamp(data.m_bitmapNr, 0, 254);
-    message+= strip_nr;
+    message+= bitmap_nr;
     
     char speed = (char) ofClamp(data.m_value, 0, 254);
     message+= speed;
@@ -248,7 +249,7 @@ void UdpManager::sendSpeed(const UdpData& data)
     
     m_udpConnection.Send(message.c_str(),message.length());
     
-    //ofLogNotice() <<"UdpManager::sendData << " << message;
+    //ofLogNotice() <<"UdpManager::sendSpeed << " << message;
 }
 
 void UdpManager::sendAutodiscovery()
