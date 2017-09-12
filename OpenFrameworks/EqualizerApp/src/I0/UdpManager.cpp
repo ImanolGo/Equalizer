@@ -43,7 +43,7 @@ void UdpManager::setup()
     
     this->setupIP();
     this->setupUdpConnection();
-    //this->setupText();
+    this->setupText();
     
     ofLogNotice() <<"UdpManager::initialized" ;
 }
@@ -113,49 +113,30 @@ void UdpManager::setupIP()
 }
 void UdpManager::setupText()
 {
-//    auto windowSettings = AppManager::getInstance().getSettingsManager().getWindowsSettings(0);
-//    
-//    int width =  (windowSettings.width - 4*LayoutManager::MARGIN - GuiManager::GUI_WIDTH)*0.5 - LayoutManager::MARGIN;
-//    int fontSize = 12;
-//    int height = fontSize*3;
-//    
-//    ofVec3f position;
-//    
-//    ofPtr<RectangleVisual> rect = AppManager::getInstance().getOscManager().getBoundingBox();
-//    float offset_y = rect->getPosition().y + rect->getHeight();
-//    
-//    //position.x = GuiManager::GUI_WIDTH + 2*LayoutManager::MARGIN;
-//    position.y = LayoutManager::MARGIN + offset_y;
-//    position.x = 2.5*LayoutManager::MARGIN + GuiManager::GUI_WIDTH;
-//    
-//    int porReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
-//    string text = ">> UDP receiving -> Port: " + ofToString(porReceive);
-//    
-//    m_udpReceiveTextFont =  ofPtr<TextVisual> (new TextVisual(position, width, height));
-//    m_udpReceiveTextFont->setText(text, "fonts/open-sans/OpenSans-Semibold.ttf", fontSize);
-//    m_udpReceiveTextFont->setColor(ofColor::white);
-//    m_udpReceiveTextFont->setLineHeight(2.5);
-//    
-//    position.y += LayoutManager::MARGIN + fontSize;
-//    m_udpReceiveMessageFont =  ofPtr<TextVisual> (new TextVisual(position, width, height));
-//    m_udpReceiveMessageFont->setText(text, "fonts/open-sans/OpenSans-Semibold.ttf", fontSize);
-//    m_udpReceiveMessageFont->setColor(ofColor::white);
-//    m_udpReceiveMessageFont->setLineHeight(2.5);
-//    
-//    AppManager::getInstance().getViewManager().addOverlay(m_udpReceiveTextFont);
-//    AppManager::getInstance().getViewManager().addOverlay(m_udpReceiveMessageFont);
-//    
-//    position.y = LayoutManager::PADDING + offset_y;;
-//    position.x -= 0.5*LayoutManager::MARGIN;
-//    width += LayoutManager::MARGIN;
-//    height = 4*LayoutManager::MARGIN;
-//    
-//    ofPtr<RectangleVisual> rectangleVisual = ofPtr<RectangleVisual>(new RectangleVisual(position, width, height));
-//    ofColor color(60,60,60);
-//    //ofColor color = AppManager::getInstance().getSettingsManager().getColor("GUI2");
-//    rectangleVisual->setColor(color);
-//    
-//    AppManager::getInstance().getViewManager().addOverlay(rectangleVisual,2);
+    
+    int width =  ofGetWidth();
+    int fontSize = 12;
+    int height = fontSize*2;
+    
+    ofVec3f position;
+
+    position.y = LayoutManager::MARGIN;
+    position.x = 4*LayoutManager::MARGIN + AppManager::getInstance().getGuiManager().getWidth();
+    
+    string ip = AppManager::getInstance().getSettingsManager().getIpAddress();
+    int portSend = AppManager::getInstance().getSettingsManager().getUdpPortSend();
+
+    
+    int porReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
+    string text = "UDP Send -> Local IP: " +  m_ip + ", Boradcast IP: " + m_broadcast + ", Port: " + ofToString(portSend);
+    
+    m_udpText =  ofPtr<TextVisual> (new TextVisual(position, width, height));
+    m_udpText->setText(text, "fonts/open-sans/OpenSans-Semibold.ttf", fontSize);
+    m_udpText->setColor(ofColor::white);
+    m_udpText->setLineHeight(2.5);
+    
+    
+    AppManager::getInstance().getViewManager().addOverlay(m_udpText);
 }
 
 
@@ -173,12 +154,12 @@ void UdpManager::update()
 
 void UdpManager::updateReceiveText(const string& message)
 {
-    int porReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
-    string text = ">> UDP receiving -> Port: " + ofToString(porReceive) ;
-    //text += "   " + message;
-    m_udpReceiveTextFont->setText(text);
-    
-    m_udpReceiveMessageFont->setText("   " + message);
+//    int porReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
+//    string text = ">> UDP receiving -> Port: " + ofToString(porReceive) ;
+//    //text += "   " + message;
+//    m_udpReceiveTextFont->setText(text);
+//    
+//    m_udpReceiveMessageFont->setText("   " + message);
 
 }
 

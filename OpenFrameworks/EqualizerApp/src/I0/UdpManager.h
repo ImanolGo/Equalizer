@@ -91,8 +91,8 @@ private:
     
  
     ofxUDPManager          m_udpConnection;        ///< ofxUdpManager  class
-    ofPtr<TextVisual>      m_udpReceiveTextFont;
-    ofPtr<TextVisual>      m_udpReceiveMessageFont;
+    ofPtr<TextVisual>      m_udpText;
+    
     unsigned int            m_id;
     ofColor                 m_color;
     string                  m_ip;
