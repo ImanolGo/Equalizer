@@ -73,9 +73,11 @@ void UdpManager::setupUdpConnection()
 void UdpManager::setupIP()
 {
     #ifdef TARGET_WIN32
-        system("/data/commands/ipfirst.cmd");
-        ofFile file("my.ip");
-        file >> m_ip;
+		system("ipfirst.cmd");
+		ofFile file("my.ip");
+		file >> m_ip;
+		//ofLog() << "My IP: " << m_ip;
+
     #else
         ofxMyIP myip;
         myip.setup();
