@@ -62,7 +62,8 @@ void UdpManager::setupUdpConnection()
     string ip = AppManager::getInstance().getSettingsManager().getIpAddress();
     int portSend = AppManager::getInstance().getSettingsManager().getUdpPortSend();
    
-    m_udpConnection.Connect(m_broadcast.c_str(),portSend);
+    //m_udpConnection.Connect(m_broadcast.c_str(),portSend);
+    m_udpConnection.Connect(ip.c_str(),portSend);
     m_udpConnection.SetEnableBroadcast(true);
     
     ofLogNotice() <<"UdpManager::setupUdpReceiver -> sending to IP " << ip <<" to port " << portSend;
@@ -131,7 +132,10 @@ void UdpManager::setupText()
 
     
     int porReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
-    string text = "UDP Send -> Local IP: " +  m_ip + ", Boradcast IP: " + m_broadcast + ", Port: " + ofToString(portSend);
+
+   // string text = "UDP Send -> Local IP: " +  m_ip + ", Boradcast IP: " + m_broadcast + ", Port: " + ofToString(portSend);
+
+    string text = "UDP Send -> Local IP: x" +  m_ip + ", Send IP: " + ip + ", Port: " + ofToString(portSend);
     
     m_udpText =  ofPtr<TextVisual> (new TextVisual(position, width, height));
     m_udpText->setText(text, "fonts/open-sans/OpenSans-Semibold.ttf", fontSize);
@@ -149,19 +153,19 @@ void UdpManager::update()
     string message;
     string tempMessage;
     
-    //ofLogNotice() <<">>UdpManager::update -> message: " << message;
-    //this->updateReceiveText(message);
+    ofLogNotice() <<">>UdpManager::update -> message: " << message;
+    this->updateReceiveText(message);
 
 }
 
 
 void UdpManager::updateReceiveText(const string& message)
 {
-//    int porReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
-//    string text = ">> UDP receiving -> Port: " + ofToString(porReceive) ;
-//    //text += "   " + message;
-//    m_udpReceiveTextFont->setText(text);
-//    
+    int porReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
+    string text = ">> UDP receiving -> Port: " + ofToString(porReceive) ;
+    text += "   " + message;
+    //m_udpReceiveTextFont->setText(text);
+//
 //    m_udpReceiveMessageFont->setText("   " + message);
 
 }

@@ -46,7 +46,7 @@ IPAddress gateway(192, 168, 1, 1); // set gateway to match your network
 IPAddress subnet(255, 255, 255, 0); // set subnet mask to match your network
 
 
-unsigned int localPort = 2390;
+unsigned int localPort = 55766;
 WiFiUDP Udp;
 
 char packetBuffer[UDP_PACKET_SIZE]; //buffer to hold incoming packet

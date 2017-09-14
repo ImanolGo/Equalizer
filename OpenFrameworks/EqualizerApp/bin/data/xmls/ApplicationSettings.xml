@@ -6,7 +6,8 @@
       <window title="EqualizerApp" x="70" y="70" width="960" height="600" fullscreen="0" showCursor="1"/>
 
       <debug showCursor="1" setVerbose="1"/> 
-	    <network ipAddress="192.168.0.255" portUdpReceive="44409" portUdpSend="63094"/>
+
+	    <network ipAddress="192.168.1.70" portUdpReceive="44409" portUdpSend="55766"/>
 
   </of_settings>
 
