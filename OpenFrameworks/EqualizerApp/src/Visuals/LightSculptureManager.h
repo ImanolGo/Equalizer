@@ -74,6 +74,10 @@ class LightSculptureManager: public Manager
     
         void onToggleSendHeights(bool &value) {m_sendHeights = value;}
     
+        void onSetId(int &value);
+    
+        void onSetValue(int &value);
+    
         void showChannels(bool _showChannels);
     
     private:
@@ -113,6 +117,7 @@ class LightSculptureManager: public Manager
         int                     m_bitmapNumber;
         int                     m_stripNumber;
         bool                    m_sendHeights;
+        int                     m_id;
     
 };
 

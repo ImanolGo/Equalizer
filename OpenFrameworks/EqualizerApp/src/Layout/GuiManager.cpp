@@ -83,11 +83,18 @@ void GuiManager::setupCommunicationsGui()
     m_comStripNum.set("StripNr", 0, 0, 3);
     m_comStripNum.addListener(lightSculptureManager, &LightSculptureManager::onSetStripNumber);
     m_parametersCommunications.add(m_comStripNum);
-   
     
     m_comSpeed.set("Speed", 127, 0, 254);
     m_comSpeed.addListener(lightSculptureManager, &LightSculptureManager::onSetSpeed);
     m_parametersCommunications.add(m_comSpeed);
+    
+    m_comId.set("Id", 70, 0, 100);
+    m_comId.addListener(lightSculptureManager, &LightSculptureManager::onSetId);
+    m_parametersCommunications.add(m_comId);
+    
+    m_comValue.set("Value", 0, 0, 254);
+    m_comValue.addListener(lightSculptureManager, &LightSculptureManager::onSetValue);
+    m_parametersCommunications.add(m_comValue);
     
     m_comClearLights.set("Clear", false);
     m_comClearLights.addListener(lightSculptureManager, &LightSculptureManager::onClearLights);

@@ -16,7 +16,7 @@
 const string LightSculptureManager::LEDS_LIST_PATH = "leds/";
 
 
-LightSculptureManager::LightSculptureManager(): Manager(), m_lightObjectSize(20.0), m_bitmapNumber(0), m_stripNumber(0), m_sendHeights(true)
+LightSculptureManager::LightSculptureManager(): Manager(), m_lightObjectSize(20.0), m_bitmapNumber(0), m_stripNumber(0), m_sendHeights(true), m_id(0)
 {
 	//Intentionally left empty
 }
@@ -291,4 +291,18 @@ void LightSculptureManager::onSetSpeed(int &value)
 
 
 
+
+void LightSculptureManager::onSetId(int &value)
+{
+    m_id = value;
+}
+
+void LightSculptureManager::onSetValue(int &value)
+{
+    UdpData data; data.m_bitmapNr = m_bitmapNumber; data.m_stripNr = m_stripNumber;
+    
+    data.m_id = m_id;
+    data.m_value = value;
+    AppManager::getInstance().getUdpManager().sendData(data);
+}
 

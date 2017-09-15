@@ -13,10 +13,12 @@
 #include "ofxMyIP.h"
 
 
-const int UdpManager::UDP_MESSAGE_LENGHT = 1000;
+const int UdpManager::UDP_MESSAGE_LENGHT = 10000;
 
 const char UdpManager::START_COMMAND = 'd';
 const char UdpManager::END_COMMAND = 255;
+const char UdpManager::ID_COMMAND = 'i';
+const char UdpManager::HEARTBEAT_COMMAND = 'b';
 
 UdpManager::UdpManager(): Manager(), m_id(0), m_broadcast("")
 {
@@ -40,6 +42,7 @@ void UdpManager::setup()
     
     this->setupIP();
     this->setupUdpConnection();
+    //this->createConnections();
     this->setupText();
     this->sendAutodiscovery();
     
@@ -53,19 +56,40 @@ void UdpManager::setupUdpConnection()
     
     //m_udpConnection.SetEnableBroadcast(true);
     m_udpConnection.Create(); //create the socket
-    m_udpConnection.Bind(portReceive); //and bind to port
+    //m_udpConnection.Bind(portReceive); //and bind to port
     
     
     string ip = AppManager::getInstance().getSettingsManager().getIpAddress();
     int portSend = AppManager::getInstance().getSettingsManager().getUdpPortSend();
    
-    //m_udpConnection.Connect(m_broadcast.c_str(),portSend);
-    m_udpConnection.Connect(ip.c_str(),portSend);
+    m_udpConnection.Connect(m_broadcast.c_str(),portSend);
+    //m_udpConnection.Connect(ip.c_str(),portSend);
     m_udpConnection.SetEnableBroadcast(true);
     
-    ofLogNotice() <<"UdpManager::setupUdpReceiver -> sending to IP " << ip <<" to port " << portSend;
+    ofLogNotice() <<"UdpManager::setupUdpReceiver -> sending to IP " << m_broadcast <<" to port " << portSend;
     
     m_udpConnection.SetNonBlocking(true);
+}
+
+void UdpManager::createConnections()
+{
+    string ipBase = "";
+    
+    auto stringSplit = ofSplitString(m_ip, ".");
+    
+    for(int i=0; i<stringSplit.size()-1; i++)
+    {
+        ipBase = ipBase + stringSplit[i] + ".";
+    }
+    
+    for(int i=10; i<90; i++)
+    {
+        char _id = (char) i;
+        string ip = ipBase + ofToString(i);
+        m_ipList[_id] = ip;
+        ofLogNotice() <<"UdpManager::receivedId -> ID: " << int(_id) << ", ip: " << ip;
+        this->addConnection(_id,ip);
+    }
 }
 
 
@@ -127,7 +151,7 @@ void UdpManager::setupText()
 
     
     int porReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
-    string text = "UDP Send -> Local IP: x" +  m_ip + ", Send IP: " + ip + ", Port: " + ofToString(portSend);
+    string text = "UDP Send -> Local IP: x" +  m_ip + ", Broadcast IP: " + m_broadcast + ", Port: " + ofToString(portSend);
     
     m_udpText =  ofPtr<TextVisual> (new TextVisual(position, width, height));
     m_udpText->setText(text, "fonts/open-sans/OpenSans-Semibold.ttf", fontSize);
@@ -141,27 +165,137 @@ void UdpManager::setupText()
 
 void UdpManager::update()
 {
-    char udpMessage[UDP_MESSAGE_LENGHT];
-    string message;
-    string tempMessage;
-    
-    ofLogNotice() <<">>UdpManager::update -> message: " << message;
-    this->updateReceiveText(message);
+    this->updateReveivePackage();
+
 
 }
 
+void UdpManager::updateReveivePackage()
+{
+    char udpMessage[UDP_MESSAGE_LENGHT];
+    m_udpConnection.Receive(udpMessage,UDP_MESSAGE_LENGHT);
+    string message=udpMessage;
+    
+    if(message!="")
+    {
+        //ofLogNotice() <<"UdpManager::updateReveivePackage -> SIZE " << message.size();
+        //ofLogNotice() <<"UdpManager::updateReveivePackage -> message " << message;
+        
+        if(isMessage(udpMessage, UDP_MESSAGE_LENGHT)){
+            this->parseMessage(udpMessage, UDP_MESSAGE_LENGHT);
+        }
+    }
+}
+
+bool UdpManager::isMessage(char * buffer, int size)
+{
+    if(size<UDP_MESSAGE_LENGHT){
+        return false;
+    }
+    
+    if(buffer[0] != START_COMMAND){
+        return false;
+    }
+    
+    if(buffer[1] == ID_COMMAND && buffer[3] != END_COMMAND){
+        return false;
+    }
+       
+    if(buffer[1] == HEARTBEAT_COMMAND && buffer[5] != END_COMMAND){
+        return false;
+    }
+    
+    
+    string ip; int port;
+    m_udpConnection.GetRemoteAddr(ip, port);
+    
+    ofLogNotice() <<"UdpManager::isMessage -> Received Message from: " << ip;
+    
+    return true;
+}
+
+void UdpManager::parseMessage(char * buffer, int size)
+{
+    if(size<UDP_MESSAGE_LENGHT){
+        return;
+    }
+    
+    if(buffer[1] == ID_COMMAND){
+        this->receivedId(buffer[2] );
+    }
+    
+    if(buffer[1] == HEARTBEAT_COMMAND ){
+       this->receivedHeartbeat(buffer[2], buffer[3], buffer[4]);
+    }
+    
+}
+
+void UdpManager::receivedId(char _id)
+{
+    string ip; int port;
+    m_udpConnection.GetRemoteAddr(ip, port);
+    
+    ofLogNotice() <<"UdpManager::receivedId -> Received Message from: " << ip;
+    
+    if(m_ipList.find(_id)==m_ipList.end())
+    {
+        m_ipList[_id] = ip;
+        ofLogNotice() <<"UdpManager::receivedId -> ID: " << int(_id) << ", ip: " << ip;
+        this->addConnection(_id,ip);
+        
+    }
+}
+
+void UdpManager::addConnection(char _id, string ip)
+{
+    shared_ptr<ofxUDPManager> udpConnection = shared_ptr<ofxUDPManager>(new ofxUDPManager());
+    
+    int portSend = AppManager::getInstance().getSettingsManager().getUdpPortSend();
+  
+    udpConnection->Create();
+    udpConnection->Connect(ip.c_str(),portSend);
+    udpConnection->SetNonBlocking(true);
+    
+    m_udpManagerMap[_id] = udpConnection;
+    ofLogNotice() <<"UdpManager::addConnection -> created connnextion with IP " << ip <<" to port " << portSend;
+
+    
+}
+void UdpManager::receivedHeartbeat(char _id, char val1, char val2)
+{
+    string ip; int port;
+    m_udpConnection.GetRemoteAddr(ip, port);
+    
+    ofLogNotice() <<"UdpManager::receivedHeartbeat -> Received Message from: " << ip;
+    
+    if(m_ipList.find(_id)==m_ipList.end())
+    {
+        m_ipList[_id] = ip;
+        ofLogNotice() <<"UdpManager::receivedId -> ID: " << int(_id) << ", ip: " << ip;
+        this->addConnection(_id,ip);
+        
+    }
+}
 
 void UdpManager::updateReceiveText(const string& message)
 {
     int porReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
-    string text = ">> UDP receiving -> Port: " + ofToString(porReceive) ;
-    text += "   " + message;
+    //string text = ">> UDP receiving -> Port: " + ofToString(porReceive) ;
+    //text += "   " + message;
     //m_udpReceiveTextFont->setText(text);
 //
 //    m_udpReceiveMessageFont->setText("   " + message);
 
 }
 
+void UdpManager::sendMessage(char _id, string message)
+{
+    if(m_udpManagerMap.find(_id) == m_udpManagerMap.end()){
+        return;
+    }
+    
+    m_udpManagerMap[_id]->Send(message.c_str(),message.length());
+}
 
 void UdpManager::sendData(const UdpData& data)
 {
@@ -186,7 +320,8 @@ void UdpManager::sendData(const UdpData& data)
     
     message+= END_COMMAND;
   
-    m_udpConnection.Send(message.c_str(),message.length());
+    this->sendMessage(id_, message);
+    //m_udpConnection.Send(message.c_str(),message.length());
     
     //ofLogNotice() <<"UdpManager::sendData << " << message;
 }
@@ -214,7 +349,8 @@ void UdpManager::sendLoadBitmap(const UdpData& data)
     
     message+= END_COMMAND;
     
-    m_udpConnection.Send(message.c_str(),message.length());
+    this->sendMessage(id_, message);
+   // m_udpConnection.Send(message.c_str(),message.length());
     
     //ofLogNotice() <<"UdpManager::sendLoadBitmap << " << message;
 }
@@ -243,8 +379,8 @@ void UdpManager::sendSpeed(const UdpData& data)
     
     message+= END_COMMAND;
     
-    m_udpConnection.Send(message.c_str(),message.length());
-    
+    this->sendMessage(id_, message);
+    //m_udpConnection.Send(message.c_str(),message.length());
     //ofLogNotice() <<"UdpManager::sendSpeed << " << message;
 }
 

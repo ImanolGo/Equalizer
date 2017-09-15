@@ -96,6 +96,8 @@ private:
     ofParameter<bool>     m_comClearLights;
     ofParameter<bool>     m_comSendHeights;
     ofParameter<int>      m_comSpeed;
+    ofParameter<int>      m_comId;
+    ofParameter<int>      m_comValue;
     
     ofxColorSlider          m_color;
     
