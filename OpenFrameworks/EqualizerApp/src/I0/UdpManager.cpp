@@ -56,7 +56,7 @@ void UdpManager::setupUdpConnection()
     
     //m_udpConnection.SetEnableBroadcast(true);
     m_udpConnection.Create(); //create the socket
-    //m_udpConnection.Bind(portReceive); //and bind to port
+    m_udpConnection.Bind(portReceive); //and bind to port
     
     
     string ip = AppManager::getInstance().getSettingsManager().getIpAddress();
@@ -151,7 +151,7 @@ void UdpManager::setupText()
 
     
     int porReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
-    string text = "UDP Send -> Local IP: x" +  m_ip + ", Broadcast IP: " + m_broadcast + ", Port: " + ofToString(portSend);
+    string text = "Local IP:" +  m_ip + ", Broadcast IP: " + m_broadcast + ", Tx Port: " + ofToString(portSend) + ", Rx Port: " + ofToString(porReceive);
     
     m_udpText =  ofPtr<TextVisual> (new TextVisual(position, width, height));
     m_udpText->setText(text, "fonts/open-sans/OpenSans-Semibold.ttf", fontSize);
