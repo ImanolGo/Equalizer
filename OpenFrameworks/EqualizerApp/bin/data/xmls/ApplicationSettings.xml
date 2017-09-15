@@ -7,7 +7,7 @@
 
       <debug showCursor="1" setVerbose="1"/> 
 
-	    <network ipAddress="192.168.1.70" portUdpReceive="44409" portUdpSend="55766"/>
+	    <network ipAddress="192.168.1.102" portUdpReceive="44409" portUdpSend="55766"/>
 
   </of_settings>
 
