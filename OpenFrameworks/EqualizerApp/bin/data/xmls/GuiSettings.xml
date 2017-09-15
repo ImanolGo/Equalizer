@@ -1,5 +1,5 @@
 <group>
-	<FPS>53.4804</FPS>
+	<FPS>59.9458</FPS>
 	<Color>87, 255, 117, 131<Hue>87.1684</Hue>
 		<Saturation>118.393</Saturation>
 		<Brightness>122.296</Brightness>
@@ -18,4 +18,6 @@
 <Clear>0</Clear>
 <Speed>92</Speed>
 	<SendHeights>0</SendHeights>
+<Id>21</Id>
+	<Value>163</Value>
 </group>

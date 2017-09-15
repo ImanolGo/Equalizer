@@ -19,12 +19,13 @@ Receive UDP
 #include "FastLED.h"
 #include <WiFiUdp.h>
 
-#define NUM_LEDS 256
+#define NUM_LEDS 15
 #define DATA_PIN 14
 #define LED_TYPE    WS2812
 #define COLOR_ORDER GRB
 
 #define UDP_PACKET_SIZE 256
+#define PACKET_SIZE 7
 
 #define MAX_DATA_ELEMENTS 4    // the maximum number of integers in one received string
 
@@ -34,10 +35,13 @@ int input[MAX_DATA_ELEMENTS];  // array that will hold the received integers
 // Define the array of leds
 CRGB leds[NUM_LEDS];
 
-
+// Defines for wifi
 int status = WL_IDLE_STATUS;
 char ssid[] = "Don't worry, be happy!"; //  your network SSID (name)
 char pass[] = "whyistheskysohigh?";    // your network password (use for WPA, or use as key for WEP)
+
+//char ssid[] = "TP-LINK_54E4"; //  your network SSID (name)
+//char pass[] = "27155332";    // your network password (use for WPA, or use as key for WEP)
 int keyIndex = 0;            // your network key Index number (needed only for WEP)
 
 
@@ -45,13 +49,16 @@ IPAddress ip(192, 168, 1, 21); // Device fixed IP Address
 IPAddress gateway(192, 168, 1, 1); // set gateway to match your network
 IPAddress subnet(255, 255, 255, 0); // set subnet mask to match your network
 
-
+// Defines for UDP
 unsigned int localPort = 55766;
 WiFiUDP Udp;
+const char PACKET_START = 'd';
+const char PACKET_END = 255;
+const char PACKET_ID = 21;
 
 char packetBuffer[UDP_PACKET_SIZE]; //buffer to hold incoming packet
 int receivedUdpLength = 0;
-char  ReplyBuffer[] = "OK";       // a string to send back
+char  ReplyBuffer[PACKET_SIZE];       // a udp message to send back
 
 bool thisPacketIsNotEmpty = false;
 bool previousPacketIsLoaded = false;
@@ -164,12 +171,12 @@ void parseUdp()
   int packetSize = Udp.parsePacket();
   if (packetSize)
   {
-       Serial.print("Received packet of size ");
-    Serial.println(packetSize);
+       //Serial.print("Received packet of size ");
+       //Serial.println(packetSize);
     
       readUdp();
-      parseLeds();
-      sendUdpReply();
+      //parseLeds();
+      //sendUdpReply();
   }
 }
 
@@ -199,49 +206,105 @@ void readUdp() {
 //  }
 
    
-    Serial.print("From ");
+//    Serial.print("From ");
+//    IPAddress remoteIp = Udp.remoteIP();
+//    Serial.print(remoteIp);
+//    Serial.print(", port ");
+//    Serial.println(Udp.remotePort());
+
+    // read the packet into packetBufffer
+    receivedUdpLength = Udp.read(packetBuffer, 255);
+
+//     Serial.println("Contents:");
+//    Serial.println(packetBuffer);
+    
+    if(isMessage(packetBuffer, receivedUdpLength)){
+      parseMessage();
+    }
+    
+   
+
+}
+
+void parseMessage() {
+  
+    if(receivedUdpLength>=PACKET_SIZE)
+    {  
+        if(packetBuffer[1] == 'h'){
+            sendID();
+        }
+        else {
+            if(packetBuffer[2] == 1){
+            readHeight(packetBuffer[1], packetBuffer[5]);
+             }
+        }
+   }
+}
+
+void sendID()
+{
+   char replyBuffer[4] = {PACKET_START, 'i', PACKET_ID, PACKET_END};
+   // send a reply, to the IP address and port that sent us the packet we received
+    Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
+    Udp.write(replyBuffer);
+    Udp.endPacket();
+
+    Serial.println("Send ID: ");
     IPAddress remoteIp = Udp.remoteIP();
     Serial.print(remoteIp);
     Serial.print(", port ");
     Serial.println(Udp.remotePort());
-
-    // read the packet into packetBufffer
-    int len = Udp.read(packetBuffer, 255);
-    if (len > 0) {
-      packetBuffer[len] = 0;
-    }
-    Serial.println("Contents:");
-    Serial.println(packetBuffer);
-
-}
-
-
-void parseLeds() {
-    parseInput();
-    updateLeds();
-}
-
-
-void parseInput() {
-      Serial.println(packetBuffer);
-      getValues(packetBuffer,input,MAX_DATA_ELEMENTS );
-}
-
-void updateLeds() 
-{
-   int id = input[0];
-   Serial.print("ID: "); Serial.println(id);
-   Serial.print("R: "); Serial.println(input[1]);
-   Serial.print("G: "); Serial.println(input[2]);
-   Serial.print("B: "); Serial.println(input[3]);
-
-    CRGB color =  CRGB(input[1],input[2],input[3]);
     
-    for(int i=0; i<NUM_LEDS; i++){
-        leds[i] =  color;
+}
+
+void readHeight(char id, char _value)
+{
+   if(id == PACKET_ID)
+   {
+      //Serial.print("ReadHeight");
+      updateHeight(_value);
+   }
+    
+}
+
+void updateHeight(char _value)
+{  
+   int v = int(_value);
+   //Serial.print("Value "); Serial.println(v);
+   
+   int height = v*NUM_LEDS/254;
+  // Serial.print("Num Leds: "); Serial.println(height);
+   updateLeds(height);
+    
+}
+
+
+void updateLeds(int numLeds) 
+{
+    for(int i=0; i<numLeds; i++){
+        leds[i] =  CRGB::Red;
+    }
+
+     for(int i=numLeds; i<NUM_LEDS; i++){
+        leds[i] =  CRGB::Black;
     }
 
     FastLED.show();
+
+    
+//   int id = input[0];
+//   Serial.print("ID: "); Serial.println(id);
+//   Serial.print("R: "); Serial.println(input[1]);
+//   Serial.print("G: "); Serial.println(input[2]);
+//   Serial.print("B: "); Serial.println(input[3]);
+//
+//    CRGB color =  CRGB(input[1],input[2],input[3]);
+//    
+//    for(int i=0; i<NUM_LEDS; i++){
+//        leds[i] =  color;
+//    }
+//
+//    FastLED.show();
 }
 void getValues(char * str,int * values, int maxelements) {
   // function to parse the given string and populate the values integer array
@@ -259,7 +322,7 @@ void getValues(char * str,int * values, int maxelements) {
 void setAllLedsBlack() {
 
     for(int i=0; i<NUM_LEDS; i++){
-        leds[i] =  CRGB::Red;
+        leds[i] =  CRGB::Black;
     }
 
     FastLED.show();
@@ -359,3 +422,23 @@ void printEncryptionType(int thisType) {
       break;
   }
 }
+
+bool isMessage(char* _buffer, int bufferSize){
+  
+   if(bufferSize<PACKET_SIZE){
+    return false;
+   }
+
+   if(_buffer[0]!=PACKET_START){
+    return false;
+   }
+
+   if(_buffer[PACKET_SIZE-1]!=PACKET_END){
+    return false;
+   }
+
+   //Serial.println("MESSAGE RECEIVED!!!");
+   return true;
+   
+}
+

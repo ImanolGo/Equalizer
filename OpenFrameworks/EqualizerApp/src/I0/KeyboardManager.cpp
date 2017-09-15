@@ -43,7 +43,7 @@ void KeyboardManager::keyPressed(ofKeyEventArgs &e)
 {
     int key = e.key;
     
-    ofLogNotice() <<"KeyboardManager::keyPressed-> " + ofToString(key);
+    //ofLogVerbose() <<"KeyboardManager::keyPressed-> " + ofToString(key);
     
   
     if(key == 'g' || key == 'G') {
@@ -60,7 +60,7 @@ void KeyboardManager::keyReleased(ofKeyEventArgs &e)
 {
     int key = e.key;
     
-    ofLogNotice() <<"KeyboardManager::keyReleased-> " + ofToString(key);
+    //ofLogVerbose() <<"KeyboardManager::keyReleased-> " + ofToString(key);
     
 }
 
