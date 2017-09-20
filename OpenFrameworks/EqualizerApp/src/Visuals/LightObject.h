@@ -27,7 +27,7 @@ public:
     
     void draw();
     
-    void draw(int width, int height);
+    void draw(const ofRectangle& boundingBox);
     
     int getId() const {return m_id;}
     

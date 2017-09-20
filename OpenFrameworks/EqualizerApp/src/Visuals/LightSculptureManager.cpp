@@ -39,6 +39,7 @@ void LightSculptureManager::setup()
     
     this->setupBoundingBox();
     this->setupLeds();
+    this->setupBackgroundImage();
     
     ofLogNotice() <<"LightSculptureManager::initialized" ;
     
@@ -46,24 +47,30 @@ void LightSculptureManager::setup()
 
 void LightSculptureManager::setupBoundingBox()
 {
-//    m_boundingBox.setX(166.081);
-//    m_boundingBox.setY(362.7);
-//    m_boundingBox.setWidth(401.301 - m_boundingBox.getX());
-//    m_boundingBox.setHeight(706.770 - m_boundingBox.getY());
+
+    float x = 10;
+    float y = 10;
+    float w = 90;
+    float h = 90;
     
-    m_boundingBox.setX(166.081);
-    m_boundingBox.setY(362.7);
-    m_boundingBox.setWidth(401.301 - m_boundingBox.getX());
-    m_boundingBox.setHeight(706.770 - m_boundingBox.getY());
+    m_boundingBox.setX(x);
+    m_boundingBox.setY(y);
+    m_boundingBox.setWidth(w);
+    m_boundingBox.setHeight(h);
 }
 
 
 
 void LightSculptureManager::setupLeds()
 {
-    this->createLedsPosition();
-    //this->readLedsPositions();
+   // this->createLedsPosition();
+    this->readLedsPositions();
     //this->normalizeLeds();
+}
+
+void LightSculptureManager::setupBackgroundImage()
+{
+    m_backgroundImage.setResource("SculptureFloor");
 }
 
 void LightSculptureManager::createLedsPosition()
@@ -233,20 +240,26 @@ void LightSculptureManager::sendHeights()
 
 void LightSculptureManager::draw()
 {
+    m_backgroundImage.draw();
     this->drawLeds();
 }
 
-void LightSculptureManager::draw(int width, int height)
-{
-    this->drawLeds(width, height);
-}
 
-void LightSculptureManager::drawLeds(int width, int height)
+void LightSculptureManager::drawLeds()
 {
     for(auto led: m_lightObjects)
     {
-        led->draw(width,height);
+        led->draw(m_boundingBox);
     }
+}
+
+
+void LightSculptureManager::setBoundingBox(const ofRectangle& boundingBox)
+{
+    m_boundingBox = boundingBox;
+   
+    m_backgroundImage.setWidth(boundingBox.width); m_backgroundImage.setHeight(boundingBox.height);
+    m_backgroundImage.setPosition(ofVec2f(boundingBox.x, boundingBox.y));
 }
 
 void LightSculptureManager::onSetLedsSize(float &value)
@@ -305,4 +318,6 @@ void LightSculptureManager::onSetValue(int &value)
     data.m_value = value;
     AppManager::getInstance().getUdpManager().sendData(data);
 }
+
+
 

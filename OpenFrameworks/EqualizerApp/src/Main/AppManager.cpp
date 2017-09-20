@@ -23,7 +23,7 @@ AppManager& AppManager::getInstance()
 
 }
 
-AppManager::AppManager(): Manager(), m_debugMode(false)
+AppManager::AppManager(): Manager(), m_debugMode(false), m_initialized(false)
 {
    //Intentionally left empty
 }
@@ -49,6 +49,8 @@ void AppManager::setup()
     this->setupOF();
 	this->setupManagers();
     
+    m_initialized = true;
+    
     //setDebugMode(m_debugMode);
 }
 
@@ -67,18 +69,23 @@ void AppManager::setupManagers()
     m_resourceManager.setup();
     m_viewManager.setup();
     m_visualEffectsManager.setup();
+    m_lightSculptureManager.setup();
     m_layoutManager.setup();
+    m_taxManager.setup();
     m_udpManager.setup();
     m_keyboardManager.setup();
     m_noiseManager.setup();
-    m_lightSculptureManager.setup();
     m_guiManager.setup();
 }
 
 void AppManager::update()
 {
+    if(!m_initialized)
+        return;
+    
     m_visualEffectsManager.update();
     m_viewManager.update();
+    m_taxManager.update();
     m_udpManager.update();
     m_noiseManager.update();
     m_lightSculptureManager.update();
@@ -88,6 +95,9 @@ void AppManager::update()
 
 void AppManager::draw()
 {
+    
+    if(!m_initialized)
+        return;
     
     //ofBackgroundGradient( ofColor(80), ofColor(55), OF_GRADIENT_CIRCULAR );
     ofBackground(55,55,55);

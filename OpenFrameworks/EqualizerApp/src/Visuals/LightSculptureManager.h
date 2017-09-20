@@ -10,6 +10,7 @@
 
 #include "Manager.h"
 #include "LightObject.h"
+#include "ImageVisual.h"
 
 
 //========================== class LightSculptureManager ==============================
@@ -47,9 +48,6 @@ class LightSculptureManager: public Manager
         //! Draw the Led Manager
         void draw();
     
-        //! Draw the Led Manager according to a certain width or height
-        void draw(int width, int height);
-    
         const LightObjectVector& getLeds() const {return m_lightObjects;}
     
         void setPixels(ofPixelsRef pixels);
@@ -79,12 +77,16 @@ class LightSculptureManager: public Manager
         void onSetValue(int &value);
     
         void showChannels(bool _showChannels);
+
+        void setBoundingBox(const ofRectangle& boundingBox);
     
     private:
     
         void setupBoundingBox();
     
         void setupLeds();
+    
+        void setupBackgroundImage();
     
         void createLedsPosition();
     
@@ -100,7 +102,7 @@ class LightSculptureManager: public Manager
     
         void createLed(const ofPoint& position);
     
-        void drawLeds(int width = 1, int height = 1);
+        void drawLeds();
     
         void sendHeights();
     
@@ -112,6 +114,7 @@ class LightSculptureManager: public Manager
     
         LightObjectVector       m_lightObjects;
         ofRectangle             m_boundingBox;
+        ImageVisual             m_backgroundImage;
     
         float                   m_lightObjectSize;
         int                     m_bitmapNumber;

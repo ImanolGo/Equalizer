@@ -80,11 +80,13 @@ void LightObject::draw()
     ofPopMatrix();
 }
 
-void LightObject::draw(int width, int height)
+void LightObject::draw(const ofRectangle& boundingBox)
 {
     
     ofPushMatrix();
-    ofTranslate(m_position.x * width, m_position.y * height);
+    float x = boundingBox.x + m_position.x * boundingBox.width;
+    float y = boundingBox.y + m_position.y * boundingBox.height;
+    ofTranslate(x, y);
     this->draw();
     ofPopMatrix();
 }

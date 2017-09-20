@@ -69,7 +69,7 @@ void GuiManager::setupCommunicationsGui()
     auto lightSculptureManager = &AppManager::getInstance().getLightSculptureManager();
     auto udpManager = &AppManager::getInstance().getUdpManager();
     
-    m_parametersLayout.setName("Communications");
+    m_parametersCommunications.setName("Data");
     
     ofxButton * autodiscovery = new ofxButton();
     autodiscovery->setup("Autodiscovery");

@@ -25,6 +25,7 @@
 #include "UdpManager.h"
 #include "LightSculptureManager.h"
 #include "NoiseManager.h"
+#include "TaxManager.h"
 
 
 //========================== class AppManager ==============================
@@ -79,6 +80,9 @@ public:
     //! Returns the noise manager
     NoiseManager&   getNoiseManager() { return m_noiseManager; }
     
+    //! Returns the tax manager
+    TaxManager&   getTaxManager() { return m_taxManager; }
+    
     //! Returns the Light Sculpture manager
     LightSculptureManager&   getLightSculptureManager() { return m_lightSculptureManager; }
     
@@ -125,8 +129,10 @@ private:
     UdpManager               m_udpManager;               ///< Manages the udp messages
     NoiseManager             m_noiseManager;             ///< Manages the noise visuals
     LightSculptureManager    m_lightSculptureManager;    ///< Manages the light sculpture
+    TaxManager               m_taxManager;               ///< Manages the taxes
     
     bool                     m_debugMode;
+    bool                     m_initialized;
 };
 
 //==========================================================================

@@ -1,5 +1,5 @@
 <group>
-	<FPS>60.0413</FPS>
+	<FPS>57.9711</FPS>
 	<Color>87, 255, 117, 131<Hue>87.1684</Hue>
 		<Saturation>118.393</Saturation>
 		<Brightness>122.296</Brightness>
@@ -7,6 +7,13 @@
 <group/>
 <Data>
 		<ID>289</ID>
+	<BitMapNr>0</BitMapNr>
+		<StripNr>0</StripNr>
+		<Speed>127</Speed>
+		<Id>70</Id>
+		<Value>0</Value>
+		<Clear>0</Clear>
+		<SendHeights>1</SendHeights>
 	</Data>
 <Noise>
 		<Noise_Resolution>7</Noise_Resolution>

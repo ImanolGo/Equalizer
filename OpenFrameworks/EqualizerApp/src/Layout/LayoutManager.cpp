@@ -65,6 +65,10 @@ void LayoutManager::setupFbo()
     m_fbo.allocate(width, height, GL_RGBA);
     m_fbo.begin(); ofClear(0); m_fbo.end();
     
+    
+    auto rect = ofRectangle(2*MARGIN, 2*MARGIN, m_fbo.getWidth()-4*MARGIN, m_fbo.getHeight()-4*MARGIN);
+    AppManager::getInstance().getLightSculptureManager().setBoundingBox(rect);
+    
 }
 
 
@@ -166,7 +170,7 @@ void LayoutManager::drawFbo()
     ofEnableAlphaBlending();
     m_fbo.begin();
     ofClear(0);
-    AppManager::getInstance().getLightSculptureManager().draw(m_fbo.getWidth(), m_fbo.getHeight());
+    AppManager::getInstance().getLightSculptureManager().draw();
     
     m_fbo.end();
     ofDisableAlphaBlending();
