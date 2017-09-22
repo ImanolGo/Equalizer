@@ -98,23 +98,31 @@ void LightSculptureManager::createLedsPosition()
 void LightSculptureManager::addLed(const ofPoint& position)
 {
     ofRectangle windowRect = AppManager::getInstance().getLayoutManager().getWindowRect();
-    createLed(position);
-    
-    if (!m_lightObjects.empty()) {
-        m_lightObjects.back()->normalize(windowRect);
-    }
-    
-    ofLogNotice() <<"LightSculptureManager::addLed-> id = " <<  m_lightObjects.back()->getId();
+    auto ledObject = createLed(position);
+    ledObject->normalize(windowRect);
+  
+    ofLogNotice() <<"LightSculptureManager::addLed-> id = " <<  ledObject->getId();
 }
 
 void LightSculptureManager::deleteLastLed()
 {
-    if(!m_lightObjects.empty()){
-        int id = m_lightObjects.back()->getId();
-        m_lightObjects.pop_back();
-
-        ofLogNotice() <<"LightSculptureManager::deleteLastLed-> id = " << id;
+    if(m_lightObjects.empty()){
+        return;
     }
+    
+    
+    int latestId = -100000;
+    
+    for(auto lightObject: m_lightObjects){
+        if(latestId < lightObject.second->getId()){
+            latestId = lightObject.second->getId();
+        }
+    }
+    
+    
+    m_lightObjects.erase (latestId);  // erasing by key
+    ofLogNotice() <<"LightSculptureManager::deleteLastLed-> id = " << latestId;
+   
 }
 
 void LightSculptureManager::readLedsPositions()
@@ -149,7 +157,7 @@ void LightSculptureManager::saveLedsPositions()
     
     for(auto lightObject: m_lightObjects)
     {
-        ofPoint pos = lightObject->getPosition();
+        ofPoint pos = lightObject.second->getPosition();
         ledPosFile << "{" << pos.x << ", " << pos.y << ", 0.0}" <<std::endl;
     }
     
@@ -162,24 +170,25 @@ void LightSculptureManager::saveLedsPositions()
 
 void LightSculptureManager::normalizeLeds()
 {
-    for (auto led: m_lightObjects)
+    for (auto lightObject: m_lightObjects)
     {
-        led->normalize(m_boundingBox);
-        ofLogNotice() <<"LightSculptureManager::normalized LED -> id " << led->getId() << ", x = "  << led->getPosition().x << ", y = "  << led->getPosition().y;
+        lightObject.second->normalize(m_boundingBox);
+        ofLogNotice() <<"LightSculptureManager::normalized LED -> id " << lightObject.second->getId() << ", x = "  << lightObject.second->getPosition().x << ", y = "  << lightObject.second->getPosition().y;
     }
     
 }
 
 
-void LightSculptureManager::createLed(const ofPoint& position)
+ofPtr<LightObject> LightSculptureManager::createLed(const ofPoint& position)
 {
     auto lightObject = ofPtr<LightObject> (new LightObject ( position, m_lightObjects.size() + 1) );
     lightObject->setColor(ofColor::black);
     lightObject->setSize(m_lightObjectSize);
-    m_lightObjects.push_back(lightObject);
-
+    m_lightObjects[lightObject->getId()] = lightObject;
     
     ofLogNotice() <<"LightSculptureManager::createLed -> id " << lightObject->getId() << ", x = "  << lightObject->getPosition().x << ", y = "  << lightObject->getPosition().y;
+    
+    return lightObject;
 }
 
 bool LightSculptureManager::parseLedLine(string& line, ofPoint& position)
@@ -221,8 +230,8 @@ void LightSculptureManager::setPixels(ofPixelsRef pixels)
 
 void LightSculptureManager::setLedColors(ofPixelsRef pixels)
 {
-    for(auto led: m_lightObjects){
-        led->setPixelColor(pixels);
+    for(auto lightObject: m_lightObjects){
+        lightObject.second->setPixelColor(pixels);
     }
 }
 
@@ -232,8 +241,8 @@ void LightSculptureManager::sendHeights()
     data.m_bitmapNr = m_bitmapNumber; data.m_stripNr = m_stripNumber;
     
     for(auto lightObject: m_lightObjects){
-        data.m_id = lightObject->getId();
-        data.m_value = ofMap(lightObject->getColor().getBrightness(), 0, 255, 0, 254);
+        data.m_id = lightObject.second->getId();
+        data.m_value = ofMap(lightObject.second->getColor().getBrightness(), 0, 255, 0, 254);
         AppManager::getInstance().getUdpManager().sendData(data);
     }
 }
@@ -247,9 +256,9 @@ void LightSculptureManager::draw()
 
 void LightSculptureManager::drawLeds()
 {
-    for(auto led: m_lightObjects)
+    for(auto lightObject: m_lightObjects)
     {
-        led->draw(m_boundingBox);
+        lightObject.second->draw(m_boundingBox);
     }
 }
 
@@ -267,7 +276,7 @@ void LightSculptureManager::onSetLedsSize(float &value)
     m_lightObjectSize = value;
     
     for(auto lightObject: m_lightObjects){
-        lightObject->setWidth(m_lightObjectSize);
+        lightObject.second->setWidth(m_lightObjectSize);
     }
 }
 
@@ -275,7 +284,7 @@ void LightSculptureManager::showChannels(bool _showChannels)
 {
     for(auto lightObject: m_lightObjects)
     {
-        lightObject->showId(_showChannels);
+        lightObject.second->showId(_showChannels);
     }
 }
 
@@ -285,7 +294,7 @@ void LightSculptureManager::onClearLights(bool& value)
     
     for(auto lightObject: m_lightObjects)
     {
-        data.m_id = lightObject->getId();
+        data.m_id = lightObject.second->getId();
         AppManager::getInstance().getUdpManager().sendLoadBitmap(data);
     }
 }
@@ -297,7 +306,7 @@ void LightSculptureManager::onSetSpeed(int &value)
     
     for(auto lightObject: m_lightObjects)
     {
-        data.m_id = lightObject->getId();
+        data.m_id = lightObject.second->getId();
         AppManager::getInstance().getUdpManager().sendSpeed(data);
     }
 }
@@ -319,5 +328,18 @@ void LightSculptureManager::onSetValue(int &value)
     AppManager::getInstance().getUdpManager().sendData(data);
 }
 
+
+//ofPtr<LightObject> LightSculptureManager::getLightObject(int _id)
+//{
+//    for(auto lightObject: m_lightObjects)
+//    {
+//        if(_id == lightObject->getId()){
+//            return lightObject;
+//        }
+//    }
+//    
+//    return NULL;
+//}
+//
 
 

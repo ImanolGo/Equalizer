@@ -10,7 +10,9 @@
 #include "AppManager.h"
 
 
-TaxManager::TaxManager(): Manager()
+const double TaxManager::REFRESH_TIME = 2.0;
+
+TaxManager::TaxManager(): Manager(), m_elapsedTime(0.0)
 {
     //Intentionally left empty
 }
@@ -30,61 +32,180 @@ void TaxManager::setup()
     
     Manager::setup();
     
+    if(this->loadSettingsFile()){
+        this->loadAllSettings();
+        this->setupCitizens();
+    }
+
     
-    this->readSettings();
-    this->setupCitizens();
     ofLogNotice() <<"TaxManager::initialized" ;
 }
 
 
-void TaxManager::readSettings()
+
+bool TaxManager::loadSettingsFile()
 {
-    ofXml xml;
     
     string path = "xmls/TaxesSettings.xml";
-    if(!xml.load(path)){
+    if(!m_xml.load(path)){
         ofLogNotice() <<"TaxManager::readSettings-> unable to load file: " << path ;
-        return;
+        return false;
     }
     
     ofLogNotice() <<"TaxManager::readSettings->  successfully loaded " << path ;
     
-    
-    CitizenSettings settings;
-    
-    xml.setTo("//");
+    return true;
+
+}
+
+
+
+void TaxManager::loadAllSettings()
+{
+    this->readTaxBands();
+    this->readTaxConditions();
+}
+
+void TaxManager::readTaxBands()
+{
+    m_xml.setTo("//");
+    string xmlPath = "//tax_rates/band[0]";
+    if(m_xml.exists(xmlPath)) {
+        m_xml.setTo(xmlPath);
+        
+        do {
+            
+            auto attributes = m_xml.getAttributes();
+            
+            TaxBand taxBand;
+            
+            taxBand.name =  attributes["name"];
+            taxBand.min = ofToFloat(attributes["min"]);
+            taxBand.max = ofToFloat(attributes["max"]);
+            taxBand.rate = ofToFloat(attributes["rate"]);
+            
+            m_taxBands.push_back(taxBand);
+            
+            ofLogNotice() <<"TaxManager::readTaxBands-> name = " << taxBand.name <<", min = " <<  taxBand.min
+            <<", max = "<<  taxBand.max << ", rate = " <<  taxBand.rate ;
+        }
+        while(m_xml.setToSibling()); // go to the next node
+        
+    }
+}
+
+
+void TaxManager::readTaxConditions()
+{
+    m_xml.setTo("//");
     
     string xmlPath = "//tax_rates/direct_tax";
-    if(xml.exists(xmlPath)) {
-        xml.setTo(xmlPath);
-        auto attributes = xml.getAttributes();
-        settings.directTaxRate = ofToFloat(attributes["value"]);
+    if(m_xml.exists(xmlPath)) {
+        m_xml.setTo(xmlPath);
+        auto attributes = m_xml.getAttributes();
+        m_settings.directTaxRate = ofToFloat(attributes["value"])/100.0;
         
     }
-
     
-    xml.setTo("//");
+    
+    m_xml.setTo("//");
     xmlPath = "//tax_rates/initial_values";
-    if(xml.exists(xmlPath)) {
-        xml.setTo(xmlPath);
-        auto attributes = xml.getAttributes();
-        settings.minLifeCost = ofToFloat(attributes["min_life_cost"]);
-        settings.spendingFactorIncome = ofToFloat(attributes["spending_factor_income"]);
-        settings.spendingFactorWealth = ofToFloat(attributes["spending_factor_wealth"]);
+    if(m_xml.exists(xmlPath)) {
+        m_xml.setTo(xmlPath);
+        auto attributes = m_xml.getAttributes();
+        m_settings.minLifeCost = ofToFloat(attributes["min_life_cost"]);
+        m_settings.spendingFactorIncome = ofToFloat(attributes["spending_factor_income"]);
+        m_settings.spendingFactorWealth = ofToFloat(attributes["spending_factor_wealth"]);
         
     }
     
-     ofLogNotice() <<"TaxManager::readSettings->  directTaxRate =  " << settings.directTaxRate  << ", minLifeCost = " << settings.minLifeCost
-    << ", spendingFactorIncome = " << settings.spendingFactorIncome << ", spendingFactorWealth = " << settings.spendingFactorWealth;
+    ofLogNotice() <<"TaxManager::readTaxConditions->  directTaxRate =  " << m_settings.directTaxRate  << ", minLifeCost = " << m_settings.minLifeCost
+    << ", spendingFactorIncome = " << m_settings.spendingFactorIncome << ", spendingFactorWealth = " << m_settings.spendingFactorWealth;
     
+
 }
 
 void TaxManager::setupCitizens()
 {
+    m_xml.setTo("//");
+    string xmlPath = "//citizens/citizen[0]";
+    if(m_xml.exists(xmlPath)) {
+        m_xml.setTo(xmlPath);
+        
+        do {
+            
+            auto attributes = m_xml.getAttributes();
+            m_settings.type = ofToInt(attributes["type"]);
+            m_settings.id = ofToInt(attributes["id"]);
+            m_settings.income = this->getTaxRandomIncome(m_settings.type);
+            m_settings.incomeTaxRate = this->getTaxRate(m_settings.income)/100.0;
+            
+            auto citizen = shared_ptr<TaxCitizen> (new TaxCitizen(m_settings));
+            m_citizens[m_settings.id] = citizen;
+            
+            
+            
+            ofLogNotice() <<"TaxManager::setupCitizens-> id = " <<  m_settings.id <<", type = " <<   m_settings.type
+            <<", income = " <<   m_settings.income <<", income tax rate = " <<   m_settings.incomeTaxRate;
+        }
+        while(m_xml.setToSibling()); // go to the next node
+        
+    }
+
 }
 
 void TaxManager::update()
 {
+    m_elapsedTime+= ofGetLastFrameTime();
+    if(m_elapsedTime > REFRESH_TIME){
+        this->updateCitizens();
+        m_elapsedTime = 0;
+    }
+    
+}
+
+void TaxManager::updateCitizens()
+{
+    double accWealth = 0;
+    for(auto citizen: m_citizens){
+        citizen.second->update();
+        accWealth+= citizen.second->getWealth();
+       //  ofLogNotice() <<"TaxManager::updateCitizens-> id, " << citizen.second->getId() <<", wealth= " << citizen.second->getWealth();
+        
+    }
+    
+    for(auto citizen: m_citizens){
+        citizen.second->setTotalWealth(accWealth);
+    }
+    
+    ofLogNotice() <<"TaxManager::updateCitizens-> acc wealth= " << accWealth;
+}
+
+
+float TaxManager::getTaxRate(float income)
+{
+    for(int i = m_taxBands.size()-1; i >= 0; i--)
+    {
+        auto & taxBand = m_taxBands[i];
+        if( income >= taxBand.min && income < taxBand.max ){
+            //ofLogNotice() <<"TaxManager::getTaxRate -> " << taxBand.rate;
+            return taxBand.rate;
+        }
+    }
+    
+    return 0.0;
+}
+
+
+float TaxManager::getTaxRandomIncome(int type)
+{
+    if(type < 0 || type >=m_taxBands.size()){
+        return 0.0;
+    }
+    
+    auto& taxBand = m_taxBands[type];
+
+    return ofRandom(((taxBand.min >  m_settings.minLifeCost) ? taxBand.min :  m_settings.minLifeCost), taxBand.max);
 }
 
 

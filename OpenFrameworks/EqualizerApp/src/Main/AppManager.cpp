@@ -99,6 +99,9 @@ void AppManager::draw()
     if(!m_initialized)
         return;
     
+    
+    //ofLogNotice()<<"AppManager::ofGetLastFrameTime()-> " << ofGetLastFrameTime();
+
     //ofBackgroundGradient( ofColor(80), ofColor(55), OF_GRADIENT_CIRCULAR );
     ofBackground(55,55,55);
     m_viewManager.draw();

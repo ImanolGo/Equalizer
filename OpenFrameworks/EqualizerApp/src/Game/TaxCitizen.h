@@ -13,6 +13,7 @@
 
 struct CitizenSettings {
     int id = 0;
+    int type = 0;
     float directTaxRate = 10.0;
     float incomeTaxRate = 10.0;
     float income = 10000;
@@ -35,18 +36,27 @@ public:
     
     int getId() const {return m_settings.id;}
     
+    int getType() const {return m_settings.type;}
+    
     float getWealth() const {return m_wealth;}
+    
+    float getPercentageWealth() const {return m_percWealth;}
+    
+    void update();
+    
+    void setTotalWealth(double value);
+    
+    void resetWealth() {m_wealth = 1.0;}
     
 private:
     
-    void setup();
-    
-    void update();
+    void setup(const CitizenSettings& settings);
     
 private:
     
     CitizenSettings m_settings;
-    float m_wealth;
+    double m_wealth;
+    float m_percWealth;
     
 
 };

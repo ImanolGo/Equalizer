@@ -28,8 +28,8 @@ class LightSculptureManager: public Manager
     
     public:
     
-        typedef vector<int> IntVector;
-        typedef vector< ofPtr<LightObject> > LightObjectVector;
+        typedef ofPtr<LightObject> LightObjecPtr;
+        typedef map< int , LightObjecPtr > LightObjectMap;
     
     public:
 
@@ -48,7 +48,9 @@ class LightSculptureManager: public Manager
         //! Draw the Led Manager
         void draw();
     
-        const LightObjectVector& getLeds() const {return m_lightObjects;}
+        //const LightObjectMap& getLeds() const {return m_lightObjects;}
+    
+        //LightObjecPtr getLightObject(int _id);
     
         void setPixels(ofPixelsRef pixels);
     
@@ -100,7 +102,7 @@ class LightSculptureManager: public Manager
     
         void removeCharsFromString( string &str, char* charsToRemove );
     
-        void createLed(const ofPoint& position);
+        LightObjecPtr createLed(const ofPoint& position);
     
         void drawLeds();
     
@@ -112,7 +114,7 @@ class LightSculptureManager: public Manager
     
     
     
-        LightObjectVector       m_lightObjects;
+        LightObjectMap          m_lightObjects;
         ofRectangle             m_boundingBox;
         ImageVisual             m_backgroundImage;
     

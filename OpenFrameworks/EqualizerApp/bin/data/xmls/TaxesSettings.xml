@@ -3,14 +3,14 @@
 
   <tax_rates>
 
-      <band name="Personal Allowance" min="0" max="11500" rate="0"/>
-      <band name="Basic Rate" min="11501" max="45000" rate="20"/>
-      <band name="Higher Rate" min="45001" max="150000" rate="40"/>
-      <band name="Additional Rate" min="150001" max="15000000" rate="45"/>
-
       <direct_tax value="20"/>
 
       <initial_values min_life_cost="8000" spending_factor_income = "0.05" spending_factor_wealth = "0.2"/>
+
+      <band name="Personal Allowance" min="0" max="11500" rate="0"/>
+      <band name="Basic Rate" min="11501" max="45000" rate="20"/>
+      <band name="Higher Rate" min="45001" max="150000" rate="40"/>
+      <band name="Additional Rate" min="150001" max="1500000" rate="45"/>
 
   </tax_rates>
 
@@ -32,7 +32,7 @@
     <citizen name="Personal Allowance" type="0" id = "76"/>
     <citizen name="Personal Allowance" type="0" id = "75"/>
     <citizen name="Personal Allowance" type="0" id = "74"/>
-    <citizen name="Personal Allowance" type="0" id = "78"/>
+    <citizen name="Personal Allowance" type="0" id = "73"/>
     <citizen name="Personal Allowance" type="0" id = "68"/>
     <citizen name="Personal Allowance" type="0" id = "57"/>
     <citizen name="Personal Allowance" type="0" id = "45"/>
@@ -78,6 +78,7 @@
     <citizen name="Basic Rate" type="1" id = "52"/>
     <citizen name="Basic Rate" type="1" id = "46"/>
     <citizen name="Basic Rate" type="1" id = "40"/>
+    <citizen name="Basic Rate" type="1" id = "22"/>
 
     <citizen name="Higher Rate" type="2" id = "34"/>
     <citizen name="Higher Rate" type="2" id = "28"/>
@@ -97,10 +98,6 @@
     <citizen name="Additional Rate" type="3" id = "49"/>
     <citizen name="Additional Rate" type="3" id = "54"/>
     <citizen name="Additional Rate" type="3" id = "48"/>
-
-
-
-    
 
 
   </citizens>
