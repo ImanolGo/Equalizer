@@ -10,7 +10,10 @@
 
 #include "UdpManager.h"
 #include "AppManager.h"
+
+#ifndef TARGET_WIN32
 #include "ofxMyIP.h"
+#endif
 
 
 const int UdpManager::UDP_MESSAGE_LENGHT = 10000;
@@ -96,9 +99,11 @@ void UdpManager::createConnections()
 void UdpManager::setupIP()
 {
     #ifdef TARGET_WIN32
-        system("data/commands/ipfirst.cmd");
-        ofFile file("my.ip");
-        file >> m_ip;
+		system("ipfirst.cmd");
+		ofFile file("my.ip");
+		file >> m_ip;
+		//ofLog() << "My IP: " << m_ip;
+
     #else
         ofxMyIP myip;
         myip.setup();
@@ -151,6 +156,7 @@ void UdpManager::setupText()
 
     
     int porReceive = AppManager::getInstance().getSettingsManager().getUdpPortReceive();
+
     string text = "Local IP:" +  m_ip + ", Broadcast IP: " + m_broadcast + ", Tx Port: " + ofToString(portSend) + ", Rx Port: " + ofToString(porReceive);
     
     m_udpText =  ofPtr<TextVisual> (new TextVisual(position, width, height));

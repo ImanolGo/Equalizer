@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7FD42DF7-442E-479A-BA76-D0022F99702A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>EqualizerApp</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="../../../../../Applications/of_v0.9.8_vs_release/of_v0.9.8_vs_release/libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="../../../../../Applications/of_v0.9.8_vs_release/of_v0.9.8_vs_release/libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="../../../../../Applications/of_v0.9.8_vs_release/of_v0.9.8_vs_release/libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="../../../../../Applications/of_v0.9.8_vs_release/of_v0.9.8_vs_release/libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_debug</TargetName>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_debug</TargetName>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxGui\src;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\doc;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxGui\src;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\doc;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxGui\src;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\doc;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxGui\src;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\doc;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Addons\ofxGui\src\ofxBaseGui.cpp" />
+    <ClCompile Include="src\Addons\ofxGui\src\ofxButton.cpp" />
+    <ClCompile Include="src\Addons\ofxGui\src\ofxGuiGroup.cpp" />
+    <ClCompile Include="src\Addons\ofxGui\src\ofxLabel.cpp" />
+    <ClCompile Include="src\Addons\ofxGui\src\ofxPanel.cpp" />
+    <ClCompile Include="src\Addons\ofxGui\src\ofxSlider.cpp" />
+    <ClCompile Include="src\Addons\ofxGui\src\ofxSliderGroup.cpp" />
+    <ClCompile Include="src\Addons\ofxGui\src\ofxToggle.cpp" />
+    <ClCompile Include="src\Addons\ofxNetwork\src\ofxTCPClient.cpp" />
+    <ClCompile Include="src\Addons\ofxNetwork\src\ofxTCPManager.cpp" />
+    <ClCompile Include="src\Addons\ofxNetwork\src\ofxTCPServer.cpp" />
+    <ClCompile Include="src\Addons\ofxNetwork\src\ofxUDPManager.cpp" />
+    <ClCompile Include="src\Addons\ofxSvg\libs\svgTiny\src\src_colors.cpp" />
+    <ClCompile Include="src\Addons\ofxSvg\libs\svgTiny\src\svgtiny.cpp" />
+    <ClCompile Include="src\Addons\ofxSvg\libs\svgTiny\src\svgtiny_gradient.cpp" />
+    <ClCompile Include="src\Addons\ofxSvg\libs\svgTiny\src\svgtiny_list.cpp" />
+    <ClCompile Include="src\Addons\ofxSvg\src\ofxSvg.cpp" />
+    <ClCompile Include="src\Addons\ofxUnicode\src\ofTextConverter.cpp" />
+    <ClCompile Include="src\Addons\ofxUnicode\src\ofUnicode.cpp" />
+    <ClCompile Include="src\Addons\ofxUnicode\src\ofUTF8.cpp" />
+    <ClCompile Include="src\Engine\3D\CameraAnimations.cpp" />
+    <ClCompile Include="src\Engine\3D\CameraAnimationsManager.cpp" />
+    <ClCompile Include="src\Engine\3D\CameraManager.cpp" />
+    <ClCompile Include="src\Engine\3D\LightManager.cpp" />
+    <ClCompile Include="src\Engine\Resources\ResourceManager.cpp" />
+    <ClCompile Include="src\Engine\Tools\EngineFont.cpp" />
+    <ClCompile Include="src\Engine\Visuals\ImageVisual.cpp" />
+    <ClCompile Include="src\Engine\Visuals\ImageVisual3D.cpp" />
+    <ClCompile Include="src\Engine\Visuals\RectangleVisual.cpp" />
+    <ClCompile Include="src\Engine\Visuals\SvgVisual.cpp" />
+    <ClCompile Include="src\Engine\Visuals\TextVisual.cpp" />
+    <ClCompile Include="src\Engine\Visuals\VideoVisual.cpp" />
+    <ClCompile Include="src\Engine\Visuals\ViewManager.cpp" />
+    <ClCompile Include="src\Engine\Visuals\VisualEffects.cpp" />
+    <ClCompile Include="src\Engine\Visuals\VisualEffectsManager.cpp" />
+    <ClCompile Include="src\I0\KeyboardManager.cpp" />
+    <ClCompile Include="src\I0\UdpManager.cpp" />
+    <ClCompile Include="src\Layout\GuiManager.cpp" />
+    <ClCompile Include="src\Layout\LayoutManager.cpp" />
+    <ClCompile Include="src\Main\AppManager.cpp" />
+    <ClCompile Include="src\Main\EqualizerApp.cpp" />
+    <ClCompile Include="src\Main\main.cpp" />
+    <ClCompile Include="src\Main\SettingsManager.cpp" />
+    <ClCompile Include="src\Visuals\LightObject.cpp" />
+    <ClCompile Include="src\Visuals\LightSculptureManager.cpp" />
+    <ClCompile Include="src\Visuals\NoiseManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Addons\ofxGui\src\ofxBaseGui.h" />
+    <ClInclude Include="src\Addons\ofxGui\src\ofxButton.h" />
+    <ClInclude Include="src\Addons\ofxGui\src\ofxGui.h" />
+    <ClInclude Include="src\Addons\ofxGui\src\ofxGuiGroup.h" />
+    <ClInclude Include="src\Addons\ofxGui\src\ofxLabel.h" />
+    <ClInclude Include="src\Addons\ofxGui\src\ofxPanel.h" />
+    <ClInclude Include="src\Addons\ofxGui\src\ofxSlider.h" />
+    <ClInclude Include="src\Addons\ofxGui\src\ofxSliderGroup.h" />
+    <ClInclude Include="src\Addons\ofxGui\src\ofxToggle.h" />
+    <ClInclude Include="src\Addons\ofxMyIP\src\ofxMyIP.h" />
+    <ClInclude Include="src\Addons\ofxNetwork\src\ofxNetwork.h" />
+    <ClInclude Include="src\Addons\ofxNetwork\src\ofxNetworkUtils.h" />
+    <ClInclude Include="src\Addons\ofxNetwork\src\ofxTCPClient.h" />
+    <ClInclude Include="src\Addons\ofxNetwork\src\ofxTCPManager.h" />
+    <ClInclude Include="src\Addons\ofxNetwork\src\ofxTCPServer.h" />
+    <ClInclude Include="src\Addons\ofxNetwork\src\ofxUDPManager.h" />
+    <ClInclude Include="src\Addons\ofxSvg\libs\svgTiny\src\svgtiny.h" />
+    <ClInclude Include="src\Addons\ofxSvg\libs\svgTiny\src\svgtiny_internal.h" />
+    <ClInclude Include="src\Addons\ofxSvg\src\ofxSvg.h" />
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\include\utf8\checked.h" />
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\include\utf8\core.h" />
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\include\utf8\unchecked.h" />
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\include\utf8.h" />
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8\checked.h" />
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8\core.h" />
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8\unchecked.h" />
+    <ClInclude Include="src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8.h" />
+    <ClInclude Include="src\Addons\ofxUnicode\src\ofTextConverter.h" />
+    <ClInclude Include="src\Addons\ofxUnicode\src\ofUnicode.h" />
+    <ClInclude Include="src\Addons\ofxUnicode\src\ofUTF8.h" />
+    <ClInclude Include="src\Engine\3D\CameraAnimations.h" />
+    <ClInclude Include="src\Engine\3D\CameraAnimationsManager.h" />
+    <ClInclude Include="src\Engine\3D\CameraManager.h" />
+    <ClInclude Include="src\Engine\3D\LightManager.h" />
+    <ClInclude Include="src\Engine\Resources\ResourceManager.h" />
+    <ClInclude Include="src\Engine\Tools\EngineFont.h" />
+    <ClInclude Include="src\Engine\Visuals\BasicVisual.h" />
+    <ClInclude Include="src\Engine\Visuals\ImageVisual.h" />
+    <ClInclude Include="src\Engine\Visuals\ImageVisual3D.h" />
+    <ClInclude Include="src\Engine\Visuals\RectangleVisual.h" />
+    <ClInclude Include="src\Engine\Visuals\SvgVisual.h" />
+    <ClInclude Include="src\Engine\Visuals\TextVisual.h" />
+    <ClInclude Include="src\Engine\Visuals\VideoVisual.h" />
+    <ClInclude Include="src\Engine\Visuals\ViewManager.h" />
+    <ClInclude Include="src\Engine\Visuals\VisualEffects.h" />
+    <ClInclude Include="src\Engine\Visuals\VisualEffectsManager.h" />
+    <ClInclude Include="src\I0\KeyboardManager.h" />
+    <ClInclude Include="src\I0\UdpManager.h" />
+    <ClInclude Include="src\Layout\GuiManager.h" />
+    <ClInclude Include="src\Layout\LayoutManager.h" />
+    <ClInclude Include="src\Main\AppManager.h" />
+    <ClInclude Include="src\Main\EqualizerApp.h" />
+    <ClInclude Include="src\Main\Manager.h" />
+    <ClInclude Include="src\Main\SettingsManager.h" />
+    <ClInclude Include="src\Visuals\LightObject.h" />
+    <ClInclude Include="src\Visuals\LightSculptureManager.h" />
+    <ClInclude Include="src\Visuals\NoiseManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
+      <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(OF_ROOT)\libs\openFrameworksCompiled\project\vs</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="icon.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
