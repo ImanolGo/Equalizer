@@ -82,7 +82,7 @@ void NoiseManager::update()
     this->updateNoise();
     setupBoundingBox();
     
-    AppManager::getInstance().getLightSculptureManager().setPixels(m_noiseImage.getPixels());
+    //AppManager::getInstance().getLightSculptureManager().setPixels(m_noiseImage.getPixels());
 }
 
 

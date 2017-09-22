@@ -1,5 +1,5 @@
 <group>
-	<FPS>59.0175</FPS>
+	<FPS>60.0025</FPS>
 	<Color>87, 255, 117, 131<Hue>87.1684</Hue>
 		<Saturation>118.393</Saturation>
 		<Brightness>122.296</Brightness>
@@ -27,4 +27,13 @@
 	<SendHeights>0</SendHeights>
 <Id>21</Id>
 	<Value>163</Value>
+<Taxes>
+		<BitMapNr>7448.98</BitMapNr>
+		<Direct_Tax>18.3673</Direct_Tax>
+		<Basic_Tax_Rate>69.898</Basic_Tax_Rate>
+		<Additional_Tax_Rate>68.8776</Additional_Tax_Rate>
+		<UnknownName>0.428571</UnknownName>
+	<Basic_Income>6428.57</Basic_Income>
+		<Higher_Tax_Rate>61.2245</Higher_Tax_Rate>
+	</Taxes>
 </group>

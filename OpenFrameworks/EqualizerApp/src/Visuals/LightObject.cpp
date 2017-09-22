@@ -108,6 +108,16 @@ void LightObject::setPixelColor(ofPixelsRef pixels)
     //m_color = ofColor(brightness);
 }
 
+
+void LightObject::setHeight(float height)
+{
+    m_color = ofColor::white;
+    int brightness = ofMap(height, 0.0, 1.0, 30, 255, true);
+    m_color.setBrightness(brightness);
+    
+    //ofLogNotice() <<"LightObject::setHeight-> id = " <<  this->getId() << ", brightness = " << brightness;
+}
+
 void LightObject::setSize(int size){
     setWidth(size);
     this->setupText();

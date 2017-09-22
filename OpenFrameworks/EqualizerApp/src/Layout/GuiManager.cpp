@@ -42,6 +42,7 @@ void GuiManager::setup()
 
     this->setupGuiParameters();
     //this->setupLayoutGui();
+    this->setupTaxGui();
     this->setupCommunicationsGui();
     this->setupNoiseGui();
 
@@ -62,6 +63,32 @@ void GuiManager::setupGuiParameters()
 
 }
 
+
+void GuiManager::setupTaxGui()
+{
+    auto taxManager = &AppManager::getInstance().getTaxManager();
+    
+    m_parametersTaxes.setName("Taxes");
+    
+    m_taxBasicIncome.set("Basic Income", 0, 0, 20000);
+    m_taxBasicIncome.addListener(taxManager, &TaxManager::onSetBasicIncome);
+    m_parametersTaxes.add(m_taxBasicIncome);
+    
+    m_directTax.set("Direct Tax", 20, 0, 100);
+    m_directTax.addListener(taxManager, &TaxManager::onSetDirectTaxRate);
+    m_parametersTaxes.add(m_directTax);
+    
+    m_basicRate.set("Basic Tax Rate", 20, 0, 100);
+    m_parametersTaxes.add(m_basicRate);
+    
+    m_higherRate.set("Higher Tax Rate", 40, 0, 100);
+    m_parametersTaxes.add(m_higherRate);
+    
+    m_additionalRate.set("Additional Tax Rate", 45, 0, 100);
+    m_parametersTaxes.add(m_additionalRate);
+    
+    m_gui.add(m_parametersTaxes);
+}
 
 
 void GuiManager::setupCommunicationsGui()

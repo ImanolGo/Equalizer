@@ -13,7 +13,7 @@
 
 TaxCitizen::TaxCitizen(const CitizenSettings& settings): m_wealth(5000), m_settings(settings)
 {
-    this->setup(settings);
+    this->setup();
 }
 
 TaxCitizen::~TaxCitizen()
@@ -21,29 +21,26 @@ TaxCitizen::~TaxCitizen()
     //Intentionaly left empty
 }
 
-void TaxCitizen::setup(const CitizenSettings& settings)
+void TaxCitizen::setup()
 {
     m_wealth = 1.0;
     
+}
+
+void TaxCitizen::reset()
+{
+    m_wealth = 1.0;
     
-//    m_settings.id = settings.id;
-//    m_settings.type = m_settings.type;
-//    m_settings.directTaxRate = settings.directTaxRate;
-//    m_settings.incomeTaxRate = settings.incomeTaxRate;
-//    m_settings.income = settings.income;
-//    m_settings.minLifeCost = settings.minLifeCost;
-//    m_settings.spendingFactorIncome = settings.spendingFactorIncome;
-//    m_settings.spendingFactorWealth = settings.spendingFactorWealth;
 }
 
 
 void TaxCitizen::update()
 {
     
-    float incomeTax = m_settings.income*m_settings.incomeTaxRate;
+    float incomeTax = m_settings.income*(m_settings.incomeTaxRate/100.0);
     float spending = m_settings.minLifeCost + m_settings.spendingFactorIncome*m_settings.income + m_wealth*m_settings.spendingFactorWealth;
-    float directTax = spending*m_settings.directTaxRate;
-    float saving = m_settings.income - incomeTax - spending - directTax;
+    float directTax = spending*m_settings.directTaxRate/100.0;
+    float saving = m_settings.income + m_settings.universalIncome - incomeTax - spending - directTax;
     if(saving < 0){
         saving = 1;
     }
@@ -91,4 +88,11 @@ void TaxCitizen::update()
 void TaxCitizen::setTotalWealth(double value)
 {
     m_percWealth = m_wealth/value;
+   // ofLogNotice() << " TaxCitizen::update -> id = , " << m_settings.id << ", m_percWealth = " << m_percWealth;
+}
+
+
+void TaxCitizen::setDirectTax(float value)
+{
+    m_settings.directTaxRate = ofClamp(value, 0.0, 100.0);
 }

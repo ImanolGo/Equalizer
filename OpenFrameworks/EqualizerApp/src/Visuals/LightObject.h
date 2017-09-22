@@ -39,6 +39,8 @@ public:
     
     void setSize(int size);
     
+    void setHeight(float height);
+    
 private:
     
     void setup();

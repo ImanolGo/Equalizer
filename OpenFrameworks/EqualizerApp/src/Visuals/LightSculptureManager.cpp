@@ -219,6 +219,18 @@ void LightSculptureManager::update()
     //
 }
 
+
+void LightSculptureManager::setHeight(int _id, float height)
+{
+    if(m_lightObjects.find(_id) == m_lightObjects.end()){
+        return;
+    }
+    
+    //ofLogNotice() <<"LightSculptureManager::setHeight -> id " <<  m_lightObjects[_id]->getId() << ", height = "  << height;
+    m_lightObjects[_id]->setHeight(height);
+}
+
+
 void LightSculptureManager::setPixels(ofPixelsRef pixels)
 {
     this->setLedColors(pixels);

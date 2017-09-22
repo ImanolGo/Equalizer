@@ -10,7 +10,7 @@
 #include "AppManager.h"
 
 
-const double TaxManager::REFRESH_TIME = 2.0;
+const double TaxManager::REFRESH_TIME = 0.02;
 
 TaxManager::TaxManager(): Manager(), m_elapsedTime(0.0)
 {
@@ -103,7 +103,7 @@ void TaxManager::readTaxConditions()
     if(m_xml.exists(xmlPath)) {
         m_xml.setTo(xmlPath);
         auto attributes = m_xml.getAttributes();
-        m_settings.directTaxRate = ofToFloat(attributes["value"])/100.0;
+        m_settings.directTaxRate = ofToFloat(attributes["value"]);
         
     }
     
@@ -138,7 +138,7 @@ void TaxManager::setupCitizens()
             m_settings.type = ofToInt(attributes["type"]);
             m_settings.id = ofToInt(attributes["id"]);
             m_settings.income = this->getTaxRandomIncome(m_settings.type);
-            m_settings.incomeTaxRate = this->getTaxRate(m_settings.income)/100.0;
+            m_settings.incomeTaxRate = this->getTaxRate(m_settings.income);
             
             auto citizen = shared_ptr<TaxCitizen> (new TaxCitizen(m_settings));
             m_citizens[m_settings.id] = citizen;
@@ -159,6 +159,7 @@ void TaxManager::update()
     m_elapsedTime+= ofGetLastFrameTime();
     if(m_elapsedTime > REFRESH_TIME){
         this->updateCitizens();
+        this->updateHeights();
         m_elapsedTime = 0;
     }
     
@@ -166,21 +167,31 @@ void TaxManager::update()
 
 void TaxManager::updateCitizens()
 {
-    double accWealth = 0;
+    double maxWealth = 0;
     for(auto citizen: m_citizens){
         citizen.second->update();
-        accWealth+= citizen.second->getWealth();
+        //accWealth+= citizen.second->getWealth();
+        if(maxWealth<citizen.second->getWealth()){
+            maxWealth = citizen.second->getWealth();
+        }
        //  ofLogNotice() <<"TaxManager::updateCitizens-> id, " << citizen.second->getId() <<", wealth= " << citizen.second->getWealth();
         
     }
     
     for(auto citizen: m_citizens){
-        citizen.second->setTotalWealth(accWealth);
+        citizen.second->setTotalWealth(maxWealth);
     }
     
-    ofLogNotice() <<"TaxManager::updateCitizens-> acc wealth= " << accWealth;
+   // ofLogNotice() <<"TaxManager::updateCitizens-> acc wealth= " << maxWealth;
 }
 
+void TaxManager::updateHeights()
+{
+    for(auto citizen: m_citizens){
+        AppManager::getInstance().getLightSculptureManager().setHeight(citizen.second->getId(), citizen.second->getPercentageWealth());
+        //citizen.second->setTotalWealth(accWealth);
+    }
+}
 
 float TaxManager::getTaxRate(float income)
 {
@@ -205,7 +216,27 @@ float TaxManager::getTaxRandomIncome(int type)
     
     auto& taxBand = m_taxBands[type];
 
-    return ofRandom(((taxBand.min >  m_settings.minLifeCost) ? taxBand.min :  m_settings.minLifeCost), taxBand.max);
+    //return ofRandom(((taxBand.min >  m_settings.minLifeCost) ? taxBand.min :  m_settings.minLifeCost), taxBand.max);
+    return ofRandom( taxBand.min, taxBand.max);
+}
+
+
+void TaxManager::onSetBasicIncome(float& value)
+{
+    for(auto citizen: m_citizens){
+        citizen.second->reset();
+        citizen.second->setUniversalIncome(value);
+    }
+}
+
+
+
+void TaxManager::onSetDirectTaxRate(float& value)
+{
+    for(auto citizen: m_citizens){
+        citizen.second->reset();
+        citizen.second->setDirectTax(value);
+    }
 }
 
 

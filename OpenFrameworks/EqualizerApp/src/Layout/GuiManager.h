@@ -67,6 +67,8 @@ private:
     
     void setupLayoutGui();
     
+    void setupTaxGui();
+    
     void setupCommunicationsGui();
     
     void setupNoiseGui();
@@ -84,9 +86,15 @@ private:
     ofParameterGroup    m_parametersLayout;
     ofParameterGroup    m_parametersNoise;
     ofParameterGroup    m_parametersCommunications;
+    ofParameterGroup    m_parametersTaxes;
+    
+    ofParameter<float>    m_taxBasicIncome;
+    ofParameter<float>    m_directTax;
+    ofParameter<float>    m_basicRate;
+    ofParameter<float>    m_higherRate;
+    ofParameter<float>    m_additionalRate;
     
     ofParameter<int>      m_id;
-    
     ofParameter<int>      m_noiseResolution;
     ofParameter<float>    m_noiseFrequency;
     ofParameter<float>    m_noiseSpeed;

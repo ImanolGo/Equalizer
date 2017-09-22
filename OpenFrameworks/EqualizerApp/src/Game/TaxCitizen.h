@@ -14,12 +14,13 @@
 struct CitizenSettings {
     int id = 0;
     int type = 0;
-    float directTaxRate = 10.0;
+    float directTaxRate = 10.;
     float incomeTaxRate = 10.0;
     float income = 10000;
     float minLifeCost = 8000;
     float spendingFactorIncome = 0.05;
     float spendingFactorWealth = 0.2;
+    float universalIncome = 0.0;
     
 };
 
@@ -44,13 +45,19 @@ public:
     
     void update();
     
+    void reset();
+    
     void setTotalWealth(double value);
     
     void resetWealth() {m_wealth = 1.0;}
     
+    void setUniversalIncome(float value){m_settings.universalIncome = value;}
+    
+    void setDirectTax(float value);
+    
 private:
     
-    void setup(const CitizenSettings& settings);
+    void setup();
     
 private:
     

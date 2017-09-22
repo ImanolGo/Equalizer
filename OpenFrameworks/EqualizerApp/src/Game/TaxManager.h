@@ -59,6 +59,10 @@ public:
     //! updates the tax manager
     void update();
     
+    void onSetBasicIncome(float& value);
+    
+    void onSetDirectTaxRate(float& value);
+
 
 private:
     
@@ -79,6 +83,8 @@ private:
     float getTaxRandomIncome(int type);
     
     void updateCitizens();
+    
+    void updateHeights();
     
     
 private:
