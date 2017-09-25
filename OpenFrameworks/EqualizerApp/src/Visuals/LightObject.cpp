@@ -11,7 +11,7 @@
 
 const int LightObject::SIZE = 20;
 
-LightObject::LightObject(const ofPoint& position, int id): BasicVisual(position, SIZE, SIZE), m_id(id), m_showId(true), m_targetValue(0), m_currentValue(0)
+LightObject::LightObject(const ofPoint& position, int id): BasicVisual(position, SIZE, SIZE), m_id(id), m_showId(false), m_targetValue(0), m_currentValue(0), m_noise(0)
 {
     this->setup();
 }
@@ -51,8 +51,9 @@ void LightObject::setupText()
 
 void LightObject::update()
 {
-    m_currentValue = m_currentValue + ( m_targetValue - m_currentValue ) * 0.02;
-    m_color = ofColor(m_currentValue);
+    m_currentValue = m_currentValue + ( m_targetValue - m_currentValue ) * 0.02 ;
+    int brightness = ofClamp(m_currentValue + m_noise, 0, 255);
+    m_color = ofColor(brightness);
 }
 
 void LightObject::draw()
@@ -107,9 +108,11 @@ void LightObject::setPixelColor(ofPixelsRef pixels)
 {
     m_color = pixels.getColor(m_position.x * pixels.getWidth(), m_position.y * pixels.getHeight());
     int brightness = m_color.getBrightness();
+    
+    m_noise = ofMap(brightness, 0.0, 255, -10, 10, true);
     //m_color = ofColor( 255, 194, 0);
-    m_color = ofColor::white;
-    m_color.setBrightness(brightness);
+    //m_color = ofColor::white;
+    //m_color.setBrightness(brightness);
     //m_color = ofColor(brightness);
 }
 

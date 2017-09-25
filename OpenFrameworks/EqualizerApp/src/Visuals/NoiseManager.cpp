@@ -13,7 +13,7 @@
 #include "AppManager.h"
 
 
-NoiseManager::NoiseManager(): Manager(), m_noiseResolution(64), m_noiseFrequency(0.4), m_noiseSpeed(1.0)
+NoiseManager::NoiseManager(): Manager(), m_noiseResolution(8), m_noiseFrequency(0.4), m_noiseSpeed(0.3)
 {
 	//Intentionally left empty
 }
@@ -82,7 +82,7 @@ void NoiseManager::update()
     this->updateNoise();
     setupBoundingBox();
     
-    //AppManager::getInstance().getLightSculptureManager().setPixels(m_noiseImage.getPixels());
+    AppManager::getInstance().getLightSculptureManager().addNoise(m_noiseImage.getPixels());
 }
 
 

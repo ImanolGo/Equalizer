@@ -300,9 +300,6 @@ void UdpManager::sendLoadBitmaps(char _id)
     
     data.m_bitmapNr = 1; data.m_stripNr = 3;
     this->sendLoadBitmap(data);
-    
-    data.m_bitmapNr = 1; data.m_stripNr = 4;
-    this->sendLoadBitmap(data);
 }
 
 void UdpManager::updateReceiveText(const string& message)

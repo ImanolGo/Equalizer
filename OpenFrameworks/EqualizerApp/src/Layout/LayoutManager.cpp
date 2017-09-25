@@ -109,13 +109,13 @@ void LayoutManager::resetWindowFrame()
 
 void LayoutManager::update()
 {
-    this->updateColor();
+   // this->updateColor();
 }
 
 
 void LayoutManager::updateColor()
 {
-    m_color = AppManager::getInstance().getGuiManager().getColor();
+   // m_color = AppManager::getInstance().getGuiManager().getColor();
     
 }
 
@@ -168,6 +168,7 @@ void LayoutManager::drawFbo()
 {
     
     ofEnableAlphaBlending();
+    
     m_fbo.begin();
     ofClear(0);
     AppManager::getInstance().getLightSculptureManager().draw();

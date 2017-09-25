@@ -249,6 +249,13 @@ void LightSculptureManager::setLedColors(ofPixelsRef pixels)
     }
 }
 
+void LightSculptureManager::addNoise(ofPixelsRef pixels)
+{
+    for(auto lightObject: m_lightObjects){
+        lightObject.second->setPixelColor(pixels);
+    }
+}
+
 void LightSculptureManager::sendHeights()
 {
     UdpData data;

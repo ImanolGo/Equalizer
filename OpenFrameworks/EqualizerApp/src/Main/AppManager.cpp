@@ -87,6 +87,7 @@ void AppManager::update()
     m_viewManager.update();
     m_taxManager.update();
     m_udpManager.update();
+    m_guiManager.update();
     m_noiseManager.update();
     m_lightSculptureManager.update();
     m_layoutManager.update();
@@ -107,7 +108,7 @@ void AppManager::draw()
     m_viewManager.draw();
     m_layoutManager.draw();
     m_guiManager.draw();
-    m_noiseManager.draw();
+    //m_noiseManager.draw();
     
 }
 

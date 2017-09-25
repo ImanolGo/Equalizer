@@ -56,6 +56,8 @@ class LightSculptureManager: public Manager
     
         void setHeight(int _id, float height);
     
+        void addNoise(ofPixelsRef pixels);
+    
         void setLedColors(ofPixelsRef pixels);
     
         int getNumberLeds() const {return m_lightObjects.size();}

@@ -59,6 +59,7 @@ private:
     bool        m_showId;
     float       m_currentValue;
     float       m_targetValue;
+    float       m_noise;
 };
 
 

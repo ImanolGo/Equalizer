@@ -10,7 +10,8 @@
 #pragma once
 
 #include "Manager.h"
-#include "ofxGui.h"
+#include "ofxDatGui.h"
+
 //========================== class GuiManager ==============================
 //============================================================================
 /** \class GuiManager GuiManager.h
@@ -36,6 +37,9 @@ public:
     //! Set-up the gui
     void setup();
     
+    //! update the gui
+    void update();
+    
     //! Draw the gui
     void draw();
     
@@ -59,7 +63,6 @@ public:
     
     ofPoint  getPosition() {return m_gui.getPosition();}
     
-    ofxColorSlider& getColor(){return m_color;}
     
 private:
     
@@ -78,8 +81,8 @@ private:
 private:
     
     // Fluid GUI
-    ofxPanel			m_gui;
-    
+    ofxDatGui			m_gui;
+
     ofParameter<float>	m_guiFPS;
     
 
@@ -87,7 +90,7 @@ private:
     ofParameterGroup    m_parametersNoise;
     ofParameterGroup    m_parametersCommunications;
     ofParameterGroup    m_parametersTaxes;
-    
+
     ofParameter<float>    m_taxBasicIncome;
     ofParameter<float>    m_directTax;
     ofParameter<float>    m_basicRate;
@@ -106,9 +109,6 @@ private:
     ofParameter<int>      m_comSpeed;
     ofParameter<int>      m_comId;
     ofParameter<int>      m_comValue;
-    
-    ofxColorSlider          m_color;
-    
    
     bool        m_showGui;  //It defines the whether the gui should be shown or not
 };
