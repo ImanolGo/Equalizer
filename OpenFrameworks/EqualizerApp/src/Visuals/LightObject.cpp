@@ -11,7 +11,7 @@
 
 const int LightObject::SIZE = 20;
 
-LightObject::LightObject(const ofPoint& position, int id): BasicVisual(position, SIZE, SIZE), m_id(id), m_showId(true)
+LightObject::LightObject(const ofPoint& position, int id): BasicVisual(position, SIZE, SIZE), m_id(id), m_showId(true), m_targetValue(0), m_currentValue(0)
 {
     this->setup();
 }
@@ -49,6 +49,11 @@ void LightObject::setupText()
     
 }
 
+void LightObject::update()
+{
+    m_currentValue = m_currentValue + ( m_targetValue - m_currentValue ) * 0.02;
+    m_color = ofColor(m_currentValue);
+}
 
 void LightObject::draw()
 {
@@ -111,9 +116,10 @@ void LightObject::setPixelColor(ofPixelsRef pixels)
 
 void LightObject::setHeight(float height)
 {
-    m_color = ofColor::white;
-    int brightness = ofMap(height, 0.0, 1.0, 30, 255, true);
-    m_color.setBrightness(brightness);
+    //m_color = ofColor::white;
+    m_targetValue = ofMap(height, 0.0, 1.0, 10.0, 255.0, true);
+    
+    //m_color.setBrightness(brightness);
     
     //ofLogNotice() <<"LightObject::setHeight-> id = " <<  this->getId() << ", brightness = " << brightness;
 }

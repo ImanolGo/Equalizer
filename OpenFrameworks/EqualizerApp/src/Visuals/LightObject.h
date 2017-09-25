@@ -27,6 +27,8 @@ public:
     
     void draw();
     
+    void update();
+    
     void draw(const ofRectangle& boundingBox);
     
     int getId() const {return m_id;}
@@ -55,6 +57,8 @@ private:
     ofPtr<TextVisual>   m_idText;
     ofPtr<ImageVisual>  m_image;
     bool        m_showId;
+    float       m_currentValue;
+    float       m_targetValue;
 };
 
 

@@ -216,7 +216,9 @@ void LightSculptureManager::removeCharsFromString( string &str, char* charsToRem
 
 void LightSculptureManager::update()
 {
-    //
+    for(auto lightObject: m_lightObjects){
+        lightObject.second->update();
+    }
 }
 
 

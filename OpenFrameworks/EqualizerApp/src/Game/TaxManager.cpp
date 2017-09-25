@@ -10,9 +10,11 @@
 #include "AppManager.h"
 
 
-const double TaxManager::REFRESH_TIME = 0.02;
+const double TaxManager::REFRESH_TIME = 0.5;
+const int TaxManager::MAX_NUM_YEARS = 100;
 
-TaxManager::TaxManager(): Manager(), m_elapsedTime(0.0)
+
+TaxManager::TaxManager(): Manager(), m_elapsedTime(0.0), m_numYears(0)
 {
     //Intentionally left empty
 }
@@ -157,10 +159,11 @@ void TaxManager::setupCitizens()
 void TaxManager::update()
 {
     m_elapsedTime+= ofGetLastFrameTime();
-    if(m_elapsedTime > REFRESH_TIME){
+    if(m_elapsedTime >= REFRESH_TIME && m_numYears < MAX_NUM_YEARS){
         this->updateCitizens();
         this->updateHeights();
         m_elapsedTime = 0;
+        m_numYears ++;
     }
     
 }
@@ -223,6 +226,9 @@ float TaxManager::getTaxRandomIncome(int type)
 
 void TaxManager::onSetBasicIncome(float& value)
 {
+    m_numYears = 0;
+    m_elapsedTime = REFRESH_TIME;
+    
     for(auto citizen: m_citizens){
         citizen.second->reset();
         citizen.second->setUniversalIncome(value);
@@ -233,6 +239,9 @@ void TaxManager::onSetBasicIncome(float& value)
 
 void TaxManager::onSetDirectTaxRate(float& value)
 {
+    m_numYears = 0;
+    m_elapsedTime = REFRESH_TIME;
+    
     for(auto citizen: m_citizens){
         citizen.second->reset();
         citizen.second->setDirectTax(value);
@@ -243,6 +252,9 @@ void TaxManager::setIncomeTaxRate(float value, int type)
 {
     if(type<0 || type>=m_taxBands.size())return;
     
+    m_numYears = 0;
+    m_elapsedTime = REFRESH_TIME;
+
     m_taxBands[type].rate = value;
     
     for(auto citizen: m_citizens){

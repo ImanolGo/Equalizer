@@ -45,6 +45,7 @@ class TaxManager: public Manager
 {
     
     static const double REFRESH_TIME; ///< holds the refresh update time for every citizen update
+    static const int MAX_NUM_YEARS; ///< holds the maximum number of years to make the simulation
 
 public:
     //! Constructor
@@ -107,6 +108,8 @@ private:
     ofXml           m_xml;
     
     double          m_elapsedTime;
+    int             m_numYears;
+    
 
 
 };
