@@ -264,6 +264,8 @@ void UdpManager::addConnection(char _id, string ip)
     
     m_udpManagerMap[_id] = udpConnection;
     ofLogNotice() <<"UdpManager::addConnection -> created connnextion with IP " << ip <<" to port " << portSend;
+    
+    this->sendLoadBitmaps(_id);
 
     
 }
@@ -281,6 +283,26 @@ void UdpManager::receivedHeartbeat(char _id, char val1, char val2)
         this->addConnection(_id,ip);
         
     }
+}
+
+
+void UdpManager::sendLoadBitmaps(char _id)
+{
+    UdpData data;
+    data.m_bitmapNr = 0; data.m_stripNr = 0; data.m_id = (int)_id;
+    this->sendLoadBitmap(data);
+    
+    data.m_bitmapNr = 1; data.m_stripNr = 1;
+    this->sendLoadBitmap(data);
+    
+    data.m_bitmapNr = 1; data.m_stripNr = 2;
+    this->sendLoadBitmap(data);
+    
+    data.m_bitmapNr = 1; data.m_stripNr = 3;
+    this->sendLoadBitmap(data);
+    
+    data.m_bitmapNr = 1; data.m_stripNr = 4;
+    this->sendLoadBitmap(data);
 }
 
 void UdpManager::updateReceiveText(const string& message)

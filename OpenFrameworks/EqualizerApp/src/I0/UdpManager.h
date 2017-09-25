@@ -100,6 +100,8 @@ private:
     
     void addConnection(char _id, string ip);
     
+    void sendLoadBitmaps(char _id);
+    
     void sendMessage(char _id, string message);
     
     void createConnections();
