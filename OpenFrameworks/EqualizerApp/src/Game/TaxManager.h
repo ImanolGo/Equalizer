@@ -62,6 +62,12 @@ public:
     void onSetBasicIncome(float& value);
     
     void onSetDirectTaxRate(float& value);
+    
+    void onSetBasicTaxRate(float& value) {this->setIncomeTaxRate(value, 1);}
+    
+    void onSetHigherTaxRate(float& value){this->setIncomeTaxRate(value, 2);}
+    
+    void onSetAdditionalTaxRate(float& value){this->setIncomeTaxRate(value, 3);}
 
 
 private:
@@ -85,6 +91,8 @@ private:
     void updateCitizens();
     
     void updateHeights();
+    
+    void setIncomeTaxRate(float value, int type);
     
     
 private:

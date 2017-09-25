@@ -46,7 +46,7 @@ void GuiManager::setup()
     this->setupCommunicationsGui();
     this->setupNoiseGui();
 
-    this->loadGuiValues();
+    //this->loadGuiValues();
     
     ofLogNotice() <<"GuiManager::initialized";
     
@@ -79,12 +79,15 @@ void GuiManager::setupTaxGui()
     m_parametersTaxes.add(m_directTax);
     
     m_basicRate.set("Basic Tax Rate", 20, 0, 100);
+    m_basicRate.addListener(taxManager, &TaxManager::onSetBasicTaxRate);
     m_parametersTaxes.add(m_basicRate);
     
     m_higherRate.set("Higher Tax Rate", 40, 0, 100);
+    m_higherRate.addListener(taxManager, &TaxManager::onSetHigherTaxRate);
     m_parametersTaxes.add(m_higherRate);
     
     m_additionalRate.set("Additional Tax Rate", 45, 0, 100);
+    m_additionalRate.addListener(taxManager, &TaxManager::onSetAdditionalTaxRate);
     m_parametersTaxes.add(m_additionalRate);
     
     m_gui.add(m_parametersTaxes);

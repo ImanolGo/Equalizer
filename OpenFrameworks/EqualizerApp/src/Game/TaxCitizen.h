@@ -43,6 +43,10 @@ public:
     
     float getPercentageWealth() const {return m_percWealth;}
     
+    float getIncome() const {return m_settings.income;}
+    
+    void setIncomeTaxRate(float value){m_settings.incomeTaxRate = value;}
+    
     void update();
     
     void reset();

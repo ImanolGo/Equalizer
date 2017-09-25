@@ -239,7 +239,18 @@ void TaxManager::onSetDirectTaxRate(float& value)
     }
 }
 
-
+void TaxManager::setIncomeTaxRate(float value, int type)
+{
+    if(type<0 || type>=m_taxBands.size())return;
+    
+    m_taxBands[type].rate = value;
+    
+    for(auto citizen: m_citizens){
+        citizen.second->reset();
+        auto incomeTaxRate = this->getTaxRate(citizen.second->getIncome());
+        citizen.second->setIncomeTaxRate(incomeTaxRate);
+    }
+}
 
 
 
