@@ -63,6 +63,16 @@ public:
     
     ofPoint  getPosition() {return m_gui.getPosition();}
     
+    void onDropdownEvent(ofxDatGuiDropdownEvent e);
+    
+    void onColorPickerEvent(ofxDatGuiColorPickerEvent e);
+    
+    void onButtonEvent(ofxDatGuiButtonEvent e);
+    
+    void onToggleEvent(ofxDatGuiToggleEvent e);
+    
+    void onMatrixEvent(ofxDatGuiMatrixEvent e);
+    
     
 private:
     
@@ -77,6 +87,8 @@ private:
     void setupNoiseGui();
     
     void drawRectangle();
+    
+    void setupGuiEvents();
 
 private:
     
@@ -86,10 +98,7 @@ private:
     ofParameter<float>	m_guiFPS;
     
 
-    ofParameterGroup    m_parametersLayout;
-    ofParameterGroup    m_parametersNoise;
-    ofParameterGroup    m_parametersCommunications;
-    ofParameterGroup    m_parametersTaxes;
+    ofParameterGroup      m_parameters;
 
     ofParameter<float>    m_taxBasicIncome;
     ofParameter<float>    m_directTax;

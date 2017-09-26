@@ -39,6 +39,8 @@ public:
     
     void showId(bool _showId) {m_showId = _showId;}
     
+    void toggleShowId() {m_showId = !m_showId;}
+    
     void setSize(int size);
     
     void setHeight(float height);

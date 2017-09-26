@@ -44,9 +44,10 @@ void GuiManager::setup()
     this->setupGuiParameters();
     //this->setupLayoutGui();
     this->setupTaxGui();
-    //this->setupCommunicationsGui();
+    this->setupCommunicationsGui();
     //this->setupNoiseGui();
 
+    this->setupGuiEvents();
     //this->loadGuiValues();
 
     
@@ -62,6 +63,8 @@ void GuiManager::setupGuiParameters()
 //    m_gui.setPosition(20, 20);
 //    m_gui.add(m_guiFPS.set("FPS", 0, 0, 60));
 //    ofxGuiSetFont( "fonts/open-sans/OpenSans-Semibold.ttf", 9 );
+    
+    ofxDatGuiLog::quiet();
     
     m_gui.setPosition(ofxDatGuiAnchor::TOP_LEFT);
     //m_gui.setAssetPath(ofToDataPath("fonts/"));
@@ -90,32 +93,31 @@ void GuiManager::setupTaxGui()
     
     auto taxManager = &AppManager::getInstance().getTaxManager();
 
-    m_parametersTaxes.setName("Taxes");
     
     m_taxBasicIncome.set("Basic Income", 0, 0, 20000);
     m_taxBasicIncome.addListener(taxManager, &TaxManager::onSetBasicIncome);
-    //m_parametersTaxes.add(m_taxBasicIncome);
+    m_parameters.add(m_taxBasicIncome);
     
     m_directTax.set("Direct Tax", 20, 0, 100);
     m_directTax.addListener(taxManager, &TaxManager::onSetDirectTaxRate);
-   // m_parametersTaxes.add(m_directTax);
+    m_parameters.add(m_directTax);
     
     m_basicRate.set("Basic Rate", 20, 0, 100);
     m_basicRate.addListener(taxManager, &TaxManager::onSetBasicTaxRate);
-   // m_parametersTaxes.add(m_basicRate);
+    m_parameters.add(m_basicRate);
     
     m_higherRate.set("Higher Rate", 40, 0, 100);
     m_higherRate.addListener(taxManager, &TaxManager::onSetHigherTaxRate);
-   // m_parametersTaxes.add(m_higherRate);
+    m_parameters.add(m_higherRate);
     
     m_additionalRate.set("Additional Rate", 45, 0, 100);
     m_additionalRate.addListener(taxManager, &TaxManager::onSetAdditionalTaxRate);
-   // m_parametersTaxes.add(m_additionalRate);
+    m_parameters.add(m_additionalRate);
     
     
     // add a folder to group a few components together //
     ofxDatGuiFolder* folder = m_gui.addFolder("TAXES", ofColor::cyan);
-     folder->addSlider(m_taxBasicIncome);
+    folder->addSlider(m_taxBasicIncome);
     folder->addSlider(m_directTax);
     folder->addSlider(m_basicRate);
     folder->addSlider(m_higherRate);
@@ -130,45 +132,42 @@ void GuiManager::setupTaxGui()
 
 void GuiManager::setupCommunicationsGui()
 {
-//    auto lightSculptureManager = &AppManager::getInstance().getLightSculptureManager();
-//    auto udpManager = &AppManager::getInstance().getUdpManager();
-//    
-//    m_parametersCommunications.setName("Data");
-//    
-//    ofxButton * autodiscovery = new ofxButton();
-//    autodiscovery->setup("Autodiscovery");
-//    autodiscovery->addListener(udpManager, &UdpManager::sendAutodiscovery);
-//    m_gui.add(autodiscovery);
-//    
-//    m_comBitmapNum.set("BitMapNr", 0, 0, 10);
-//    m_comBitmapNum.addListener(lightSculptureManager, &LightSculptureManager::onSetBitmapNumber);
-//    m_parametersCommunications.add(m_comBitmapNum);
-//
-//    m_comStripNum.set("StripNr", 0, 0, 3);
-//    m_comStripNum.addListener(lightSculptureManager, &LightSculptureManager::onSetStripNumber);
-//    m_parametersCommunications.add(m_comStripNum);
-//    
-//    m_comSpeed.set("Speed", 127, 0, 254);
-//    m_comSpeed.addListener(lightSculptureManager, &LightSculptureManager::onSetSpeed);
-//    m_parametersCommunications.add(m_comSpeed);
-//    
-//    m_comId.set("Id", 70, 0, 100);
-//    m_comId.addListener(lightSculptureManager, &LightSculptureManager::onSetId);
-//    m_parametersCommunications.add(m_comId);
-//    
-//    m_comValue.set("Value", 0, 0, 254);
-//    m_comValue.addListener(lightSculptureManager, &LightSculptureManager::onSetValue);
-//    m_parametersCommunications.add(m_comValue);
-//    
-//    m_comClearLights.set("Clear", false);
-//    m_comClearLights.addListener(lightSculptureManager, &LightSculptureManager::onClearLights);
-//    m_parametersCommunications.add(m_comClearLights);
-//
-//    m_comSendHeights.set("SendHeights", true);
-//    m_comSendHeights.addListener(lightSculptureManager, &LightSculptureManager::onToggleSendHeights);
-//    m_parametersCommunications.add(m_comSendHeights);
-////
-//    m_gui.add(m_parametersCommunications);
+    auto lightSculptureManager = &AppManager::getInstance().getLightSculptureManager();
+    auto udpManager = &AppManager::getInstance().getUdpManager();
+    
+    
+    m_comBitmapNum.set("BitMapNr", 0, 0, 10);
+    m_comBitmapNum.addListener(lightSculptureManager, &LightSculptureManager::onSetBitmapNumber);
+    m_parameters.add(m_comBitmapNum);
+
+    m_comStripNum.set("StripNr", 0, 0, 3);
+    m_comStripNum.addListener(lightSculptureManager, &LightSculptureManager::onSetStripNumber);
+    m_parameters.add(m_comStripNum);
+    
+    m_comSpeed.set("Speed", 127, 0, 254);
+    m_comSpeed.addListener(lightSculptureManager, &LightSculptureManager::onSetSpeed);
+    
+    m_comId.set("Id", 70, 0, 100);
+    m_comId.addListener(lightSculptureManager, &LightSculptureManager::onSetId);
+
+    m_comValue.set("Value", 0, 0, 254);
+    m_comValue.addListener(lightSculptureManager, &LightSculptureManager::onSetValue);
+    m_parameters.add(m_comValue);
+    
+    ofxDatGuiFolder* folder = m_gui.addFolder("COMMUNICATIONS", ofColor::white);
+    folder->addButton("Autodiscovery");
+    folder->addSlider(m_comBitmapNum);
+    folder->addSlider(m_comStripNum);
+    folder->addSlider(m_comSpeed);
+    folder->addSlider(m_comId);
+    folder->addSlider(m_comValue);
+    folder->addToggle("Clear");
+    folder->addToggle("SendHeights");
+    
+    //folder->expand();
+    
+    m_gui.addBreak();
+
 }
 void GuiManager::setupLayoutGui()
 {
@@ -232,16 +231,27 @@ void GuiManager::draw()
 }
 
 
+void GuiManager::setupGuiEvents()
+{
+    m_gui.onDropdownEvent(this, &GuiManager::onDropdownEvent);
+    m_gui.onColorPickerEvent(this, &GuiManager::onColorPickerEvent);
+    m_gui.onButtonEvent(this, &GuiManager::onButtonEvent);
+    m_gui.onToggleEvent(this, &GuiManager::onToggleEvent);
+    m_gui.onMatrixEvent(this, &GuiManager::onMatrixEvent);
+}
+
+
 void GuiManager::saveGuiValues()
 {
-//    ofXml xml;
-//    xml.serialize(m_parameters);
-//    xml.save(GUI_SETTINGS_FILE_NAME);
+    ofXml xml;
+    xml.serialize(m_parameters);
+    xml.save(GUI_SETTINGS_FILE_NAME);
 }
 
 void GuiManager::loadGuiValues()
 {
-//   m_gui.loadFromFile(GUI_SETTINGS_FILE_NAME);
+    ofXml xml(GUI_SETTINGS_FILE_NAME);
+    xml.deserialize(m_parameters);
 }
 
 
@@ -257,3 +267,50 @@ void GuiManager::drawRectangle()
     ofDrawRectangle( m_gui.getPosition().x - 20, 0, GUI_WIDTH + 60, ofGetHeight());
     ofPopStyle();
 }
+
+
+
+void GuiManager::onDropdownEvent(ofxDatGuiDropdownEvent e)
+{
+    cout << "onDropdownEvent: " << e.target->getName() << " Selected" << endl;
+    
+}
+
+void GuiManager::onColorPickerEvent(ofxDatGuiColorPickerEvent e)
+{
+    cout << "onColorPickerEvent: " << e.target->getName() << " Selected" << endl;
+    
+    
+}
+
+void GuiManager::onButtonEvent(ofxDatGuiButtonEvent e)
+{
+    cout << "onButtonEvent: " << e.target->getName() << " Selected" << endl;
+    
+    if(e.target->getName() == "Autodiscovery")
+    {
+        AppManager::getInstance().getUdpManager().sendAutodiscovery();
+    }
+}
+
+
+void GuiManager::onToggleEvent(ofxDatGuiToggleEvent e)
+{
+    cout << "onToggleEvent: " << e.target->getName() << " Selected" << endl;
+    
+    if(e.target->getName() == "Clear")
+    {
+        AppManager::getInstance().getLightSculptureManager().onClearLights(e.target->getChecked());
+    }
+    else if(e.target->getName() == "SendHeights")
+    {
+        AppManager::getInstance().getLightSculptureManager().onToggleSendHeights(e.target->getChecked());
+        ofLogNotice() <<"GuiManager::onToggleEvent -> SendHeights : " << e.target->getChecked();
+    }
+}
+
+void GuiManager::onMatrixEvent(ofxDatGuiMatrixEvent e)
+{
+    cout << "onMatrixEvent " << e.child << " : " << e.enabled << endl;
+}
+

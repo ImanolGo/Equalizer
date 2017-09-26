@@ -263,7 +263,7 @@ void UdpManager::addConnection(char _id, string ip)
     udpConnection->SetNonBlocking(true);
     
     m_udpManagerMap[_id] = udpConnection;
-    ofLogNotice() <<"UdpManager::addConnection -> created connnextion with IP " << ip <<" to port " << portSend;
+    ofLogNotice() <<"UdpManager::addConnection -> created connnection with IP " << ip <<" to port " << portSend;
     
     this->sendLoadBitmaps(_id);
 
@@ -319,6 +319,8 @@ void UdpManager::sendMessage(char _id, string message)
         return;
     }
     
+    
+    //ofLogNotice() <<"UdpManager::sendMessage << " << message;
     m_udpManagerMap[_id]->Send(message.c_str(),message.length());
 }
 

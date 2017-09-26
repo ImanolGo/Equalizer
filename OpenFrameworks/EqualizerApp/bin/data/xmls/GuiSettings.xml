@@ -1,39 +1,10 @@
 <group>
-	<FPS>60.0215</FPS>
-	<Color>87, 255, 117, 131<Hue>87.1684</Hue>
-		<Saturation>118.393</Saturation>
-		<Brightness>122.296</Brightness>
-	</Color>
-<group/>
-<Data>
-		<ID>289</ID>
+	<Basic_Income>5258.96</Basic_Income>
+	<Direct_Tax>20</Direct_Tax>
+	<Basic_Rate>20</Basic_Rate>
+	<Higher_Rate>40</Higher_Rate>
+	<Additional_Rate>45</Additional_Rate>
 	<BitMapNr>0</BitMapNr>
-		<StripNr>0</StripNr>
-		<Speed>127</Speed>
-		<Id>70</Id>
-		<Value>0</Value>
-		<Clear>0</Clear>
-		<SendHeights>1</SendHeights>
-	</Data>
-<Noise>
-		<Noise_Resolution>8</Noise_Resolution>
-		<Noise_Frequency>0.4</Noise_Frequency>
-		<Noise_Speed>0.337622</Noise_Speed>
-	</Noise>
-<BitMapNr>4</BitMapNr>
-<StripNr>2</StripNr>
-<Clear>0</Clear>
-<Speed>92</Speed>
-	<SendHeights>0</SendHeights>
-<Id>21</Id>
-	<Value>163</Value>
-<Taxes>
-		<BitMapNr>7448.98</BitMapNr>
-		<Direct_Tax>20</Direct_Tax>
-		<Basic_Tax_Rate>20</Basic_Tax_Rate>
-		<Additional_Tax_Rate>45</Additional_Tax_Rate>
-		<UnknownName>0.428571</UnknownName>
-	<Basic_Income>0</Basic_Income>
-		<Higher_Tax_Rate>40</Higher_Tax_Rate>
-	</Taxes>
+	<StripNr>0</StripNr>
+	<Value>0</Value>
 </group>

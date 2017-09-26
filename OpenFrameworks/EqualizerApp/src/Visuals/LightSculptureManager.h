@@ -74,9 +74,9 @@ class LightSculptureManager: public Manager
     
         void onSetSpeed(int &value);
     
-        void onClearLights(bool &value);
+        void onClearLights(bool value);
     
-        void onToggleSendHeights(bool &value) {m_sendHeights = value;}
+        void onToggleSendHeights(bool value) {m_sendHeights = value;}
     
         void onSetId(int &value);
     
@@ -85,6 +85,8 @@ class LightSculptureManager: public Manager
         void showChannels(bool _showChannels);
 
         void setBoundingBox(const ofRectangle& boundingBox);
+    
+        void onToggleShowIds();
     
     private:
     

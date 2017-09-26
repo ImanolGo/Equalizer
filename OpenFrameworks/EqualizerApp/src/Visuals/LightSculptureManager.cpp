@@ -219,6 +219,10 @@ void LightSculptureManager::update()
     for(auto lightObject: m_lightObjects){
         lightObject.second->update();
     }
+    
+    if(m_sendHeights){
+        this->sendHeights();
+    }
 }
 
 
@@ -260,6 +264,7 @@ void LightSculptureManager::sendHeights()
 {
     UdpData data;
     data.m_bitmapNr = m_bitmapNumber; data.m_stripNr = m_stripNumber;
+    //ofLogNotice() <<"LightSculptureManager::sendHeights";
     
     for(auto lightObject: m_lightObjects){
         data.m_id = lightObject.second->getId();
@@ -309,7 +314,7 @@ void LightSculptureManager::showChannels(bool _showChannels)
     }
 }
 
-void LightSculptureManager::onClearLights(bool& value)
+void LightSculptureManager::onClearLights(bool value)
 {
     UdpData data; data.m_value = value; data.m_bitmapNr = m_bitmapNumber; data.m_stripNr = m_stripNumber;
     
@@ -348,6 +353,17 @@ void LightSculptureManager::onSetValue(int &value)
     data.m_value = value;
     AppManager::getInstance().getUdpManager().sendData(data);
 }
+
+
+void LightSculptureManager::onToggleShowIds()
+{
+    for(auto lightObject: m_lightObjects)
+    {
+        lightObject.second->toggleShowId();
+    }
+}
+
+
 
 
 //ofPtr<LightObject> LightSculptureManager::getLightObject(int _id)

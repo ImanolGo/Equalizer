@@ -51,7 +51,8 @@ void KeyboardManager::keyPressed(ofKeyEventArgs &e)
     }
     
     if(key == ' ') {
-        AppManager::getInstance().toggleDebugMode();
+        //AppManager::getInstance().toggleDebugMode();
+        AppManager::getInstance().getLightSculptureManager().onToggleShowIds();
     }
     
 }
