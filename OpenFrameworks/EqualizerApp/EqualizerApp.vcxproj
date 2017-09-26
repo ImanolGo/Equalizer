@@ -95,12 +95,12 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxGui\src;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\doc;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxDatGui;src\Addons\ofxDatGui\src;src\Addons\ofxDatGui\src\components;src\Addons\ofxDatGui\src\core;src\Addons\ofxDatGui\src\libs\ofxSmartFont;src\Addons\ofxDatGui\src\themes;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\Game;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -114,7 +114,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxGui\src;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\doc;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxDatGui;src\Addons\ofxDatGui\src;src\Addons\ofxDatGui\src\components;src\Addons\ofxDatGui\src\core;src\Addons\ofxDatGui\src\libs\ofxSmartFont;src\Addons\ofxDatGui\src\themes;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\Game;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -133,14 +133,14 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxGui\src;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\doc;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxDatGui;src\Addons\ofxDatGui\src;src\Addons\ofxDatGui\src\components;src\Addons\ofxDatGui\src\core;src\Addons\ofxDatGui\src\libs\ofxSmartFont;src\Addons\ofxDatGui\src\themes;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\Game;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
@@ -155,7 +155,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxGui\src;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\doc;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxDatGui;src\Addons\ofxDatGui\src;src\Addons\ofxDatGui\src\components;src\Addons\ofxDatGui\src\core;src\Addons\ofxDatGui\src\libs\ofxSmartFont;src\Addons\ofxDatGui\src\themes;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\Game;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -171,14 +171,9 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Addons\ofxGui\src\ofxBaseGui.cpp" />
-    <ClCompile Include="src\Addons\ofxGui\src\ofxButton.cpp" />
-    <ClCompile Include="src\Addons\ofxGui\src\ofxGuiGroup.cpp" />
-    <ClCompile Include="src\Addons\ofxGui\src\ofxLabel.cpp" />
-    <ClCompile Include="src\Addons\ofxGui\src\ofxPanel.cpp" />
-    <ClCompile Include="src\Addons\ofxGui\src\ofxSlider.cpp" />
-    <ClCompile Include="src\Addons\ofxGui\src\ofxSliderGroup.cpp" />
-    <ClCompile Include="src\Addons\ofxGui\src\ofxToggle.cpp" />
+    <ClCompile Include="src\Addons\ofxDatGui\src\core\ofxDatGuiComponent.cpp" />
+    <ClCompile Include="src\Addons\ofxDatGui\src\libs\ofxSmartFont\ofxSmartFont.cpp" />
+    <ClCompile Include="src\Addons\ofxDatGui\src\ofxDatGui.cpp" />
     <ClCompile Include="src\Addons\ofxNetwork\src\ofxTCPClient.cpp" />
     <ClCompile Include="src\Addons\ofxNetwork\src\ofxTCPManager.cpp" />
     <ClCompile Include="src\Addons\ofxNetwork\src\ofxTCPServer.cpp" />
@@ -206,6 +201,8 @@
     <ClCompile Include="src\Engine\Visuals\ViewManager.cpp" />
     <ClCompile Include="src\Engine\Visuals\VisualEffects.cpp" />
     <ClCompile Include="src\Engine\Visuals\VisualEffectsManager.cpp" />
+    <ClCompile Include="src\Game\TaxCitizen.cpp" />
+    <ClCompile Include="src\Game\TaxManager.cpp" />
     <ClCompile Include="src\I0\KeyboardManager.cpp" />
     <ClCompile Include="src\I0\UdpManager.cpp" />
     <ClCompile Include="src\Layout\GuiManager.cpp" />
@@ -219,15 +216,27 @@
     <ClCompile Include="src\Visuals\NoiseManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Addons\ofxGui\src\ofxBaseGui.h" />
-    <ClInclude Include="src\Addons\ofxGui\src\ofxButton.h" />
-    <ClInclude Include="src\Addons\ofxGui\src\ofxGui.h" />
-    <ClInclude Include="src\Addons\ofxGui\src\ofxGuiGroup.h" />
-    <ClInclude Include="src\Addons\ofxGui\src\ofxLabel.h" />
-    <ClInclude Include="src\Addons\ofxGui\src\ofxPanel.h" />
-    <ClInclude Include="src\Addons\ofxGui\src\ofxSlider.h" />
-    <ClInclude Include="src\Addons\ofxGui\src\ofxSliderGroup.h" />
-    <ClInclude Include="src\Addons\ofxGui\src\ofxToggle.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGui2dPad.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiButton.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiColorPicker.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiControls.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiFRM.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiGroups.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiLabel.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiMatrix.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiScrollView.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiSlider.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiTextInput.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiTextInputField.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiTimeGraph.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\core\ofxDatGuiComponent.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\core\ofxDatGuiConstants.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\core\ofxDatGuiEvents.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\core\ofxDatGuiIntObject.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\libs\ofxSmartFont\ofxSmartFont.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\ofxDatGui.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\themes\ofxDatGuiTheme.h" />
+    <ClInclude Include="src\Addons\ofxDatGui\src\themes\ofxDatGuiThemes.h" />
     <ClInclude Include="src\Addons\ofxMyIP\src\ofxMyIP.h" />
     <ClInclude Include="src\Addons\ofxNetwork\src\ofxNetwork.h" />
     <ClInclude Include="src\Addons\ofxNetwork\src\ofxNetworkUtils.h" />
@@ -265,9 +274,12 @@
     <ClInclude Include="src\Engine\Visuals\ViewManager.h" />
     <ClInclude Include="src\Engine\Visuals\VisualEffects.h" />
     <ClInclude Include="src\Engine\Visuals\VisualEffectsManager.h" />
+    <ClInclude Include="src\Game\TaxCitizen.h" />
+    <ClInclude Include="src\Game\TaxManager.h" />
     <ClInclude Include="src\I0\KeyboardManager.h" />
     <ClInclude Include="src\I0\UdpManager.h" />
     <ClInclude Include="src\Layout\GuiManager.h" />
+    <ClInclude Include="src\Layout\GuiTheme.h" />
     <ClInclude Include="src\Layout\LayoutManager.h" />
     <ClInclude Include="src\Main\AppManager.h" />
     <ClInclude Include="src\Main\EqualizerApp.h" />

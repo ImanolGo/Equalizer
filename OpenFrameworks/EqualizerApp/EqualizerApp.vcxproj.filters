@@ -1,29 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\Addons\ofxGui\src\ofxBaseGui.cpp">
-      <Filter>src\Addons\ofxGui\src</Filter>
+    <ClCompile Include="src\Addons\ofxDatGui\src\core\ofxDatGuiComponent.cpp">
+      <Filter>src\Addons\ofxDatGui\src\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Addons\ofxGui\src\ofxButton.cpp">
-      <Filter>src\Addons\ofxGui\src</Filter>
+    <ClCompile Include="src\Addons\ofxDatGui\src\libs\ofxSmartFont\ofxSmartFont.cpp">
+      <Filter>src\Addons\ofxDatGui\src\libs\ofxSmartFont</Filter>
     </ClCompile>
-    <ClCompile Include="src\Addons\ofxGui\src\ofxGuiGroup.cpp">
-      <Filter>src\Addons\ofxGui\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Addons\ofxGui\src\ofxLabel.cpp">
-      <Filter>src\Addons\ofxGui\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Addons\ofxGui\src\ofxPanel.cpp">
-      <Filter>src\Addons\ofxGui\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Addons\ofxGui\src\ofxSlider.cpp">
-      <Filter>src\Addons\ofxGui\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Addons\ofxGui\src\ofxSliderGroup.cpp">
-      <Filter>src\Addons\ofxGui\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Addons\ofxGui\src\ofxToggle.cpp">
-      <Filter>src\Addons\ofxGui\src</Filter>
+    <ClCompile Include="src\Addons\ofxDatGui\src\ofxDatGui.cpp">
+      <Filter>src\Addons\ofxDatGui\src</Filter>
     </ClCompile>
     <ClCompile Include="src\Addons\ofxNetwork\src\ofxTCPClient.cpp">
       <Filter>src\Addons\ofxNetwork\src</Filter>
@@ -106,6 +91,12 @@
     <ClCompile Include="src\Engine\Visuals\VisualEffectsManager.cpp">
       <Filter>src\Engine\Visuals</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\TaxCitizen.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\TaxManager.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
     <ClCompile Include="src\I0\KeyboardManager.cpp">
       <Filter>src\I0</Filter>
     </ClCompile>
@@ -147,11 +138,26 @@
     <Filter Include="src\Addons">
       <UniqueIdentifier>{44C2E31E-3A94-67F8-2669-D1C5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Addons\ofxGui">
-      <UniqueIdentifier>{407BE4E2-78CC-D24E-0CB6-5BCE}</UniqueIdentifier>
+    <Filter Include="src\Addons\ofxDatGui">
+      <UniqueIdentifier>{2E7538D4-C36F-8777-AEB8-6078}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Addons\ofxGui\src">
-      <UniqueIdentifier>{A7E0B2A9-6C0A-9388-6769-DD5A}</UniqueIdentifier>
+    <Filter Include="src\Addons\ofxDatGui\src">
+      <UniqueIdentifier>{9B2BD274-10FB-AEC5-2635-E9EE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxDatGui\src\components">
+      <UniqueIdentifier>{7498F6AF-C5E1-8250-334D-DE6B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxDatGui\src\core">
+      <UniqueIdentifier>{EE4C6E4F-0B27-9C00-46A0-70AD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxDatGui\src\libs">
+      <UniqueIdentifier>{5E70804E-04B1-BC1B-EB8D-28D6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxDatGui\src\libs\ofxSmartFont">
+      <UniqueIdentifier>{31F722F6-F0EF-18F4-8045-5ECA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofxDatGui\src\themes">
+      <UniqueIdentifier>{52BDAD53-CF60-61F0-0B2B-310F}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Addons\ofxMyIP">
       <UniqueIdentifier>{5D982135-E8F0-3A25-7B33-FB06}</UniqueIdentifier>
@@ -225,6 +231,9 @@
     <Filter Include="src\Engine\Visuals">
       <UniqueIdentifier>{F737640D-9F42-AC92-7F50-BCBC}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Game">
+      <UniqueIdentifier>{1AA88DEE-0508-8DFB-8F6A-7291}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\I0">
       <UniqueIdentifier>{2328543A-8C7A-E3DD-7D4D-BD0B}</UniqueIdentifier>
     </Filter>
@@ -239,32 +248,68 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Addons\ofxGui\src\ofxBaseGui.h">
-      <Filter>src\Addons\ofxGui\src</Filter>
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGui2dPad.h">
+      <Filter>src\Addons\ofxDatGui\src\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\Addons\ofxGui\src\ofxButton.h">
-      <Filter>src\Addons\ofxGui\src</Filter>
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiButton.h">
+      <Filter>src\Addons\ofxDatGui\src\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\Addons\ofxGui\src\ofxGui.h">
-      <Filter>src\Addons\ofxGui\src</Filter>
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiColorPicker.h">
+      <Filter>src\Addons\ofxDatGui\src\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\Addons\ofxGui\src\ofxGuiGroup.h">
-      <Filter>src\Addons\ofxGui\src</Filter>
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiControls.h">
+      <Filter>src\Addons\ofxDatGui\src\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\Addons\ofxGui\src\ofxLabel.h">
-      <Filter>src\Addons\ofxGui\src</Filter>
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiFRM.h">
+      <Filter>src\Addons\ofxDatGui\src\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\Addons\ofxGui\src\ofxPanel.h">
-      <Filter>src\Addons\ofxGui\src</Filter>
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiGroups.h">
+      <Filter>src\Addons\ofxDatGui\src\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\Addons\ofxGui\src\ofxSlider.h">
-      <Filter>src\Addons\ofxGui\src</Filter>
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiLabel.h">
+      <Filter>src\Addons\ofxDatGui\src\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\Addons\ofxGui\src\ofxSliderGroup.h">
-      <Filter>src\Addons\ofxGui\src</Filter>
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiMatrix.h">
+      <Filter>src\Addons\ofxDatGui\src\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\Addons\ofxGui\src\ofxToggle.h">
-      <Filter>src\Addons\ofxGui\src</Filter>
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiScrollView.h">
+      <Filter>src\Addons\ofxDatGui\src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiSlider.h">
+      <Filter>src\Addons\ofxDatGui\src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiTextInput.h">
+      <Filter>src\Addons\ofxDatGui\src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiTextInputField.h">
+      <Filter>src\Addons\ofxDatGui\src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiTimeGraph.h">
+      <Filter>src\Addons\ofxDatGui\src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxDatGui\src\core\ofxDatGuiComponent.h">
+      <Filter>src\Addons\ofxDatGui\src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxDatGui\src\core\ofxDatGuiConstants.h">
+      <Filter>src\Addons\ofxDatGui\src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxDatGui\src\core\ofxDatGuiEvents.h">
+      <Filter>src\Addons\ofxDatGui\src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxDatGui\src\core\ofxDatGuiIntObject.h">
+      <Filter>src\Addons\ofxDatGui\src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxDatGui\src\libs\ofxSmartFont\ofxSmartFont.h">
+      <Filter>src\Addons\ofxDatGui\src\libs\ofxSmartFont</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxDatGui\src\ofxDatGui.h">
+      <Filter>src\Addons\ofxDatGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxDatGui\src\themes\ofxDatGuiTheme.h">
+      <Filter>src\Addons\ofxDatGui\src\themes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofxDatGui\src\themes\ofxDatGuiThemes.h">
+      <Filter>src\Addons\ofxDatGui\src\themes</Filter>
     </ClInclude>
     <ClInclude Include="src\Addons\ofxMyIP\src\ofxMyIP.h">
       <Filter>src\Addons\ofxMyIP\src</Filter>
@@ -377,6 +422,12 @@
     <ClInclude Include="src\Engine\Visuals\VisualEffectsManager.h">
       <Filter>src\Engine\Visuals</Filter>
     </ClInclude>
+    <ClInclude Include="src\Game\TaxCitizen.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\TaxManager.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
     <ClInclude Include="src\I0\KeyboardManager.h">
       <Filter>src\I0</Filter>
     </ClInclude>
@@ -384,6 +435,9 @@
       <Filter>src\I0</Filter>
     </ClInclude>
     <ClInclude Include="src\Layout\GuiManager.h">
+      <Filter>src\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Layout\GuiTheme.h">
       <Filter>src\Layout</Filter>
     </ClInclude>
     <ClInclude Include="src\Layout\LayoutManager.h">

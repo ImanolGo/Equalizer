@@ -1,6 +1,7 @@
 
 #include "EqualizerApp.h"
 
+/*
 #ifndef TARGET_WIN32
 //========================================================================
 int main() {
@@ -21,6 +22,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 }
 
 #endif
+
+*/
+
+int main() {
+	ofSetupOpenGL(1024, 768, OF_WINDOW);
+	ofRunApp(std::make_shared<EqualizerApp>());
+}
+
 
 
 
