@@ -231,7 +231,7 @@ void TaxManager::onSetBasicIncome(float& value)
     
     for(auto citizen: m_citizens){
         citizen.second->reset();
-        citizen.second->setUniversalIncome(value);
+        citizen.second->setUniversalIncome(value*0.8);
     }
 }
 

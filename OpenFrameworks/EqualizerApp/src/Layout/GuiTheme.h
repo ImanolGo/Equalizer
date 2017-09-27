@@ -27,7 +27,7 @@ public:
     {
         layout.width = 500;
         layout.height = 50;
-        layout.labelWidth = 140;
+        layout.labelWidth = 148;
         layout.upperCaseLabels = false;
         //font.file =  AssetPath + "fonts/open-sans/OpenSans-Semibold.ttf";
         font.size = 11;

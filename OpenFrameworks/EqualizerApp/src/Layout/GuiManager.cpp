@@ -20,7 +20,7 @@ const string GuiManager::GUI_SETTINGS_NAME = "GUI";
 const int GuiManager::GUI_WIDTH = 500;
 
 
-GuiManager::GuiManager(): Manager(), m_showGui(true)
+GuiManager::GuiManager(): Manager(), m_showGui(true), m_folder(NULL)
 {
 	//Intentionally left empty
 }
@@ -30,6 +30,7 @@ GuiManager::~GuiManager()
 {
     this->saveGuiValues();
     ofLogNotice() <<"GuiManager::Destructor";
+	delete m_folder;
 }
 
 
@@ -44,7 +45,7 @@ void GuiManager::setup()
     this->setupGuiParameters();
     //this->setupLayoutGui();
     this->setupTaxGui();
-   // this->setupCommunicationsGui();
+    //this->setupCommunicationsGui();
     //this->setupNoiseGui();
 
     this->setupGuiEvents();
@@ -94,7 +95,7 @@ void GuiManager::setupTaxGui()
     auto taxManager = &AppManager::getInstance().getTaxManager();
 
     
-    m_taxBasicIncome.set("Basic Income", 0, 0, 20000);
+    m_taxBasicIncome.set("Universal Income", 0, 0, 20000);
     m_taxBasicIncome.addListener(taxManager, &TaxManager::onSetBasicIncome);
     m_parameters.add(m_taxBasicIncome);
     
@@ -116,15 +117,14 @@ void GuiManager::setupTaxGui()
     
     
     // add a folder to group a few components together //
-    ofxDatGuiFolder* folder = m_gui.addFolder("TAXES", ofColor::cyan);
-    folder->addSlider(m_taxBasicIncome);
-    folder->addSlider(m_directTax);
-    folder->addSlider(m_basicRate);
-    folder->addSlider(m_higherRate);
-    folder->addSlider(m_additionalRate);
-    folder->expand();
-    
-    
+	m_folder = m_gui.addFolder("TAXES", ofColor::cyan);
+	m_folder->addSlider(m_taxBasicIncome);
+	m_folder->addSlider(m_directTax);
+	m_folder->addSlider(m_basicRate);
+	m_folder->addSlider(m_higherRate);
+	m_folder->addSlider(m_additionalRate);
+	m_folder->expand();
+	
 //
 //    m_gui.add(m_parametersTaxes);
 }
@@ -147,14 +147,14 @@ void GuiManager::setupCommunicationsGui()
     m_comSpeed.set("Speed", 127, 0, 254);
     m_comSpeed.addListener(lightSculptureManager, &LightSculptureManager::onSetSpeed);
     
-    m_comId.set("Id", 70, 0, 100);
+    m_comId.set("Id", 1, 1, 76);
     m_comId.addListener(lightSculptureManager, &LightSculptureManager::onSetId);
 
-    m_comValue.set("Value", 0, 0, 254);
+    m_comValue.set("Value", 0, 0, 139);
     m_comValue.addListener(lightSculptureManager, &LightSculptureManager::onSetValue);
     m_parameters.add(m_comValue);
     
-    ofxDatGuiFolder* folder = m_gui.addFolder("COMMUNICATIONS", ofColor::white);
+	ofxDatGuiFolder*folder = m_gui.addFolder("COMMUNICATIONS", ofColor::white);
     folder->addButton("Autodiscovery");
     folder->addSlider(m_comBitmapNum);
     folder->addSlider(m_comStripNum);
@@ -164,7 +164,7 @@ void GuiManager::setupCommunicationsGui()
     folder->addToggle("Clear");
     folder->addToggle("SendHeights");
     
-    //folder->expand();
+    folder->expand();
     
     m_gui.addBreak();
 
@@ -212,8 +212,20 @@ void GuiManager::setupNoiseGui()
 void GuiManager::update()
 {
     m_gui.update();
+	this->updateFolder();
 }
 
+
+void GuiManager::updateFolder()
+{
+	if (!m_folder) {
+		return;
+	}
+
+	if (!m_folder->getIsExpanded()) {
+		m_folder->expand();
+	}
+}
 
 void GuiManager::draw()
 {

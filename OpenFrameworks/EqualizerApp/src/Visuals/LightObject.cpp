@@ -109,7 +109,7 @@ void LightObject::setPixelColor(ofPixelsRef pixels)
     m_color = pixels.getColor(m_position.x * pixels.getWidth(), m_position.y * pixels.getHeight());
     int brightness = m_color.getBrightness();
     
-    m_noise = ofMap(brightness, 0.0, 255, -5, 5, true);
+    m_noise = ofMap(brightness, 0.0, 255, -3, 3, true);
     //m_color = ofColor( 255, 194, 0);
     //m_color = ofColor::white;
     //m_color.setBrightness(brightness);
@@ -120,7 +120,7 @@ void LightObject::setPixelColor(ofPixelsRef pixels)
 void LightObject::setHeight(float height)
 {
     //m_color = ofColor::white;
-    m_targetValue = ofMap(height, 0.0, 1.0, 10.0, 255.0, true);
+    m_targetValue = ofMap(height, 0.0, 1.0, 5.0, 255.0, true);
     
     //m_color.setBrightness(brightness);
     
