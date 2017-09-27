@@ -165,15 +165,13 @@ void UdpManager::setupText()
     m_udpText->setLineHeight(2.5);
     
     
-    AppManager::getInstance().getViewManager().addOverlay(m_udpText);
+   // AppManager::getInstance().getViewManager().addOverlay(m_udpText);
 }
 
 
 void UdpManager::update()
 {
     this->updateReveivePackage();
-
-
 }
 
 void UdpManager::updateReveivePackage()

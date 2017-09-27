@@ -116,10 +116,15 @@ void SettingsManager::setWindowProperties()
         bool fullscreen = ofToBool(attributes["fullscreen"]);
         
         ofSetFullscreen(fullscreen);
-        ofSetWindowShape(m_appWidth,m_appHeight);
+        
         if(!fullscreen){
             ofSetWindowPosition(x,y);
+			ofSetWindowShape(m_appWidth, m_appHeight);
         }
+		else {
+			ofSetWindowShape(ofGetScreenWidth(), ofGetScreenHeight());
+			ofSetWindowPosition(0, 0);
+		}
         ofSetWindowTitle(title);
         
         ofLogNotice() <<"SettingsManager::setWindowProperties->  successfully loaded the window settings" ;

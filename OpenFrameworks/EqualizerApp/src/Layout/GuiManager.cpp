@@ -44,7 +44,7 @@ void GuiManager::setup()
     this->setupGuiParameters();
     //this->setupLayoutGui();
     this->setupTaxGui();
-    this->setupCommunicationsGui();
+   // this->setupCommunicationsGui();
     //this->setupNoiseGui();
 
     this->setupGuiEvents();
@@ -75,15 +75,15 @@ void GuiManager::setupGuiParameters()
     int margin =  LayoutManager::MARGIN;
     m_gui.setAutoDraw(false);
     auto pos = m_gui.getPosition();
-    m_gui.setPosition(pos.x + margin, pos.y + 2*margin);
+    m_gui.setPosition(pos.x + margin, pos.y + 10*margin);
    // m_gui.addHeader(GUI_SETTINGS_NAME, true);
     
     // add some components //
     //m_gui.addLabel("PrimaveraSound GUI");
     
-    m_gui.addFRM();
+    //m_gui.addFRM();
     
-    m_gui.addBreak();
+    //m_gui.addBreak();
 
 
 }

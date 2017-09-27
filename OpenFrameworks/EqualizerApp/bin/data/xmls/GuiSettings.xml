@@ -1,10 +1,7 @@
 <group>
-	<Basic_Income>5258.96</Basic_Income>
+	<Basic_Income>0</Basic_Income>
 	<Direct_Tax>20</Direct_Tax>
 	<Basic_Rate>20</Basic_Rate>
 	<Higher_Rate>40</Higher_Rate>
 	<Additional_Rate>45</Additional_Rate>
-	<BitMapNr>0</BitMapNr>
-	<StripNr>0</StripNr>
-	<Value>0</Value>
 </group>
