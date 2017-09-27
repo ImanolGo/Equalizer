@@ -40,7 +40,7 @@ void LightSculptureManager::setup()
     this->setupBoundingBox();
     this->setupLeds();
     this->setupBackgroundImage();
-    
+
     ofLogNotice() <<"LightSculptureManager::initialized" ;
     
 }

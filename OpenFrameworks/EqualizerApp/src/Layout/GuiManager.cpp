@@ -45,7 +45,7 @@ void GuiManager::setup()
     this->setupGuiParameters();
     //this->setupLayoutGui();
     this->setupTaxGui();
-    //this->setupCommunicationsGui();
+    this->setupCommunicationsGui();
     //this->setupNoiseGui();
 
     this->setupGuiEvents();
@@ -123,7 +123,15 @@ void GuiManager::setupTaxGui()
 	m_folder->addSlider(m_basicRate);
 	m_folder->addSlider(m_higherRate);
 	m_folder->addSlider(m_additionalRate);
-	m_folder->expand();
+
+	if (!AppManager::getInstance().getSettingsManager().getDebugMode()) {
+		m_folder->expand();
+	}
+	else {
+		m_folder->collapse();
+	}
+
+
 	
 //
 //    m_gui.add(m_parametersTaxes);
@@ -162,11 +170,21 @@ void GuiManager::setupCommunicationsGui()
     folder->addSlider(m_comId);
     folder->addSlider(m_comValue);
     folder->addToggle("Clear");
-    folder->addToggle("SendHeights");
+    auto toggle = folder->addToggle("SendHeights");
     
     folder->expand();
     
     m_gui.addBreak();
+
+	if (!AppManager::getInstance().getSettingsManager().getDebugMode()) {
+		folder->setVisible(false);
+	}
+	else {
+		toggle->setChecked(false);
+		AppManager::getInstance().getLightSculptureManager().onToggleSendHeights(false);
+	}
+
+	toggle = NULL;
 
 }
 void GuiManager::setupLayoutGui()
@@ -222,6 +240,9 @@ void GuiManager::updateFolder()
 		return;
 	}
 
+	if (AppManager::getInstance().getSettingsManager().getDebugMode()) {
+		return;
+	}
 	if (!m_folder->getIsExpanded()) {
 		m_folder->expand();
 	}

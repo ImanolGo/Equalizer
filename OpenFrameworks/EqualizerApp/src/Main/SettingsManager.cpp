@@ -16,7 +16,7 @@
 const string SettingsManager::APPLICATION_SETTINGS_FILE_NAME = "xmls/ApplicationSettings.xml";
 
 
-SettingsManager::SettingsManager(): Manager(), m_appHeight(0.0), m_appWidth(0.0)
+SettingsManager::SettingsManager(): Manager(), m_appHeight(0.0), m_appWidth(0.0), m_debugMode(false)
 {
     //Intentionally left empty
 }
@@ -90,6 +90,9 @@ void SettingsManager::setDebugProperties()
             ofSetLogLevel(OF_LOG_NOTICE);
         }
         
+		m_debugMode = ofToBool(attributes["testMode"]);
+
+		ofLogNotice() << "SettingsManager::setDebugProperties->  test mode = " << m_debugMode;
         
         ofLogNotice() <<"SettingsManager::setDebugProperties->  successfully loaded the OF general settings" ;
         return;
