@@ -66,6 +66,10 @@ void LightSculptureManager::setupLeds()
    // this->createLedsPosition();
     this->readLedsPositions();
     //this->normalizeLeds();
+
+	if (AppManager::getInstance().getSettingsManager().getDebugMode()) {
+		this->showChannels(true);
+	}
 }
 
 void LightSculptureManager::setupBackgroundImage()

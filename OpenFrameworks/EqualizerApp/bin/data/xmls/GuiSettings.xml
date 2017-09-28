@@ -4,7 +4,7 @@
 	<Basic_Rate>20</Basic_Rate>
 	<Higher_Rate>40</Higher_Rate>
 	<Additional_Rate>45</Additional_Rate>
-	<BitMapNr>6</BitMapNr>
-	<StripNr>1</StripNr>
-	<Value>68</Value>
+	<BitMapNr>0</BitMapNr>
+	<StripNr>0</StripNr>
+	<Value>0</Value>
 </group>
