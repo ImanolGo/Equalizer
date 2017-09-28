@@ -95,12 +95,12 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxDatGui;src\Addons\ofxDatGui\src;src\Addons\ofxDatGui\src\components;src\Addons\ofxDatGui\src\core;src\Addons\ofxDatGui\src\libs\ofxSmartFont;src\Addons\ofxDatGui\src\themes;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\Game;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\Addons\ofxDatGui\src;src\Addons\ofxDatGui\src\components;src\Addons\ofxDatGui\src\core;src\Addons\ofxDatGui\src\libs\ofxSmartFont;src\Addons\ofxDatGui\src\themes;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\Game;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -114,7 +114,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxDatGui;src\Addons\ofxDatGui\src;src\Addons\ofxDatGui\src\components;src\Addons\ofxDatGui\src\core;src\Addons\ofxDatGui\src\libs\ofxSmartFont;src\Addons\ofxDatGui\src\themes;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\Game;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\Addons\ofxDatGui\src;src\Addons\ofxDatGui\src\components;src\Addons\ofxDatGui\src\core;src\Addons\ofxDatGui\src\libs\ofxSmartFont;src\Addons\ofxDatGui\src\themes;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\Game;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -133,14 +133,14 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxDatGui;src\Addons\ofxDatGui\src;src\Addons\ofxDatGui\src\components;src\Addons\ofxDatGui\src\core;src\Addons\ofxDatGui\src\libs\ofxSmartFont;src\Addons\ofxDatGui\src\themes;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\Game;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\Addons\ofxDatGui\src;src\Addons\ofxDatGui\src\components;src\Addons\ofxDatGui\src\core;src\Addons\ofxDatGui\src\libs\ofxSmartFont;src\Addons\ofxDatGui\src\themes;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\Game;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
@@ -155,7 +155,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofxDatGui;src\Addons\ofxDatGui\src;src\Addons\ofxDatGui\src\components;src\Addons\ofxDatGui\src\core;src\Addons\ofxDatGui\src\libs\ofxSmartFont;src\Addons\ofxDatGui\src\themes;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\Game;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\Addons\ofxDatGui\src;src\Addons\ofxDatGui\src\components;src\Addons\ofxDatGui\src\core;src\Addons\ofxDatGui\src\libs\ofxSmartFont;src\Addons\ofxDatGui\src\themes;src\Addons\ofxMyIP\src;src\Addons\ofxNetwork\src;src\Addons\ofxSvg\libs\svgTiny\src;src\Addons\ofxSvg\src;src\Addons\ofxUnicode\libs\utf8cpp\include;src\Addons\ofxUnicode\libs\utf8cpp\include\utf8;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source;src\Addons\ofxUnicode\libs\utf8cpp\src\utf8_v2_3_1\source\utf8;src\Addons\ofxUnicode\src;src\Engine\3D;src\Engine\Resources;src\Engine\Tools;src\Engine\Visuals;src\Game;src\I0;src\Layout;src\Main;src\Visuals</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -216,6 +216,7 @@
     <ClCompile Include="src\Visuals\NoiseManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGui2dPad.h" />
     <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiButton.h" />
     <ClInclude Include="src\Addons\ofxDatGui\src\components\ofxDatGuiColorPicker.h" />
@@ -300,6 +301,10 @@
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(OF_ROOT)\libs\openFrameworksCompiled\project\vs</AdditionalIncludeDirectories>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bin\data\images\icons\IG_Software.ico" />
+    <Image Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
