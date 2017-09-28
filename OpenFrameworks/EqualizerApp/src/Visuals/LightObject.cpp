@@ -81,6 +81,12 @@ void LightObject::draw()
     ofPopStyle();
     
     if(m_showId){
+		if (m_color.getBrightness() > 128) {
+			m_idText->setColor(ofColor::black);
+		}
+		else {
+			m_idText->setColor(ofColor::white);
+		}
         m_idText->draw();
     }
     ofPopMatrix();
