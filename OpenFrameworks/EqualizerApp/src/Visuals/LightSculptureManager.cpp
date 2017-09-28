@@ -68,7 +68,7 @@ void LightSculptureManager::setupLeds()
     //this->normalizeLeds();
 
 	if (AppManager::getInstance().getSettingsManager().getDebugMode()) {
-		this->showChannels(true);
+		//this->showChannels(true);
 	}
 }
 
@@ -316,6 +316,18 @@ void LightSculptureManager::showChannels(bool _showChannels)
     {
         lightObject.second->showId(_showChannels);
     }
+}
+
+
+
+void LightSculptureManager::showChannel(bool _showChannel, int _id)
+{
+	for (auto lightObject : m_lightObjects)
+	{
+		if (lightObject.second->getId() == _id) {
+			lightObject.second->showId(_showChannel);
+		}		
+	}
 }
 
 void LightSculptureManager::onClearLights(bool value)

@@ -265,6 +265,10 @@ void UdpManager::addConnection(char _id, string ip)
     
     this->sendLoadBitmaps(_id);
 
+	if (AppManager::getInstance().getSettingsManager().getDebugMode()) {
+		AppManager::getInstance().getLightSculptureManager().showChannel(true, _id);
+	}
+
     
 }
 void UdpManager::receivedHeartbeat(char _id, char val1, char val2)

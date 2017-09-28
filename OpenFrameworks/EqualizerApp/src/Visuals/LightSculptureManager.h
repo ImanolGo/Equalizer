@@ -84,6 +84,8 @@ class LightSculptureManager: public Manager
     
         void showChannels(bool _showChannels);
 
+		void showChannel(bool _showChannel, int _id);
+
         void setBoundingBox(const ofRectangle& boundingBox);
     
         void onToggleShowIds();
