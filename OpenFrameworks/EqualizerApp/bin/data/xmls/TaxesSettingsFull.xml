@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<taxes>
+
+  <tax_rates>
+
+      <direct_tax value="20"/>
+
+      <initial_values min_life_cost="8000" spending_factor_income = "0.05" spending_factor_wealth = "0.2"/>
+
+      <band name="Personal Allowance" min="0" max="11500" rate="0"/>
+      <band name="Basic Rate" min="11501" max="45000" rate="20"/>
+      <band name="Higher Rate" min="45001" max="150000" rate="40"/>
+      <band name="Additional Rate" min="150001" max="1500000" rate="45"/>
+
+  </tax_rates>
+
+
+  <citizens>
+
+    <citizen name="Personal Allowance" type="0" id = "1"/>
+    <citizen name="Personal Allowance" type="0" id = "2"/>
+    <citizen name="Personal Allowance" type="0" id = "3"/>
+    <citizen name="Personal Allowance" type="0" id = "4"/>
+    <citizen name="Personal Allowance" type="0" id = "5"/>
+    <citizen name="Personal Allowance" type="0" id = "9"/>
+    <citizen name="Personal Allowance" type="0" id = "20"/>
+    <citizen name="Personal Allowance" type="0" id = "32"/>
+    <citizen name="Personal Allowance" type="0" id = "38"/>
+    <citizen name="Personal Allowance" type="0" id = "56"/>
+    <citizen name="Personal Allowance" type="0" id = "62"/>
+    <citizen name="Personal Allowance" type="0" id = "72"/>
+    <citizen name="Personal Allowance" type="0" id = "76"/>
+    <citizen name="Personal Allowance" type="0" id = "75"/>
+    <citizen name="Personal Allowance" type="0" id = "74"/>
+    <citizen name="Personal Allowance" type="0" id = "73"/>
+    <citizen name="Personal Allowance" type="0" id = "68"/>
+    <citizen name="Personal Allowance" type="0" id = "57"/>
+    <citizen name="Personal Allowance" type="0" id = "45"/>
+    <citizen name="Personal Allowance" type="0" id = "39"/>
+    <citizen name="Personal Allowance" type="0" id = "21"/>
+    <citizen name="Personal Allowance" type="0" id = "15"/>
+
+    <citizen name="Basic Rate" type="1" id = "6"/>
+    <citizen name="Basic Rate" type="1" id = "7"/>
+    <citizen name="Basic Rate" type="1" id = "8"/>
+    <citizen name="Basic Rate" type="1" id = "14"/>
+    <citizen name="Basic Rate" type="1" id = "26"/>
+    <citizen name="Basic Rate" type="1" id = "44"/>
+    <citizen name="Basic Rate" type="1" id = "50"/>
+    <citizen name="Basic Rate" type="1" id = "67"/>
+    <citizen name="Basic Rate" type="1" id = "71"/>
+    <citizen name="Basic Rate" type="1" id = "70"/>
+    <citizen name="Basic Rate" type="1" id = "69"/>
+    <citizen name="Basic Rate" type="1" id = "63"/>
+    <citizen name="Basic Rate" type="1" id = "51"/>
+    <citizen name="Basic Rate" type="1" id = "33"/>
+    <citizen name="Basic Rate" type="1" id = "10"/>
+
+    <citizen name="Basic Rate" type="1" id = "27"/>
+    <citizen name="Basic Rate" type="1" id = "16"/>
+    <citizen name="Basic Rate" type="1" id = "11"/>
+    <citizen name="Basic Rate" type="1" id = "17"/>
+    <citizen name="Basic Rate" type="1" id = "12"/>
+    <citizen name="Basic Rate" type="1" id = "18"/>
+    <citizen name="Basic Rate" type="1" id = "13"/>
+    <citizen name="Basic Rate" type="1" id = "19"/>
+    <citizen name="Basic Rate" type="1" id = "25"/>
+    <citizen name="Basic Rate" type="1" id = "31"/>
+    <citizen name="Basic Rate" type="1" id = "37"/>
+    <citizen name="Basic Rate" type="1" id = "55"/>
+    <citizen name="Basic Rate" type="1" id = "61"/>
+    <citizen name="Basic Rate" type="1" id = "66"/>
+    <citizen name="Basic Rate" type="1" id = "60"/>
+    <citizen name="Basic Rate" type="1" id = "65"/>
+    <citizen name="Basic Rate" type="1" id = "59"/>
+    <citizen name="Basic Rate" type="1" id = "64"/>
+    <citizen name="Basic Rate" type="1" id = "58"/>
+    <citizen name="Basic Rate" type="1" id = "52"/>
+    <citizen name="Basic Rate" type="1" id = "46"/>
+    <citizen name="Basic Rate" type="1" id = "40"/>
+    <citizen name="Basic Rate" type="1" id = "22"/>
+
+    <citizen name="Higher Rate" type="2" id = "34"/>
+    <citizen name="Higher Rate" type="2" id = "28"/>
+    <citizen name="Higher Rate" type="2" id = "23"/>
+    <citizen name="Higher Rate" type="2" id = "29"/>
+    <citizen name="Higher Rate" type="2" id = "24"/>
+    <citizen name="Higher Rate" type="2" id = "30"/>
+    <citizen name="Higher Rate" type="2" id = "25"/>
+    <citizen name="Higher Rate" type="2" id = "53"/>
+    <citizen name="Higher Rate" type="2" id = "47"/>
+    <citizen name="Higher Rate" type="2" id = "41"/>
+    <citizen name="Higher Rate" type="2" id = "35"/>
+
+    <citizen name="Additional Rate" type="3" id = "42"/>
+    <citizen name="Additional Rate" type="3" id = "36"/>
+    <citizen name="Additional Rate" type="3" id = "43"/>
+    <citizen name="Additional Rate" type="3" id = "49"/>
+    <citizen name="Additional Rate" type="3" id = "54"/>
+    <citizen name="Additional Rate" type="3" id = "48"/>
+
+
+  </citizens>
+
+
+</taxes>

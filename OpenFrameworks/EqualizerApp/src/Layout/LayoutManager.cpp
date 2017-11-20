@@ -74,8 +74,17 @@ void LayoutManager::setupFbo()
 
 void LayoutManager::resetWindowRect()
 {
-    float width = AppManager::getInstance().getSettingsManager().getAppWidth();
-    float height  = AppManager::getInstance().getSettingsManager().getAppHeight();
+    auto image = AppManager::getInstance().getResourceManager().getTexture("SculptureFloor");
+    
+    float width = image->getWidth();
+    float height  = image->getHeight();
+
+    
+//    float width = AppManager::getInstance().getSettingsManager().getAppWidth();
+//    float height  = AppManager::getInstance().getSettingsManager().getAppHeight();
+    
+   
+    
     float ratio = width/ height;
     float frame_width = ofGetWidth() - AppManager::getInstance().getGuiManager().getWidth() - 2*MARGIN;
     
