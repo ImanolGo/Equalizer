@@ -14,7 +14,7 @@
   <textures>
 
     <texture name="Equalizer" path="images/general/equalizer.png"/>
-    <texture name="SculptureFloor" path="images/layout/sculptureFloor.png"/>
+    <texture name="SculptureFloor" path="images/layout/sculptureFloorReduced.png"/>
 
   </textures>
 
