@@ -165,15 +165,13 @@ void UdpManager::setupText()
     m_udpText->setLineHeight(2.5);
     
     
-    AppManager::getInstance().getViewManager().addOverlay(m_udpText);
+   // AppManager::getInstance().getViewManager().addOverlay(m_udpText);
 }
 
 
 void UdpManager::update()
 {
     this->updateReveivePackage();
-
-
 }
 
 void UdpManager::updateReveivePackage()
@@ -266,6 +264,10 @@ void UdpManager::addConnection(char _id, string ip)
     ofLogNotice() <<"UdpManager::addConnection -> created connnection with IP " << ip <<" to port " << portSend;
     
     this->sendLoadBitmaps(_id);
+
+	if (AppManager::getInstance().getSettingsManager().getDebugMode()) {
+		AppManager::getInstance().getLightSculptureManager().showChannel(true, _id);
+	}
 
     
 }

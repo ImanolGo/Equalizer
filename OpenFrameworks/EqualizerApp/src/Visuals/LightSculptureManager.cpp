@@ -40,7 +40,7 @@ void LightSculptureManager::setup()
     this->setupBoundingBox();
     this->setupLeds();
     this->setupBackgroundImage();
-    
+
     ofLogNotice() <<"LightSculptureManager::initialized" ;
     
 }
@@ -66,6 +66,10 @@ void LightSculptureManager::setupLeds()
    // this->createLedsPosition();
     this->readLedsPositions();
     //this->normalizeLeds();
+
+	if (AppManager::getInstance().getSettingsManager().getDebugMode()) {
+		//this->showChannels(true);
+	}
 }
 
 void LightSculptureManager::setupBackgroundImage()
@@ -268,7 +272,7 @@ void LightSculptureManager::sendHeights()
     
     for(auto lightObject: m_lightObjects){
         data.m_id = lightObject.second->getId();
-        data.m_value = ofMap(lightObject.second->getColor().getBrightness(), 0, 255, 0, 254);
+        data.m_value = ofMap(lightObject.second->getColor().getBrightness(), 0, 255, 0, 139);
         AppManager::getInstance().getUdpManager().sendData(data);
     }
 }
@@ -312,6 +316,18 @@ void LightSculptureManager::showChannels(bool _showChannels)
     {
         lightObject.second->showId(_showChannels);
     }
+}
+
+
+
+void LightSculptureManager::showChannel(bool _showChannel, int _id)
+{
+	for (auto lightObject : m_lightObjects)
+	{
+		if (lightObject.second->getId() == _id) {
+			lightObject.second->showId(_showChannel);
+		}		
+	}
 }
 
 void LightSculptureManager::onClearLights(bool value)

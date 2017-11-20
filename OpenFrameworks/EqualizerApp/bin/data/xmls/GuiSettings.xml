@@ -1,5 +1,5 @@
 <group>
-	<Basic_Income>0</Basic_Income>
+	<Universal_Income>0</Universal_Income>
 	<Direct_Tax>20</Direct_Tax>
 	<Basic_Rate>20</Basic_Rate>
 	<Higher_Rate>40</Higher_Rate>

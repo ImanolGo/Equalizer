@@ -90,6 +90,8 @@ private:
     
     void setupGuiEvents();
 
+	void updateFolder();
+
 private:
     
     // Fluid GUI
@@ -118,6 +120,9 @@ private:
     ofParameter<int>      m_comSpeed;
     ofParameter<int>      m_comId;
     ofParameter<int>      m_comValue;
+
+	ofxDatGuiFolder*	m_folder;
+
    
     bool        m_showGui;  //It defines the whether the gui should be shown or not
 };

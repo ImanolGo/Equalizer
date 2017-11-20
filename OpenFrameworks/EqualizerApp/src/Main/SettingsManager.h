@@ -54,6 +54,8 @@ public:
     int getUdpPortReceive() const {return m_portUdpReceive;}
     
     int getUdpPortSend() const {return m_portUdpSend;}
+
+	bool getDebugMode() const { return m_debugMode; }
     
     
 private:
@@ -98,7 +100,7 @@ private:
     int                     m_portUdpSend;          ///< stores the UDP port to send UDP messages to
     string                  m_ipAddress;             ///< stores the Ip Address used for the Network communications
     string                  m_syphonName;           ///<stores the name of the syphon pipe name
-    
+	bool					m_debugMode;			///< sets debug mode or not
 };
 
 

@@ -59,6 +59,7 @@ void AppManager::setupOF()
     ofSetLogLevel(OF_LOG_NOTICE);
     //ofSetFrameRate(25);
     ofSetVerticalSync(true);
+	ofSetFrameRate(30);
     ofSetEscapeQuitsApp(true);
 }
 
@@ -86,11 +87,11 @@ void AppManager::update()
     m_visualEffectsManager.update();
     m_viewManager.update();
     m_taxManager.update();
-    m_udpManager.update();
     m_guiManager.update();
     m_noiseManager.update();
     m_lightSculptureManager.update();
     m_layoutManager.update();
+	m_udpManager.update();
 }
 
 

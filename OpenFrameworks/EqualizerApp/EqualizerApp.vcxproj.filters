@@ -464,8 +464,13 @@
     <ClInclude Include="src\Visuals\NoiseManager.h">
       <Filter>src\Visuals</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bin\data\images\icons\IG_Software.ico" />
+    <Image Include="icon.ico" />
   </ItemGroup>
 </Project>
